@@ -1,12 +1,16 @@
 package data;
 
-public class seance {
+
+//Working in progress
+//
+//
+  public class Seance {
     private Movie movie;
     private int cinemaHallNumber;
     private int rowNumber;
     private int seatNumber;
 
-    public seance(Movie movie, int cinemaHallNumber, int rowNumber, int seatNumber) {
+    public Seance(Movie movie, int cinemaHallNumber, int rowNumber, int seatNumber) {
         this.movie = movie;
         this.cinemaHallNumber = cinemaHallNumber;
         this.rowNumber = rowNumber;

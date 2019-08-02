@@ -7,7 +7,7 @@ public class CinemaApp {
         final String APP_NAME = "Kino v1.0";
         System.out.println(APP_NAME);
         CinemaControl cinemaControl = new CinemaControl();
-        cinemaControl.controlLoop();
+        cinemaControl.initialLoop();
     }
 
 }

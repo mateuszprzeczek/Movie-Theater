@@ -2,6 +2,7 @@ package io.file;
 
 import data.Movie;
 
+
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -38,6 +39,7 @@ public class DataReader {
 
         return localTime;
 }
+   // public Seance readAndCreateSeance(){
 
     public int getInt() {
         try {

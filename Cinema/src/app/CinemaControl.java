@@ -10,9 +10,13 @@ import io.file.ConsolePrinter;
 import io.file.DataReader;
 import io.file.FileManager;
 import io.file.SerializableFileManager;
+import options.InitialOptions;
+import options.SystemOptions;
+import options.UserOptions;
 
-import java.util.Comparator;
 import java.util.InputMismatchException;
+
+//import static options.InitialOptions.EXIT;
 
 public class CinemaControl {
     private ConsolePrinter printer = new ConsolePrinter();
@@ -21,7 +25,7 @@ public class CinemaControl {
 
     private Cinema cinema;
 
-    CinemaControl() {
+    public CinemaControl() {
         fileManager = new SerializableFileManager();
         try {
             cinema = fileManager.importData();
@@ -33,16 +37,62 @@ public class CinemaControl {
         }
     }
 
-    public void controlLoop() {
-        Option option;
-        System.out.println("Witamy serdecznie w naszym kinie!");
-        System.out.println("Dzisiaj gramy: ");
-        printMovies();
 
+    public void initialLoop(){
+        InitialOptions iOptions;
+        System.out.println("Witamy serdecznie w naszym kinie!");
+        System.out.println("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
         do {
-            printOptions();
-            option = getOption();
-            switch (option) {
+            printInitialOptions();
+            iOptions = getInitialOptions();
+            switch (iOptions){
+                case USER:
+                    controlLoop();
+                    break;
+                case ADMIN:
+                    systemLoop();
+                    break;
+                case EXIT:
+                    exit();
+                    break;
+                default:
+                    printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
+            }
+        } while (iOptions != InitialOptions.EXIT);
+    }
+    private void controlLoop() {
+        UserOptions uOptions;
+        do {
+            printUserOptions();
+            uOptions = getUserOptions();
+            switch (uOptions){
+                case PRINT_MOVIES:
+                    printMovies();
+                    break;
+                case BOOK:
+                    System.out.println("Pracujemy nad tym.");
+                   // book();
+                    break;
+                case PRINT_TICKETS:
+                    System.out.println("Pracujemy nad tym");
+                    //printTickets();
+                    break;
+                case EXIT:
+                    exit();
+                    break;
+                default:
+                    printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
+            }
+        } while (uOptions != UserOptions.EXIT);
+
+    }
+
+    private void systemLoop(){
+        SystemOptions sOptions;
+        do {
+            printSystemOptions();
+            sOptions = getSystemOptions();
+            switch (sOptions) {
                 case ADD_MOVIE:
                     addMovie();
                     break;
@@ -52,21 +102,23 @@ public class CinemaControl {
                 case DELETE_MOVIE:
                     deleteMovie();
                     break;
+                case BACK:
+                    initialLoop();
+                    break;
                 case EXIT:
                     exit();
                     break;
                 default:
                     printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (option != Option.EXIT);
+        } while (sOptions != SystemOptions.EXIT);
     }
-
-    private Option getOption() {
+    private InitialOptions getInitialOptions() {
         boolean optionOk = false;
-        Option option = null;
+        InitialOptions option = null;
         while (!optionOk) {
             try {
-                option = Option.createFromInt(dataReader.getInt());
+                option = InitialOptions.createFromInt(dataReader.getInt());
                 optionOk = true;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + "Podaj ponownie: ");
@@ -77,12 +129,59 @@ public class CinemaControl {
         return option;
     }
 
-    private void printOptions() {
+    private void printInitialOptions() {
         printer.printLine("Wybierz opcję: ");
-        for (Option option : Option.values()) {
+        for (InitialOptions option : InitialOptions.values()) {
             printer.printLine(option.toString());
         }
     }
+    private SystemOptions getSystemOptions() {
+        boolean optionOk = false;
+        SystemOptions option = null;
+        while (!optionOk) {
+            try {
+                option = SystemOptions.createFromInt(dataReader.getInt());
+                optionOk = true;
+            } catch (NoSuchOptionException e) {
+                printer.printLine(e.getMessage() + "Podaj ponownie: ");
+            } catch (InputMismatchException ignored) {
+                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+            }
+        }
+        return option;
+    }
+
+    private void printSystemOptions() {
+        System.out.println("Wybierz opcję: ");
+        for (SystemOptions option : SystemOptions.values()) {
+            System.out.println(option.toString());
+        }
+    }
+    private UserOptions getUserOptions() {
+        boolean optionOk = false;
+        UserOptions option = null;
+        while (!optionOk) {
+            try {
+                option = UserOptions.createFromInt(dataReader.getInt());
+                optionOk = true;
+            } catch (NoSuchOptionException e) {
+                printer.printLine(e.getMessage() + "Podaj ponownie: ");
+            } catch (InputMismatchException ignored) {
+                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+            }
+        }
+        return option;
+    }
+    private void printUserOptions() {
+        System.out.println("Wybierz opcję: ");
+        for (UserOptions option : UserOptions.values()) {
+            System.out.println(option.toString());
+        }
+    }
+
+
+
+
 
     private void addMovie() {
         try {
@@ -94,6 +193,7 @@ public class CinemaControl {
             printer.printLine("Nie można utworzyć kolejnego filmu. Osiągnięto limit pojemności.");
         }
     }
+   // private void addSeance()
 
     private void printMovies() {
         printer.printMovies(cinema.getMovies());
@@ -125,31 +225,5 @@ public class CinemaControl {
         dataReader.close();
     }
 
-    private enum Option {
-        EXIT(0, "Wyjście z programu"),
-        ADD_MOVIE(1, "Dodanie filmu"),
-        PRINT_MOVIES(2, "Wyświetlanie dostępnych filmów"),
-        DELETE_MOVIE(3, "Usuwanie filmu");
 
-        private int value;
-        private String description;
-
-        Option(int value, String description) {
-            this.value = value;
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return value + "-" + description;
-        }
-
-        static Option createFromInt(int option) throws NoSuchOptionException {
-            try {
-                return Option.values()[option];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new NoSuchOptionException("Brak opcji o id: " + option);
-            }
-        }
-    }
 }

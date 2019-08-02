@@ -9,7 +9,6 @@ public class ConsolePrinter {
         public void printMovies(Collection<Movie> movies){
             long count = 0L;
             for (Movie movie : movies) {
-
                     String toString = movie.toString();
                     printLine(toString);
                     count++;

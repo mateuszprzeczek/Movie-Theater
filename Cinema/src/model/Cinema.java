@@ -1,12 +1,13 @@
-package data;
+package model;
 
 import exception.MovieAlreadyExistsException;
+import exception.MovieNotFoundException;
 
 import java.io.Serializable;
 import java.util.*;
 
 public class Cinema implements Serializable {
-    private Map<String, Movie> movies = new HashMap<>();
+    public static Map<String, Movie> movies = new HashMap<>();
 
 
     public void addMovie(Movie movie){
@@ -25,8 +26,21 @@ public class Cinema implements Serializable {
             return false;
         }
     }
-    public Collection<Movie> getMovies(){
-        ArrayList<Movie> list = new ArrayList<>(this.movies.values());
+    public List<Movie> getMovies(){
+        return new ArrayList<>(this.movies.values());
+    }
+    public static List<Movie> bookMovie(List<String> movieTitle){
+        Set<String> keys = movies.keySet();
+        List<Movie> list = new ArrayList<>();
+        for (String key : keys){
+            for (String title : movieTitle){
+                if (key.equals(title)){
+                    list.add(movies.get(key));
+                }
+            }
+        }
         return list;
     }
+
+
 }

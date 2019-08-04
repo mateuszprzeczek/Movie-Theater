@@ -1,7 +1,6 @@
 package io.file;
 
-import data.Cinema;
-import data.Movie;
+import model.Cinema;
 
 public interface FileManager {
     Cinema importData();

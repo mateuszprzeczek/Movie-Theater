@@ -1,6 +1,6 @@
 package app;
 
-import data.Cinema;
+import logic.CinemaControl;
 
 public class CinemaApp {
     public static void main(String[] args) {

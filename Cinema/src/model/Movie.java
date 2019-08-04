@@ -1,8 +1,7 @@
-package data;
+package model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 public class Movie implements Serializable{
     private String title;
@@ -53,7 +52,7 @@ public class Movie implements Serializable{
     public String toString() {
         return
                 "Tytuł: " + title + '\'' +
-                ", Czas trwania" + length +
+                ", Czas trwania " + length + " minut" +
                 ", Godziny seansów " + playingHour +
                 ", Cena " + price + " zł" + "\n";
     }

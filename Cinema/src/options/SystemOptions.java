@@ -1,11 +1,8 @@
 package options;
 
-import app.CinemaControl;
 import exception.NoSuchOptionException;
 import io.file.ConsolePrinter;
 import io.file.DataReader;
-
-import java.util.InputMismatchException;
 
 public enum SystemOptions {
         EXIT(0, "Wyjście z programu"),

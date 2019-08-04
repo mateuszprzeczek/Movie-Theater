@@ -1,7 +1,7 @@
-package app;
+package logic;
 
-import data.Cinema;
-import data.Movie;
+import model.Cinema;
+import model.Movie;
 import exception.DataExportException;
 import exception.DataImportException;
 import exception.InvalidDataException;
@@ -16,7 +16,6 @@ import options.UserOptions;
 
 import java.util.InputMismatchException;
 
-//import static options.InitialOptions.EXIT;
 
 public class CinemaControl {
     private ConsolePrinter printer = new ConsolePrinter();
@@ -29,7 +28,7 @@ public class CinemaControl {
         fileManager = new SerializableFileManager();
         try {
             cinema = fileManager.importData();
-            printer.printLine("Zaimplementowane dane z pliku: ");
+            //printer.printLine("Zaimplementowane dane z pliku: ");
         } catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nową bazę.");
@@ -76,6 +75,9 @@ public class CinemaControl {
                 case PRINT_TICKETS:
                     System.out.println("Pracujemy nad tym");
                     //printTickets();
+                    break;
+                case BACK:
+                    initialLoop();
                     break;
                 case EXIT:
                     exit();
@@ -130,7 +132,6 @@ public class CinemaControl {
     }
 
     private void printInitialOptions() {
-        printer.printLine("Wybierz opcję: ");
         for (InitialOptions option : InitialOptions.values()) {
             printer.printLine(option.toString());
         }
@@ -180,9 +181,6 @@ public class CinemaControl {
     }
 
 
-
-
-
     private void addMovie() {
         try {
             Movie movie = dataReader.readAndCreateMovie();
@@ -200,6 +198,7 @@ public class CinemaControl {
     }
 
 
+
     private void deleteMovie(){
         try {
             Movie movie = dataReader.readAndCreateMovie();
@@ -211,7 +210,6 @@ public class CinemaControl {
             printer.printLine("Nie udało się utworzyć filmu, niepoprawne dane");
         }
     }
-
 
 
     private void exit() {

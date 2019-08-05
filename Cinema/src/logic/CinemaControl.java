@@ -10,11 +10,16 @@ import io.file.ConsolePrinter;
 import io.file.DataReader;
 import io.file.FileManager;
 import io.file.SerializableFileManager;
+import model.Ticket;
+import model.User;
 import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Random;
 
 
 public class CinemaControl {
@@ -28,7 +33,7 @@ public class CinemaControl {
         fileManager = new SerializableFileManager();
         try {
             cinema = fileManager.importData();
-            //printer.printLine("Zaimplementowane dane z pliku: ");
+            printer.printLine("Zaimplementowane dane z pliku: ");
         } catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nową bazę.");
@@ -57,7 +62,7 @@ public class CinemaControl {
                 default:
                     printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (iOptions != InitialOptions.EXIT);
+        } while (iOptions != InitialOptions.EXIT );
     }
     private void controlLoop() {
         UserOptions uOptions;
@@ -69,23 +74,20 @@ public class CinemaControl {
                     printMovies();
                     break;
                 case BOOK:
-                    System.out.println("Pracujemy nad tym.");
-                   // book();
+                    addUser();
+                    break;
+                case ADD_TICKET:
+                    addTicket();
                     break;
                 case PRINT_TICKETS:
-                    System.out.println("Pracujemy nad tym");
-                    //printTickets();
+                    printUser();
                     break;
                 case BACK:
-                    initialLoop();
-                    break;
-                case EXIT:
-                    exit();
                     break;
                 default:
                     printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (uOptions != UserOptions.EXIT);
+        } while (uOptions != UserOptions.BACK);
 
     }
 
@@ -101,19 +103,18 @@ public class CinemaControl {
                 case PRINT_MOVIES:
                     printMovies();
                     break;
+                case PRINT_TICKETS:
+                    printUsers();
+                    break;
                 case DELETE_MOVIE:
                     deleteMovie();
                     break;
                 case BACK:
-                    initialLoop();
-                    break;
-                case EXIT:
-                    exit();
                     break;
                 default:
                     printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (sOptions != SystemOptions.EXIT);
+        } while (sOptions != SystemOptions.BACK);
     }
     private InitialOptions getInitialOptions() {
         boolean optionOk = false;
@@ -191,13 +192,53 @@ public class CinemaControl {
             printer.printLine("Nie można utworzyć kolejnego filmu. Osiągnięto limit pojemności.");
         }
     }
-   // private void addSeance()
+    private void addUser() {
+        try {
+            User user = createUser();
+            cinema.addUser(user);
+        } catch (InputMismatchException e) {
+            printer.printLine("Niepoprawne dane!");
+        }
+    }
+    private Ticket createTicket(){
+        printer.printLine("Podaj tytuł filmu ");
+        String movieTitle = dataReader.getString();
+        Movie movie = cinema.findMovieByTitle(movieTitle);
+        Random random = new Random();
+        int rowNumber = random.nextInt(10);
+        int seatNumber = random.nextInt(17);
+
+        return new Ticket(movie, rowNumber, seatNumber);
+    }
+    private User createUser() {
+        System.out.println("Podaj imię");
+        String firstName = dataReader.getString();
+        System.out.println("Podaj nazwisko");
+        String lastName = dataReader.getString();
+        Ticket ticket = createTicket();
+        List<Ticket> listOfTickets = new ArrayList<>();
+        listOfTickets.add(ticket);
+        return new User(firstName, lastName,listOfTickets );
+    }
+    private void addTicket(){
+        printer.printLine("Podaj Nazwisko");
+        String lastName = dataReader.getString();
+        User user = cinema.findUserByName(lastName);
+        user.addTicket(createTicket());
+    }
 
     private void printMovies() {
         printer.printMovies(cinema.getMovies());
     }
-
-
+    private void printUsers() {
+        printer.printUsers(cinema.getUsers());
+    }
+    private void printUser(){
+        printer.printLine("Podaj Nazwisko");
+        String lastName = dataReader.getString();
+        User user = cinema.findUserByName(lastName);
+        printer.printLine(user.toString());
+    }
 
     private void deleteMovie(){
         try {

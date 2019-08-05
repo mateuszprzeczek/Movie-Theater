@@ -1,14 +1,13 @@
 package model;
 
 import exception.MovieAlreadyExistsException;
-import exception.MovieNotFoundException;
 
 import java.io.Serializable;
 import java.util.*;
 
 public class Cinema implements Serializable {
-    public static Map<String, Movie> movies = new HashMap<>();
-
+    private Map<String, Movie> movies = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
     public void addMovie(Movie movie){
     if (movies.containsKey(movie.getTitle())){
@@ -18,6 +17,9 @@ public class Cinema implements Serializable {
     }
     movies.put(movie.getTitle(), movie);
     }
+    public void addUser(User user){
+        users.put(user.getLastName(), user);
+    }
     public boolean removeMovie(Movie movie){
         if (movies.containsValue(movie)){
             movies.remove(movie.getTitle());
@@ -26,20 +28,18 @@ public class Cinema implements Serializable {
             return false;
         }
     }
-    public List<Movie> getMovies(){
+    public Movie findMovieByTitle(String title) {
+        return movies.get(title);
+    }
+    public User findUserByName(String lastName){
+        return users.get(lastName);
+    }
+
+    public List<Movie> getMovies() {
         return new ArrayList<>(this.movies.values());
     }
-    public static List<Movie> bookMovie(List<String> movieTitle){
-        Set<String> keys = movies.keySet();
-        List<Movie> list = new ArrayList<>();
-        for (String key : keys){
-            for (String title : movieTitle){
-                if (key.equals(title)){
-                    list.add(movies.get(key));
-                }
-            }
-        }
-        return list;
+    public List<User> getUsers(){
+        return new ArrayList<>(this.users.values());
     }
 
 

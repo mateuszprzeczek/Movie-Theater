@@ -7,53 +7,32 @@ public class Movie implements Serializable{
     private String title;
     private int length;
     private LocalTime playingHour;
+    private int cinemaHallNumber;
     private double price;
 
-    public Movie(String title, int length, LocalTime playingHour, double price) {
+    public Movie(String title, int length, LocalTime playingHour, int cinemaHallNumber, double price) {
         this.title = title;
         this.length = length;
         this.playingHour = playingHour;
+        this.cinemaHallNumber = cinemaHallNumber;
         this.price = price;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public LocalTime getPlayingHour() {
-        return playingHour;
-    }
-
-    public void setPlayingHours(LocalTime playingHour) {
-        this.playingHour = playingHour;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    int getCinemaHallNumber() {
+        return cinemaHallNumber;
     }
 
     @Override
     public String toString() {
         return
-                "Tytuł: " + title + '\'' +
+                "Tytuł: " + title +
                 ", Czas trwania " + length + " minut" +
                 ", Godziny seansów " + playingHour +
-                ", Cena " + price + " zł" + "\n";
+                ", Cena " + price + " zł" ;
     }
+
 }

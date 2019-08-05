@@ -1,15 +1,13 @@
 package options;
 
 import exception.NoSuchOptionException;
-import io.file.ConsolePrinter;
-import io.file.DataReader;
 
 public enum SystemOptions {
-        EXIT(0, "Wyjście z programu"),
         ADD_MOVIE(1, "Dodanie filmu"),
         PRINT_MOVIES(2, "Wyświetlanie dostępnych filmów"),
-        DELETE_MOVIE(3, "Usuwanie filmu"),
-        BACK(4, "Wstecz");
+        PRINT_TICKETS(3, "Pokaż zarezerwowane filmy"),
+        DELETE_MOVIE(4, "Usuwanie filmu"),
+        BACK(5, "Wstecz");
 
         private int value;
         private String description;
@@ -18,8 +16,6 @@ public enum SystemOptions {
             this.value = value;
             this.description = description;
         }
-        private ConsolePrinter printer = new ConsolePrinter();
-        private DataReader dataReader = new DataReader(printer);
 
         @Override
         public String toString() {
@@ -28,7 +24,7 @@ public enum SystemOptions {
 
         public static SystemOptions createFromInt(int option) throws NoSuchOptionException {
             try {
-                return SystemOptions.values()[option];
+                return SystemOptions.values()[option-1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new NoSuchOptionException("Brak opcji o id: " + option);
             }

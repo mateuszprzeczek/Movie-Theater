@@ -27,4 +27,8 @@ public class User implements Serializable {
         return "Klient " + firstName + " " + lastName + "\n" +
                 " rezerwacja biletu na " + tickets.toString();
     }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

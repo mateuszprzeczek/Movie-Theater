@@ -1,11 +1,8 @@
 package logic;
 
+import exception.*;
 import model.Cinema;
 import model.Movie;
-import exception.DataExportException;
-import exception.DataImportException;
-import exception.InvalidDataException;
-import exception.NoSuchOptionException;
 import io.file.ConsolePrinter;
 import io.file.DataReader;
 import io.file.FileManager;
@@ -16,10 +13,7 @@ import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class CinemaControl {
@@ -42,7 +36,7 @@ public class CinemaControl {
     }
 
 
-    public void initialLoop(){
+    public void initialLoop() {
         InitialOptions iOptions;
         System.out.println("Witamy serdecznie w naszym kinie!");
         System.out.println("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
@@ -91,6 +85,7 @@ public class CinemaControl {
 
     }
 
+
     private void systemLoop(){
         SystemOptions sOptions;
         do {
@@ -125,7 +120,7 @@ public class CinemaControl {
                 optionOk = true;
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage() + "Podaj ponownie: ");
-            } catch (InputMismatchException ignored) {
+            } catch (InputMismatchException i) {
                 printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
             }
         }
@@ -154,9 +149,9 @@ public class CinemaControl {
     }
 
     private void printSystemOptions() {
-        System.out.println("Wybierz opcję: ");
+        printer.printLine("Wybierz opcję: ");
         for (SystemOptions option : SystemOptions.values()) {
-            System.out.println(option.toString());
+            printer.printLine(option.toString());
         }
     }
     private UserOptions getUserOptions() {
@@ -175,9 +170,9 @@ public class CinemaControl {
         return option;
     }
     private void printUserOptions() {
-        System.out.println("Wybierz opcję: ");
+        printer.printLine("Wybierz opcję: ");
         for (UserOptions option : UserOptions.values()) {
-            System.out.println(option.toString());
+            printer.printLine(option.toString());
         }
     }
 
@@ -200,44 +195,72 @@ public class CinemaControl {
             printer.printLine("Niepoprawne dane!");
         }
     }
-    private Ticket createTicket(){
-        printer.printLine("Podaj tytuł filmu ");
-        String movieTitle = dataReader.getString();
-        Movie movie = cinema.findMovieByTitle(movieTitle);
-        Random random = new Random();
-        int rowNumber = random.nextInt(10);
-        int seatNumber = random.nextInt(17);
-
-        return new Ticket(movie, rowNumber, seatNumber);
-    }
     private User createUser() {
-        System.out.println("Podaj imię");
+        printer.printLine("Podaj imię");
         String firstName = dataReader.getString();
-        System.out.println("Podaj nazwisko");
+        printer.printLine("Podaj nazwisko");
         String lastName = dataReader.getString();
+        printer.printLine("Rejestracja "+ firstName + " " + lastName + " zakończona powodzeniem.");
         Ticket ticket = createTicket();
         List<Ticket> listOfTickets = new ArrayList<>();
         listOfTickets.add(ticket);
         return new User(firstName, lastName,listOfTickets );
     }
-    private void addTicket(){
-        printer.printLine("Podaj Nazwisko");
-        String lastName = dataReader.getString();
-        User user = cinema.findUserByName(lastName);
-        user.addTicket(createTicket());
+    private Ticket createTicket() {
+            Movie movie = findMovie();
+            Random random = new Random();
+            int rowNumber = random.nextInt(10);
+            int seatNumber = random.nextInt(17);
+            Ticket ticket = new Ticket(movie, rowNumber, seatNumber);
+            printer.printLine("Dodano rezerwację: " + ticket.toString() + "\n");
+            return ticket;
+        }
+
+    private Movie findMovie() {
+        printer.printLine("Podaj tytuł filmu");
+        Movie movie = null;
+        boolean ok = false;
+        while (!ok) {
+            try {
+                movie = cinema.findMovieByTitle(dataReader.getString());
+                ok = true;
+            } catch (NullPointerException e) {
+                printer.printLine(
+                        "Nie posiadamy takiego filmu w naszym repertuarze, podaj ponownie");
+                printMovies();
+            }
+
+        }return movie;
     }
 
+    private void addTicket() {
+        printer.printLine("Podaj nazwisko");
+        String lastName = dataReader.getString();
+            try {
+                User user = cinema.findUser(lastName);
+                if (user != null){
+                    user.addTicket(createTicket());
+                }else {
+                    printer.printLine("Użytkownik o podanym nazwisku nie istnieje");
+                }
+            } catch (NullPointerException e) {
+                printer.printLine("Nie posiadamy takiego filmu w repertuarze");
+            }
+    }
     private void printMovies() {
         printer.printMovies(cinema.getMovies());
     }
     private void printUsers() {
         printer.printUsers(cinema.getUsers());
     }
-    private void printUser(){
+
+    private void printUser() {
         printer.printLine("Podaj Nazwisko");
         String lastName = dataReader.getString();
-        User user = cinema.findUserByName(lastName);
-        printer.printLine(user.toString());
+        String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
+        cinema.findUserByName(lastName)
+                .map(User::toString)
+                .ifPresentOrElse(System.out::println, () -> System.out.println(notFoundMessage));
     }
 
     private void deleteMovie(){

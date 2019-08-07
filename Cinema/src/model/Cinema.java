@@ -1,9 +1,11 @@
 package model;
 
 import exception.MovieAlreadyExistsException;
+import exception.NoSuchUserException;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 
 public class Cinema implements Serializable {
     private Map<String, Movie> movies = new HashMap<>();
@@ -28,11 +30,24 @@ public class Cinema implements Serializable {
             return false;
         }
     }
-    public Movie findMovieByTitle(String title) {
-        return movies.get(title);
+    public User findUser(String lastName) throws NullPointerException {
+            try{
+         users.get(lastName);
+    }catch (NullPointerException e){
+                System.out.println("Nie ma");
+            }
+            return users.get(lastName);
+        }
+    public Movie findMovieByTitle(String title) throws NullPointerException {
+        try{
+        movies.get(title);
+        } catch (NullPointerException e){
+            System.out.println("Nie posiadamy tego filmu w repertuarze");
+        }
+            return movies.get(title);
     }
-    public User findUserByName(String lastName){
-        return users.get(lastName);
+    public Optional<User> findUserByName(String lastName) {
+         return Optional.ofNullable(users.get(lastName));
     }
 
     public List<Movie> getMovies() {
@@ -42,5 +57,5 @@ public class Cinema implements Serializable {
         return new ArrayList<>(this.users.values());
     }
 
+    }
 
-}

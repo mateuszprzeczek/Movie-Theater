@@ -3,20 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/OrderController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/CinemaControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,17 +20,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="40" column="47" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+            <state relative-caret-position="199">
+              <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#621#622#0" expanded="true" />
                 <element signature="e#672#673#0" expanded="true" />
-                <element signature="e#1573#1574#0" expanded="true" />
-                <element signature="e#1671#1672#0" expanded="true" />
+                <element signature="e#1601#1602#0" expanded="true" />
+                <element signature="e#1699#1700#0" expanded="true" />
                 <element signature="e#1706#1707#0" expanded="true" />
                 <element signature="e#1765#1766#0" expanded="true" />
               </folding>
@@ -54,15 +47,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/logic/CinemaControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="244">
               <caret line="229" column="30" selection-start-line="229" selection-start-column="30" selection-end-line="229" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8531#8532#0" expanded="true" />
-                <element signature="e#8616#8617#0" expanded="true" />
+                <element signature="e#8519#8520#0" expanded="true" />
+                <element signature="e#8604#8605#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,10 +175,10 @@
         <option value="$PROJECT_DIR$/src/exception/NoSuchUserException.java" />
         <option value="$PROJECT_DIR$/src/app/CinemaApp.java" />
         <option value="$PROJECT_DIR$/src/model/User.java" />
-        <option value="$PROJECT_DIR$/src/model/Cinema.java" />
         <option value="$PROJECT_DIR$/src/logic/TicketController.java" />
         <option value="$PROJECT_DIR$/src/model/Ticket.java" />
         <option value="$PROJECT_DIR$/src/logic/CinemaControl.java" />
+        <option value="$PROJECT_DIR$/src/model/Cinema.java" />
       </list>
     </option>
   </component>
@@ -260,7 +253,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565184904098" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565185006075" />
     <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/LibraryV2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -328,14 +321,20 @@
       <option name="project" value="LOCAL" />
       <updated>1565014474321</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="exception handling...">
+      <created>1565185002252</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1565185002252</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14966443" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14966443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -345,7 +344,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3186969" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -399,7 +398,8 @@
     <MESSAGE value="Enum Options added,&#10;Loops added,&#10;Work in progress" />
     <MESSAGE value="packages refactored, some class added.&#10;OrderController work in progress" />
     <MESSAGE value="Ticket class added, fix problems with write object etc." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ticket class added, fix problems with write object etc." />
+    <MESSAGE value="exception handling..." />
+    <option name="LAST_COMMIT_MESSAGE" value="exception handling..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -613,22 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="40" column="47" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#672#673#0" expanded="true" />
-            <element signature="e#1573#1574#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1706#1707#0" expanded="true" />
-            <element signature="e#1765#1766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/options/InitialOptions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -659,12 +643,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logic/CinemaControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="244">
           <caret line="229" column="30" selection-start-line="229" selection-start-column="30" selection-end-line="229" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8531#8532#0" expanded="true" />
-            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8519#8520#0" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#621#622#0" expanded="true" />
+            <element signature="e#672#673#0" expanded="true" />
+            <element signature="e#1601#1602#0" expanded="true" />
+            <element signature="e#1699#1700#0" expanded="true" />
+            <element signature="e#1706#1707#0" expanded="true" />
+            <element signature="e#1765#1766#0" expanded="true" />
           </folding>
         </state>
       </provider>

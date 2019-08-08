@@ -40,7 +40,8 @@ public class Cinema implements Serializable {
         }
     public Movie findMovieByTitle(String title) throws NullPointerException {
         try{
-        movies.get(title);
+        Movie movie = movies.get(title);
+        movie.getTitle();
         } catch (NullPointerException e){
             System.out.println("Nie posiadamy tego filmu w repertuarze");
         }

@@ -4,8 +4,8 @@ import exception.NoSuchOptionException;
 
 public enum UserOptions {
     PRINT_MOVIES(1, "Wyświetl obecny repertuar."),
-    BOOK(2, "Zarezerwuj bilet"),
-    ADD_TICKET(3,"Zarezerwuj następny bilet"),
+    USER_REGISTRATION(2, "Rejestracja użytkownika"),
+    ADD_TICKET(3,"Zarezerwuj bilet"),
     PRINT_TICKETS(4, "Pokaż zarezerwowane filmy"),
     BACK(5, "Wstecz.");
 

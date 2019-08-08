@@ -3,11 +3,12 @@ package options;
 import exception.NoSuchOptionException;
 
 public enum SystemOptions {
-        ADD_MOVIE(1, "Dodanie filmu"),
-        PRINT_MOVIES(2, "Wyświetlanie dostępnych filmów"),
-        PRINT_TICKETS(3, "Pokaż zarezerwowane filmy"),
-        DELETE_MOVIE(4, "Usuwanie filmu"),
-        BACK(5, "Wstecz");
+        PRINT_MOVIES(1, "Wyświetlanie dostępnych filmów"),
+        ADD_MOVIE(2, "Dodaj film"),
+        ADD_PLAYING_HOUR(3, "Dodaj godzinę seansu"),
+        PRINT_TICKETS(4, "Pokaż zarezerwowane filmy"),
+        DELETE_MOVIE(5, "Usuń film"),
+        BACK(6, "Wstecz");
 
         private int value;
         private String description;

@@ -13,6 +13,7 @@ import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
 
+import java.time.LocalTime;
 import java.util.*;
 
 
@@ -67,7 +68,7 @@ public class CinemaControl {
                 case PRINT_MOVIES:
                     printMovies();
                     break;
-                case BOOK:
+                case USER_REGISTRATION:
                     addUser();
                     break;
                 case ADD_TICKET:
@@ -92,11 +93,14 @@ public class CinemaControl {
             printSystemOptions();
             sOptions = getSystemOptions();
             switch (sOptions) {
+                case PRINT_MOVIES:
+                    printMovies();
+                    break;
                 case ADD_MOVIE:
                     addMovie();
                     break;
-                case PRINT_MOVIES:
-                    printMovies();
+                case ADD_PLAYING_HOUR:
+                    addTimeOfSeanse();
                     break;
                 case PRINT_TICKETS:
                     printUsers();
@@ -223,7 +227,16 @@ public class CinemaControl {
         while (!ok) {
             try {
                 movie = cinema.findMovieByTitle(dataReader.getString());
-                ok = true;
+
+                if (movie!=null){
+                    ok = true;
+                }
+                else {
+                    printer.printLine("W naszym repertuarze nie ma filmu o podanym tytule, spróbuj jeszcze raz");
+                    printer.printLine("Dostępne Filmy:" + "\n");
+                    printMovies();
+                    printer.printLine("\n" + "Podaj tytuł filmu: ");
+                }
             } catch (NullPointerException e) {
                 printer.printLine(
                         "Nie posiadamy takiego filmu w naszym repertuarze, podaj ponownie");
@@ -232,6 +245,21 @@ public class CinemaControl {
 
         }return movie;
     }
+    private void addTimeOfSeanse(){
+        printer.printLine("Podaj tytuł filmu");
+        String title = dataReader.getString();
+        try {
+            Movie movie = cinema.findMovieByTitle(title);
+            if (movie != null){
+                movie.addPlayingHourToList(dataReader.readAndCreateTimeOfSeance());
+            }else {
+                printer.printLine("Nie ma takiego filmu. Dostępne filmy: ");
+                printMovies();
+            }
+        }catch (NullPointerException e){
+            printer.printLine("Nie ma takiego filmu");
+        }
+    }
 
     private void addTicket() {
         printer.printLine("Podaj nazwisko");
@@ -239,9 +267,10 @@ public class CinemaControl {
             try {
                 User user = cinema.findUser(lastName);
                 if (user != null){
-                    user.addTicket(createTicket());
+                    user.addTicketToList(createTicket());
                 }else {
                     printer.printLine("Użytkownik o podanym nazwisku nie istnieje");
+                    printer.printLine("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
                 }
             } catch (NullPointerException e) {
                 printer.printLine("Nie posiadamy takiego filmu w repertuarze");
@@ -265,7 +294,8 @@ public class CinemaControl {
 
     private void deleteMovie(){
         try {
-            Movie movie = dataReader.readAndCreateMovie();
+            printer.printLine("Podaj tytuł filmu, który chcesz usunąć: ");
+            Movie movie = cinema.findMovieByTitle(dataReader.getString());
             if (cinema.removeMovie(movie))
                 printer.printLine("Usunięto film");
             else

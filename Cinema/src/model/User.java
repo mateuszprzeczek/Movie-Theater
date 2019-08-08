@@ -14,12 +14,16 @@ public class User implements Serializable {
         this.tickets = tickets;
 
     }
+    public void addTicketToList(Ticket ticket){
+        tickets.add(ticket);
+    }
 
-    String getLastName() {
+    public String getLastName() {
         return lastName;
     }
-    public void addTicket(Ticket ticket){
-        tickets.add(ticket);
+
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
     @Override
@@ -28,7 +32,4 @@ public class User implements Serializable {
                 " rezerwacja biletu na " + tickets.toString();
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
 }

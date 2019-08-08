@@ -46,6 +46,13 @@ public class Cinema implements Serializable {
         }
             return movies.get(title);
     }
+    public boolean checkIfMovieIsAvailable(String title){
+        if (movies.containsKey(title)){
+            return true;
+        }else {
+            return false;
+        }
+    }
     public Optional<User> findUserByName(String lastName) {
          return Optional.ofNullable(users.get(lastName));
     }

@@ -2,24 +2,29 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Movie implements Serializable{
     private String title;
     private int length;
-    private LocalTime playingHour;
+    private List<LocalTime> playingHours;
     private int cinemaHallNumber;
     private double price;
 
-    public Movie(String title, int length, LocalTime playingHour, int cinemaHallNumber, double price) {
+    public Movie(String title, int length, List<LocalTime> playingHours, int cinemaHallNumber, double price) {
         this.title = title;
         this.length = length;
-        this.playingHour = playingHour;
+        this.playingHours = playingHours;
         this.cinemaHallNumber = cinemaHallNumber;
         this.price = price;
     }
 
     String getTitle() {
         return title;
+    }
+
+    public void addPlayingHourToList(LocalTime localTime){
+        playingHours.add(localTime);
     }
 
     int getCinemaHallNumber() {
@@ -31,7 +36,7 @@ public class Movie implements Serializable{
         return
                 "Tytuł: " + title +
                 ", Czas trwania " + length + " minut" +
-                ", Godziny seansów " + playingHour +
+                ", Godziny seansów " + playingHours.toString() +
                 ", Cena " + price + " zł" ;
     }
 

@@ -5,7 +5,7 @@ import exception.NoSuchOptionException;
 public enum SystemOptions {
         PRINT_MOVIES(1, "Wyświetlanie dostępnych filmów"),
         ADD_MOVIE(2, "Dodaj film"),
-        ADD_PLAYING_HOUR(3, "Dodaj godzinę seansu"),
+        ADD_TIME_OF_SEANCE(3, "Dodaj godzinę seansu"),
         CHANGE_PRICE(4, "Zmień cenę biletu"),
         PRINT_TICKETS(5, "Pokaż zarezerwowane filmy"),
         DELETE_MOVIE(6, "Usuń film"),

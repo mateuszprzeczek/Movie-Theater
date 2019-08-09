@@ -19,7 +19,7 @@ public class Movie implements Serializable{
         this.price = price;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -29,6 +29,10 @@ public class Movie implements Serializable{
 
     int getCinemaHallNumber() {
         return cinemaHallNumber;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override

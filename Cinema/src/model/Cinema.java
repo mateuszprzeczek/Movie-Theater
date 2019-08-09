@@ -1,15 +1,14 @@
 package model;
 
 import exception.MovieAlreadyExistsException;
-import exception.NoSuchUserException;
-
 import java.io.Serializable;
 import java.util.*;
-import java.util.function.Function;
 
 public class Cinema implements Serializable {
+
     private Map<String, Movie> movies = new HashMap<>();
-    private Map<String, User> users = new HashMap<>();
+    private Map<String, CinemaUser> users = new HashMap<>();
+
 
     public void addMovie(Movie movie){
     if (movies.containsKey(movie.getTitle())){
@@ -19,9 +18,10 @@ public class Cinema implements Serializable {
     }
     movies.put(movie.getTitle(), movie);
     }
-    public void addUser(User user){
+    public void addUser(CinemaUser user){
         users.put(user.getLastName(), user);
     }
+
     public boolean removeMovie(Movie movie){
         if (movies.containsValue(movie)){
             movies.remove(movie.getTitle());
@@ -30,7 +30,7 @@ public class Cinema implements Serializable {
             return false;
         }
     }
-    public User findUser(String lastName) throws NullPointerException {
+    public CinemaUser findUser(String lastName) throws NullPointerException {
             try{
          users.get(lastName);
     }catch (NullPointerException e){
@@ -38,22 +38,10 @@ public class Cinema implements Serializable {
             }
             return users.get(lastName);
         }
-    public Movie findMovieByTitle(String title) throws NullPointerException {
-        try{
-        Movie movie = movies.get(title);
-        movie.getTitle();
-        } catch (NullPointerException e){
-            System.out.println("Nie posiadamy tego filmu w repertuarze");
-        }
-            return movies.get(title);
+    public Movie findMovieByTitle(String title) {
+        return movies.get(title);
     }
-    public boolean checkIfMovieIsAvailable(String title){
-        if (movies.containsKey(title)){
-            return true;
-        }else {
-            return false;
-        }
-    }
+
     public Optional<User> findUserByName(String lastName) {
          return Optional.ofNullable(users.get(lastName));
     }
@@ -65,5 +53,5 @@ public class Cinema implements Serializable {
         return new ArrayList<>(this.users.values());
     }
 
-    }
+}
 

@@ -6,9 +6,10 @@ public enum SystemOptions {
         PRINT_MOVIES(1, "Wyświetlanie dostępnych filmów"),
         ADD_MOVIE(2, "Dodaj film"),
         ADD_PLAYING_HOUR(3, "Dodaj godzinę seansu"),
-        PRINT_TICKETS(4, "Pokaż zarezerwowane filmy"),
-        DELETE_MOVIE(5, "Usuń film"),
-        BACK(6, "Wstecz");
+        CHANGE_PRICE(4, "Zmień cenę biletu"),
+        PRINT_TICKETS(5, "Pokaż zarezerwowane filmy"),
+        DELETE_MOVIE(6, "Usuń film"),
+        BACK(7, "Wstecz");
 
         private int value;
         private String description;

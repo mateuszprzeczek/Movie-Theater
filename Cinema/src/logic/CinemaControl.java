@@ -1,19 +1,15 @@
 package logic;
 
 import exception.*;
-import model.Cinema;
-import model.Movie;
+import model.*;
 import io.file.ConsolePrinter;
 import io.file.DataReader;
 import io.file.FileManager;
 import io.file.SerializableFileManager;
-import model.Ticket;
-import model.User;
 import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
 
-import java.time.LocalTime;
 import java.util.*;
 
 
@@ -21,8 +17,8 @@ public class CinemaControl {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
     private FileManager fileManager;
-
     private Cinema cinema;
+
 
     public CinemaControl() {
         fileManager = new SerializableFileManager();
@@ -100,7 +96,10 @@ public class CinemaControl {
                     addMovie();
                     break;
                 case ADD_PLAYING_HOUR:
-                    addTimeOfSeanse();
+                    addTimeOfSeance();
+                    break;
+                case CHANGE_PRICE:
+                    changeMoviePrice();
                     break;
                 case PRINT_TICKETS:
                     printUsers();
@@ -193,35 +192,38 @@ public class CinemaControl {
     }
     private void addUser() {
         try {
-            User user = createUser();
+            CinemaUser user = createUser();
             cinema.addUser(user);
         } catch (InputMismatchException e) {
             printer.printLine("Niepoprawne dane!");
         }
     }
-    private User createUser() {
+
+    private Ticket createTicket() {
+        Movie movie = findMovie();
+        Random random = new Random();
+        int rowNumber = random.nextInt(10);
+        int seatNumber = random.nextInt(17);
+        Ticket ticket = new Ticket(movie, rowNumber, seatNumber);
+        printer.printLine("Dodano rezerwację: " + ticket.toString() + "\n");
+        return ticket;
+    }
+    private CinemaUser createUser(){
         printer.printLine("Podaj imię");
         String firstName = dataReader.getString();
         printer.printLine("Podaj nazwisko");
         String lastName = dataReader.getString();
         printer.printLine("Rejestracja "+ firstName + " " + lastName + " zakończona powodzeniem.");
-        Ticket ticket = createTicket();
         List<Ticket> listOfTickets = new ArrayList<>();
+        Ticket ticket = createTicket();
         listOfTickets.add(ticket);
-        return new User(firstName, lastName,listOfTickets );
+        return new CinemaUser(firstName, lastName, listOfTickets);
     }
-    private Ticket createTicket() {
-            Movie movie = findMovie();
-            Random random = new Random();
-            int rowNumber = random.nextInt(10);
-            int seatNumber = random.nextInt(17);
-            Ticket ticket = new Ticket(movie, rowNumber, seatNumber);
-            printer.printLine("Dodano rezerwację: " + ticket.toString() + "\n");
-            return ticket;
-        }
+
+
 
     private Movie findMovie() {
-        printer.printLine("Podaj tytuł filmu");
+        printer.printLine("Podaj tytuł filmu, który chcesz zarezerwować");
         Movie movie = null;
         boolean ok = false;
         while (!ok) {
@@ -229,6 +231,7 @@ public class CinemaControl {
                 movie = cinema.findMovieByTitle(dataReader.getString());
 
                 if (movie!=null){
+
                     ok = true;
                 }
                 else {
@@ -245,7 +248,7 @@ public class CinemaControl {
 
         }return movie;
     }
-    private void addTimeOfSeanse(){
+    private void addTimeOfSeance(){
         printer.printLine("Podaj tytuł filmu");
         String title = dataReader.getString();
         try {
@@ -260,12 +263,28 @@ public class CinemaControl {
             printer.printLine("Nie ma takiego filmu");
         }
     }
+    private void changeMoviePrice(){
+        printer.printLine("Podaj tytuł filmu");
+        String title = dataReader.getString();
+        try {
+            Movie movie = cinema.findMovieByTitle(title);
+            if (movie != null){
+                printer.printLine("Podaj nową cenę: ");
+                movie.setPrice(dataReader.getInt());
+            }else {
+                printer.printLine("Nie ma takiego filmu. Dostępne filmy: ");
+                printMovies();
+            }
+        }catch (NullPointerException e){
+            printer.printLine("Nie ma takiego filmu");
+        }
+    }
 
     private void addTicket() {
         printer.printLine("Podaj nazwisko");
         String lastName = dataReader.getString();
             try {
-                User user = cinema.findUser(lastName);
+                CinemaUser user = cinema.findUser(lastName);
                 if (user != null){
                     user.addTicketToList(createTicket());
                 }else {

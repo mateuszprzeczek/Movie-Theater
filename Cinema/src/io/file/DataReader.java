@@ -1,20 +1,18 @@
 package io.file;
 
-import model.Movie;
+import model.*;
+import java.io.Serializable;
+import java.time.DateTimeException;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.logging.SimpleFormatter;
+import java.util.*;
 
-public class DataReader {
+
+public class DataReader implements Serializable {
     private Scanner sc = new Scanner(System.in);
     private ConsolePrinter printer;
-
     public DataReader(ConsolePrinter printer) {
         this.printer = printer;
     }
-
 
     public Movie readAndCreateMovie() {
         System.out.println("Tytuł filmu: ");
@@ -31,6 +29,10 @@ public class DataReader {
 
         return new Movie(title, length, localTime, cinemaHallNumber, price);
     }
+
+
+
+
     private List<LocalTime> timesOfSeance (int howMany){
         List<LocalTime> localTimes = new ArrayList<>();
         for (int i = 0; i < howMany; i++){
@@ -41,16 +43,34 @@ public class DataReader {
         return localTimes;
     }
 
-    public LocalTime readAndCreateTimeOfSeance(){
-            System.out.println("Podaj godzinę seansu:");
-            int hourOfSeance = getInt();
-            System.out.println("Podaj, w której minucie zaczyna się seans: ");
-            int minutes = getInt();
-
-             LocalTime localTime = LocalTime.of(hourOfSeance, minutes);
-
-        return localTime;
-}
+    public LocalTime readAndCreateTimeOfSeance() throws DateTimeException {
+        LocalTime localTime = null;
+        boolean ok = false;
+        while (!ok){
+            try {
+                System.out.println("Podaj godzinę seansu:");
+                int hourOfSeance = getInt();
+                System.out.println("Podaj, w której minucie zaczyna się seans: ");
+                int minutes = getInt();
+                if (changeTimeFormatIsCorrect(hourOfSeance, minutes)) {
+                    localTime = LocalTime.of(hourOfSeance, minutes);
+                    ok = true;
+                }else {
+                    printer.printLine("Niepoprawny format, spróbuj jeszcze raz");
+                }
+            }catch (DateTimeException e){
+                System.err.println(e);
+            }
+        }
+            return localTime;
+    }
+    private boolean changeTimeFormatIsCorrect(int hour, int minutes){
+        if (hour > 23 || hour < 0 || minutes > 60 || minutes < 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
 
     public String getString() {
         return sc.nextLine();

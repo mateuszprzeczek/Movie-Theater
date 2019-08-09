@@ -27,12 +27,28 @@ public class Movie implements Serializable{
         playingHours.add(localTime);
     }
 
-    int getCinemaHallNumber() {
+    public int getCinemaHallNumber() {
         return cinemaHallNumber;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public List<LocalTime> getPlayingHours() {
+        return playingHours;
+    }
+
+    public void setPlayingHours(List<LocalTime> playingHours) {
+        this.playingHours = playingHours;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override

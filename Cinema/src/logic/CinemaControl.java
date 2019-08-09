@@ -10,6 +10,7 @@ import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
 
+import java.time.LocalTime;
 import java.util.*;
 
 
@@ -201,10 +202,13 @@ public class CinemaControl {
 
     private Ticket createTicket() {
         Movie movie = findMovie();
+        Movie userMovie = new Movie(movie.getTitle(), movie.getLength(),
+                movie.getPlayingHours(), movie.getCinemaHallNumber(), movie.getPrice());
+        choosePlayingHour(userMovie);
         Random random = new Random();
         int rowNumber = random.nextInt(10);
         int seatNumber = random.nextInt(17);
-        Ticket ticket = new Ticket(movie, rowNumber, seatNumber);
+        Ticket ticket = new Ticket(userMovie, rowNumber, seatNumber);
         printer.printLine("Dodano rezerwację: " + ticket.toString() + "\n");
         return ticket;
     }
@@ -218,6 +222,26 @@ public class CinemaControl {
         Ticket ticket = createTicket();
         listOfTickets.add(ticket);
         return new CinemaUser(firstName, lastName, listOfTickets);
+    }
+    private void choosePlayingHour(Movie movie) {
+        printer.printLine("Dostępne godziny");
+        printer.printLine(movie.getPlayingHours().toString());
+        boolean ok = false;
+        while (!ok) {
+            try {
+            List<LocalTime> selectedTime = new ArrayList<>();
+            LocalTime readPlayingHour = dataReader.readAndCreateTimeOfSeance();
+            if (movie.getPlayingHours().contains(readPlayingHour)){
+                selectedTime.add(readPlayingHour);
+                movie.setPlayingHours(selectedTime);
+                ok = true;
+            } else {
+                printer.printLine("Nie wyświetlamy tego filmu o podanej godzinie");
+            }
+        }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
 

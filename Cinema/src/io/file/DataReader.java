@@ -58,8 +58,8 @@ public class DataReader implements Serializable {
                 }else {
                     printer.printLine("Niepoprawny format, spróbuj jeszcze raz");
                 }
-            }catch (DateTimeException e){
-                System.err.println(e);
+            }catch (InputMismatchException e){
+                System.out.println("Niepoprawny format wpisywanych danych, spróbuj jeszcze raz");;
             }
         }
             return localTime;

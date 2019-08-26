@@ -20,16 +20,9 @@ public class TicketController {
     private Logger logger = Logger.getLogger(TicketController.class);
     private Scanner sc = new Scanner(System.in);
     private Cinema cinema;
-    private FileManager fileManager;
 
-    public TicketController() {
-        fileManager = new SerializableFileManager();
-        try {
-            cinema = fileManager.importData();
-            System.out.println("Zaimplementowane dane z pliku: ");
-        } catch (DataImportException | InvalidDataException e) {
-            System.out.println(e.getMessage());
-        }
+    public TicketController(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public Ticket createTicket() {

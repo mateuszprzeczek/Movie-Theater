@@ -45,8 +45,8 @@ public class DataReader implements Serializable {
 
     public static LocalTime createTimeOfSeance() throws DateTimeException {
         LocalTime localTime = null;
-        boolean ok = false;
-        while (!ok){
+        boolean compatibleTimeFormat = false;
+        while (!compatibleTimeFormat){
             try {
                 logger.info("Podaj godzinę seansu:");
                 int hourOfSeance = sc.nextInt();
@@ -56,7 +56,7 @@ public class DataReader implements Serializable {
                 sc.nextLine();
                 if (checkTimeFormatIsCorrect(hourOfSeance, minutes)) {
                     localTime = LocalTime.of(hourOfSeance, minutes);
-                    ok = true;
+                    compatibleTimeFormat = true;
                 }else {
                     logger.info("Niepoprawny format, spróbuj jeszcze raz");
                 }

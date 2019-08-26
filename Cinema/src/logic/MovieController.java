@@ -1,15 +1,10 @@
 package logic;
 
-import exception.DataImportException;
-import exception.InvalidDataException;
 import io.file.ConsolePrinter;
 import io.file.DataReader;
-import io.file.FileManager;
-import io.file.SerializableFileManager;
 import model.Cinema;
 import model.Movie;
 import org.apache.log4j.Logger;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,18 +12,11 @@ public class MovieController {
     Logger logger = Logger.getLogger(MovieController.class);
     private Scanner sc = new Scanner(System.in);
     private Cinema cinema;
-    private FileManager fileManager;
 
-    public MovieController(){
-        fileManager = new SerializableFileManager();
-        try {
-            cinema = fileManager.importData();
-            System.out.println("Zaimplementowane dane z pliku: ");
-        } catch (DataImportException | InvalidDataException e) {
-            System.out.println(e.getMessage());
-        }
+
+    public MovieController(Cinema cinema) {
+        this.cinema = cinema;
     }
-
 
     public void addMovie() {
         try {

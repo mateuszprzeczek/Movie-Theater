@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/DataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/DataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/CinemaControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,8 +86,8 @@
               <caret line="65" column="5" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="65" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2005#2006#0" expanded="true" />
-                <element signature="e#2102#2103#0" expanded="true" />
+                <element signature="e#1997#1998#0" expanded="true" />
+                <element signature="e#2094#2095#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/logic/TicketController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1785">
@@ -135,7 +127,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/io/file/DataReader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="199">
@@ -271,6 +263,12 @@
               <item name="Cinema" type="b2602c69:ProjectViewProjectNode" />
               <item name="Cinema" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cinema" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cinema" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -286,7 +284,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566823799448" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566824160223" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -413,12 +411,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565371911662</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="New Classes in logic package">
+      <created>1566823895565</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1566823895565</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.16912752" />
       <window_info id="Structure" order="1" sideWeight="0.50141644" side_tool="true" weight="0.1671141" />
@@ -488,6 +492,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
@@ -501,7 +506,8 @@
     <MESSAGE value="Added to extend the user" />
     <MESSAGE value="&#10;unnecessary classes have been removed" />
     <MESSAGE value="InputMismatch handling in method readAndCreateTimeOfSeance from DataReader" />
-    <option name="LAST_COMMIT_MESSAGE" value="InputMismatch handling in method readAndCreateTimeOfSeance from DataReader" />
+    <MESSAGE value="New Classes in logic package" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Classes in logic package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -779,16 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/file/SerializableFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/logic/CinemaControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -809,29 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/logic/TicketController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="105" column="31" lean-forward="true" selection-start-line="105" selection-start-column="31" selection-end-line="105" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3902#3903#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/logic/MovieController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="65" column="5" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="65" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2005#2006#0" expanded="true" />
-            <element signature="e#2102#2103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -848,6 +821,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/io/file/DataReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/logic/MovieController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="65" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="true" />
+            <element signature="e#2094#2095#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/CinemaApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -858,12 +853,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/io/file/DataReader.java">
+    <entry file="file://$PROJECT_DIR$/src/io/file/SerializableFileManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        <state relative-caret-position="477">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/logic/TicketController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="105" column="31" lean-forward="true" selection-start-line="105" selection-start-column="31" selection-end-line="105" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3902#3903#0" expanded="true" />
           </folding>
         </state>
       </provider>

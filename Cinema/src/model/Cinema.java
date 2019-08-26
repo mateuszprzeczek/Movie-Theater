@@ -6,8 +6,8 @@ import java.util.*;
 
 public class Cinema implements Serializable {
 
-    private Map<String, Movie> movies = new HashMap<>();
-    private Map<String, CinemaUser> users = new HashMap<>();
+    public Map<String, Movie> movies = new HashMap<>();
+    public Map<String, CinemaUser> users = new HashMap<>();
 
 
     public void addMovie(Movie movie){
@@ -20,6 +20,10 @@ public class Cinema implements Serializable {
     }
     public void addUser(CinemaUser user){
         users.put(user.getLastName(), user);
+    }
+
+    public Movie findMovieByTitle(String title) {
+        return movies.get(title);
     }
 
     public boolean removeMovie(Movie movie){
@@ -38,9 +42,7 @@ public class Cinema implements Serializable {
             }
             return users.get(lastName);
         }
-    public Movie findMovieByTitle(String title) {
-        return movies.get(title);
-    }
+
 
     public Optional<User> findUserByName(String lastName) {
          return Optional.ofNullable(users.get(lastName));

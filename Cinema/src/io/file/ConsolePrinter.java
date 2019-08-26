@@ -2,30 +2,25 @@ package io.file;
 
 import model.Movie;
 import model.User;
+import org.apache.log4j.Logger;
+
 import java.util.List;
 
 public class ConsolePrinter {
+   private static Logger logger = Logger.getLogger(ConsolePrinter.class);
 
-        public void printMovies(List<Movie> movies){
-            long count = 0L;
-            for (Movie movie : movies) {
-                    String toString = movie.toString();
-                    printLine(toString);
-                    count++;
-            }
-            if (count == 0){
-                System.out.println("Brak Filmów.");
+        public static void printMovies(List<Movie> movies){
+            if (movies.size() == 0){
+                logger.info("Brak filmów");
+            }else {
+                movies.stream().forEach(System.out::println);
             }
         }
-        public void printUsers(List<User> users){
-            long count = 0L;
-            for (User user : users) {
-                    String toString = user.toString();
-                    printLine(toString);
-                    count++;
-            }
-            if (count == 0){
-                System.out.println("Brak użytkowników.");
+        public static void printUsers(List<User> users){
+            if (users.size() == 0){
+                logger.info("Brak użytkowników");
+            }else {
+                users.stream().forEach(System.out::println);
             }
         }
         /*public void printTickets(List<Ticket> tickets){
@@ -43,11 +38,5 @@ public class ConsolePrinter {
             user.toString();
             printTickets(user.getTicket());
             }*/
-
-
-
-        public void printLine(String text){
-            System.out.println(text);
-        }
 
 }

@@ -15,20 +15,23 @@ import java.util.*;
 
 
 public class CinemaControl {
-    private ConsolePrinter printer = new ConsolePrinter();
-    private DataReader dataReader = new DataReader(printer);
+    private Scanner sc = new Scanner(System.in);
     private FileManager fileManager;
     private Cinema cinema;
+    private TicketController ticketController;
+    private MovieController movieController;
 
 
-    public CinemaControl() {
+    public CinemaControl(TicketController ticketController, MovieController movieController) {
+        this.ticketController = ticketController;
+        this.movieController = movieController;
         fileManager = new SerializableFileManager();
         try {
             cinema = fileManager.importData();
-            printer.printLine("Zaimplementowane dane z pliku: ");
+            System.out.println("Zaimplementowane dane z pliku: ");
         } catch (DataImportException | InvalidDataException e) {
-            printer.printLine(e.getMessage());
-            printer.printLine("Zainicjowano nową bazę.");
+            System.out.println(e.getMessage());
+            System.out.println("Zainicjowano nową bazę.");
             cinema = new Cinema();
         }
     }
@@ -51,7 +54,7 @@ public class CinemaControl {
                     exit();
                     break;
                 default:
-                    printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
+                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (iOptions != InitialOptions.EXIT );
     }
@@ -61,30 +64,30 @@ public class CinemaControl {
         InitialOptions option = null;
         while (!optionOk) {
             try {
-                option = InitialOptions.createFromInt(dataReader.getInt());
+                option = InitialOptions.createFromInt(sc.nextInt());
+                sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + "Podaj ponownie: ");
+                System.out.println(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException i) {
-                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
+                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
         }return option;
     }
     private void printInitialOptions() {
         for (InitialOptions option : InitialOptions.values())
-            printer.printLine(option.toString());
+            System.out.println(option.toString());
     }
     private void exit() {
         try {
             fileManager.exportData(cinema);
-            printer.printLine("Eksport danych do pliku zakonczony powodzeniem");
+            System.out.println("Eksport danych do pliku zakonczony powodzeniem");
         } catch (DataExportException e){
-            printer.printLine(e.getMessage());
+            System.out.println(e.getMessage());
         }
-        printer.printLine("Koniec programu...");
-        dataReader.close();
+        System.out.println("Koniec programu...");
+        sc.close();
     }
 
-    //************************USER_LOOP&METHODS**********************************************
     private void userLoop() {
         UserOptions uOptions;
         do {
@@ -98,15 +101,15 @@ public class CinemaControl {
                     addUser();
                     break;
                 case ADD_TICKET:
-                    addTicket();
+                    ticketController.addTicket();
                     break;
                 case PRINT_TICKETS:
-                    printUserTickets();
+                    ticketController.printUserTickets();
                     break;
                 case BACK:
                     break;
                 default:
-                    printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
+                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (uOptions != UserOptions.BACK);
     }
@@ -115,124 +118,30 @@ public class CinemaControl {
         UserOptions option = null;
         while (!optionOk) {
             try {
-                option = UserOptions.createFromInt(dataReader.getInt());
+                option = UserOptions.createFromInt(sc.nextInt());
+                sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + "Podaj ponownie: ");
+                System.out.println(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
             }
         }return option;
     }
     private void printUserOptions() {
-        printer.printLine("Wybierz opcję: ");
+        System.out.println("Wybierz opcję: ");
         for (UserOptions option : UserOptions.values())
-            printer.printLine(option.toString());
+            System.out.println(option.toString());
     }
-    //***Case Add User****
 
     private void addUser() {
         try {
-            CinemaUser user = createUser();
+            CinemaUser user = ticketController.createUser();
             cinema.addUser(user);
         } catch (InputMismatchException e) {
-            printer.printLine("Niepoprawne dane!");
+            System.out.println("Niepoprawne dane!");
         }
     }
-    private CinemaUser createUser(){
-        printer.printLine("Podaj imię");
-        String firstName = dataReader.getString();
-        printer.printLine("Podaj nazwisko");
-        String lastName = dataReader.getString();
-        printer.printLine("Rejestracja "+ firstName + " " + lastName + " zakończona powodzeniem.");
-        List<Ticket> listOfTickets = new ArrayList<>();
-        Ticket ticket = createTicket();
-        listOfTickets.add(ticket);
-        return new CinemaUser(firstName, lastName, listOfTickets);
-    }
-    private Ticket createTicket() {
-        Movie movie = findMovie();
-        Movie userMovie = new Movie(movie.getTitle(), movie.getLength(),
-                movie.getPlayingHours(), movie.getCinemaHallNumber(), movie.getPrice());
-        choosePlayingHour(userMovie);
-        Random random = new Random();
-        int rowNumber = random.nextInt(10);
-        int seatNumber = random.nextInt(17);
-        Ticket ticket = new Ticket(userMovie, rowNumber, seatNumber);
-        printer.printLine("Dodano rezerwację: " + ticket.toString() + "\n");
-        return ticket;
-    }
-    private Movie findMovie() {
-        Movie movie = null;
-        boolean ok = false;
-        while (!ok) {
-            try {
-                printer.printLine("Podaj tytuł filmu, który chcesz zarezerwować");
-                movie = cinema.findMovieByTitle(dataReader.getString());
-                if (movie!=null)
-                    ok = true;
-                else {
-                    printer.printLine("W naszym repertuarze nie ma filmu o podanym tytule, spróbuj jeszcze raz"
-                            + "\n" + "Dostępne Filmy:" + "\n");
-                    printMovies();
-                }
-            } catch (NullPointerException e) {
-                printer.printLine(
-                        "Nie posiadamy takiego filmu w naszym repertuarze, podaj ponownie");
-                printMovies();
-            }
-        }return movie;
-    }
-    private void choosePlayingHour(Movie movie) {
-        boolean ok = false;
-        while (!ok) {
-            try {
-                printer.printLine("Dostępne godziny");
-                printer.printLine(movie.getPlayingHours().toString());
-                List<LocalTime> selectedTime = new ArrayList<>();
-                LocalTime readPlayingHour = dataReader.readAndCreateTimeOfSeance();
-                if (movie.getPlayingHours().contains(readPlayingHour)){
-                    selectedTime.add(readPlayingHour);
-                    movie.setPlayingHours(selectedTime);
-                    ok = true;
-                } else {
-                    printer.printLine("Nie wyświetlamy tego filmu o podanej godzinie");
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
-    //***Case addTicket***
-
-    private void addTicket() {
-        printer.printLine("Podaj nazwisko");
-        String lastName = dataReader.getString();
-        try {
-            CinemaUser user = cinema.findUser(lastName);
-            if (user != null){
-                user.addTicketToList(createTicket());
-            }else {
-                printer.printLine("Użytkownik o podanym nazwisku nie istnieje");
-                printer.printLine("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
-            }
-        } catch (NullPointerException e) {
-            printer.printLine("Nie posiadamy takiego filmu w repertuarze");
-        }
-    }
-    //***Case Print Tickets*****
-
-    private void printUserTickets() {
-        printer.printLine("Podaj Nazwisko");
-        String lastName = dataReader.getString();
-        String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
-        cinema.findUserByName(lastName)
-                .map(User::toString)
-                .ifPresentOrElse(System.out::println, () -> System.out.println(notFoundMessage));
-    }
-
-
-    //****************SYSTEM_LOOP&METHODS********************************************
 
     private void systemLoop(){
         SystemOptions sOptions;
@@ -250,18 +159,18 @@ public class CinemaControl {
                     addTimeOfSeance();
                     break;
                 case CHANGE_PRICE:
-                    changeMoviePrice();
+                    changePrice();
                     break;
                 case PRINT_TICKETS:
                     printUsers();
                     break;
                 case DELETE_MOVIE:
-                    deleteMovie();
+                    movieController.deleteMovie();
                     break;
                 case BACK:
                     break;
                 default:
-                    printer.printLine("Nie ma takiej opcji. Wybierz ponownie: ");
+                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (sOptions != SystemOptions.BACK);
     }
@@ -271,82 +180,34 @@ public class CinemaControl {
         SystemOptions option = null;
         while (!optionOk) {
             try {
-                option = SystemOptions.createFromInt(dataReader.getInt());
+                option = SystemOptions.createFromInt(sc.nextInt());
+                sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                printer.printLine(e.getMessage() + "Podaj ponownie: ");
+                System.out.println(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: "); }
+                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: "); }
         }return option;
     }
     private void printSystemOptions() {
-        printer.printLine("Wybierz opcję: ");
+        System.out.println("Wybierz opcję: ");
         for (SystemOptions option : SystemOptions.values())
-            printer.printLine(option.toString());
+            System.out.println(option.toString());
     }
-    //*** Case Add Movie****
-
-    private void addMovie() {
-        try {
-            Movie movie = dataReader.readAndCreateMovie();
-            cinema.addMovie(movie);
-        } catch (InputMismatchException e) {
-            printer.printLine("Nie udało się utworzyć filmu. Niepoprawne dane!");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printLine("Nie można utworzyć kolejnego filmu. Osiągnięto limit pojemności.");
-        }
-    }
-    //*** Case Add time of seance***
-
     private void addTimeOfSeance(){
-        try {
-            printer.printLine("Podaj tytuł filmu");
-            String title = dataReader.getString();
-            Movie movie = cinema.findMovieByTitle(title);
-            if (movie != null){
-                movie.addPlayingHourToList(dataReader.readAndCreateTimeOfSeance());
-            }else {
-                printer.printLine("Nie ma takiego filmu. Dostępne filmy: ");
-                printMovies();
-            }
-        }catch (NullPointerException e){
-            printer.printLine("Nie ma takiego filmu");
-        }
+        movieController.addTimeOfSeance();
     }
-    // *** Case Change Movie price***
+    public void addMovie(){
+        movieController.addMovie();
+    }
 
-    private void changeMoviePrice(){
-        printer.printLine("Podaj tytuł filmu");
-        String title = dataReader.getString();
-        try {
-            Movie movie = cinema.findMovieByTitle(title);
-            if (movie != null){
-                printer.printLine("Podaj nową cenę: ");
-                movie.setPrice(dataReader.getInt());
-            }else {
-                printer.printLine("Nie ma takiego filmu. Dostępne filmy: ");
-                printMovies();
-            }
-        }catch (NullPointerException e){
-            printer.printLine("Nie ma takiego filmu");
-        }
+    private void changePrice(){
+        movieController.changeMoviePrice();
     }
-    private void printUsers() {
-        printer.printUsers(cinema.getUsers());
+    private void printMovies(){
+        movieController.printMovies();
     }
-    private void deleteMovie(){
-        try {
-            printer.printLine("Podaj tytuł filmu, który chcesz usunąć: ");
-            Movie movie = cinema.findMovieByTitle(dataReader.getString());
-            if (cinema.removeMovie(movie))
-                printer.printLine("Usunięto film");
-            else
-                printer.printLine("Brak wskazanego filmu");
-        } catch (InputMismatchException e){
-            printer.printLine("Nie udało się utworzyć filmu, niepoprawne dane");
-        }
-    }
-    private void printMovies() {
-        printer.printMovies(cinema.getMovies());
+    public void printUsers() {
+        ticketController.printUsers();
     }
 }

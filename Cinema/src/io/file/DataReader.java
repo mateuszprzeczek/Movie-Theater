@@ -1,6 +1,8 @@
 package io.file;
 
 import model.*;
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalTime;
@@ -8,24 +10,22 @@ import java.util.*;
 
 
 public class DataReader implements Serializable {
-    private Scanner sc = new Scanner(System.in);
-    private ConsolePrinter printer;
-    public DataReader(ConsolePrinter printer) {
-        this.printer = printer;
-    }
+    private static Logger logger = Logger.getLogger(DataReader.class);
+    private static Scanner sc = new Scanner(System.in);
 
-    public Movie readAndCreateMovie() {
-        System.out.println("Tytuł filmu: ");
+    public static Movie createMovie() {
+        logger.info("Tytuł filmu: ");
         String title = sc.nextLine();
-        System.out.println("Długość filmu w minutach: ");
-        int length = getInt();
-        printer.printLine("Ile razy w ciagu dnia bedzie wyświetlany film?");
-        int howMany = getInt();
+        logger.info("Długość filmu w minutach: ");
+        int length = sc.nextInt();
+        logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
+        int howMany = sc.nextInt();
         List<LocalTime> localTime = timesOfSeance(howMany);
-        printer.printLine("Podaj nr sali kinowej: ");
-        int cinemaHallNumber = getInt();
-        System.out.println("Podaj cenę ");
-        double price = getInt();
+        logger.info("Podaj nr sali kinowej: ");
+        int cinemaHallNumber = sc.nextInt();
+        logger.info("Podaj cenę ");
+        double price = sc.nextDouble();
+        sc.nextLine();
 
         return new Movie(title, length, localTime, cinemaHallNumber, price);
     }
@@ -33,57 +33,40 @@ public class DataReader implements Serializable {
 
 
 
-    private List<LocalTime> timesOfSeance (int howMany){
+    private static List<LocalTime> timesOfSeance (int numbersOfViewsPerDay){
         List<LocalTime> localTimes = new ArrayList<>();
-        for (int i = 0; i < howMany; i++){
-            printer.printLine("Seans nr " + (i + 1));
-            LocalTime localTime = readAndCreateTimeOfSeance();
+        for (int i = 0; i < numbersOfViewsPerDay; i++){
+            logger.info("Seans nr " + (i + 1));
+            LocalTime localTime = createTimeOfSeance();
             localTimes.add(localTime);
         }
         return localTimes;
     }
 
-    public LocalTime readAndCreateTimeOfSeance() throws DateTimeException {
+    public static LocalTime createTimeOfSeance() throws DateTimeException {
         LocalTime localTime = null;
         boolean ok = false;
         while (!ok){
             try {
-                System.out.println("Podaj godzinę seansu:");
-                int hourOfSeance = getInt();
-                System.out.println("Podaj, w której minucie zaczyna się seans: ");
-                int minutes = getInt();
-                if (changeTimeFormatIsCorrect(hourOfSeance, minutes)) {
+                logger.info("Podaj godzinę seansu:");
+                int hourOfSeance = sc.nextInt();
+                sc.nextLine();
+                logger.info("Podaj, w której minucie zaczyna się seans: ");
+                int minutes = sc.nextInt();
+                sc.nextLine();
+                if (checkTimeFormatIsCorrect(hourOfSeance, minutes)) {
                     localTime = LocalTime.of(hourOfSeance, minutes);
                     ok = true;
                 }else {
-                    printer.printLine("Niepoprawny format, spróbuj jeszcze raz");
+                    logger.info("Niepoprawny format, spróbuj jeszcze raz");
                 }
             }catch (InputMismatchException e){
-                System.out.println("Niepoprawny format wpisywanych danych, spróbuj jeszcze raz");;
+                logger.info("Niepoprawny format wpisywanych danych, spróbuj jeszcze raz");
             }
         }
             return localTime;
     }
-    private boolean changeTimeFormatIsCorrect(int hour, int minutes){
-        if (hour > 23 || hour < 0 || minutes > 60 || minutes < 0){
-            return false;
-        }else {
-            return true;
-        }
-    }
-
-    public String getString() {
-        return sc.nextLine();
-    }
-
-    public int getInt() {
-        try {
-            return sc.nextInt();
-        } finally {
-            sc.nextLine();
-        }
-    }
-    public void close(){
-        sc.close();
+    private static boolean checkTimeFormatIsCorrect(int hour, int minutes){
+        return hour <= 23 && hour >= 0 && minutes <= 60 && minutes >= 0;
     }
 }

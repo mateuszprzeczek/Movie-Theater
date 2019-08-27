@@ -13,7 +13,7 @@ public class ConsolePrinter {
             if (movies.size() == 0){
                 logger.info("Brak filmów");
             }else {
-                movies.stream().forEach(System.out::println);
+                movies.forEach(System.out::println);
             }
         }
         public static void printUsers(List<User> users){

@@ -15,14 +15,21 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class TicketController {
     private Logger logger = Logger.getLogger(TicketController.class);
     private Scanner sc = new Scanner(System.in);
     private Cinema cinema;
 
-    public TicketController(Cinema cinema) {
-        this.cinema = cinema;
+    public TicketController() {
+        FileManager fileManager = new SerializableFileManager();
+        try {
+            cinema = fileManager.importData();
+            logger.info("Zaimplementowane dane z pliku: ");
+        } catch (DataImportException | InvalidDataException e) {
+            logger.info(e.getMessage());
+            logger.info("Zainicjowano nową bazę.");
+            cinema = new Cinema();
+        }
     }
 
     public Ticket createTicket() {

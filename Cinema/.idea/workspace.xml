@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
+    <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="log4j lib added">
+      <change afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Cinema/logic/TicketController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Cinema/model/CinemaUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j-1.2.15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/src/log4j-1.2.15.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/CinemaControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/DataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/DataReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log4j-1.2.15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/log4j-1.2.15.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/CinemaControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CinemaUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CinemaUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,22 +58,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="30" />
-    <option name="y" value="10" />
-    <option name="width" value="1400" />
-    <option name="height" value="785" />
-  </component>
   <component name="ProjectId" id="1Q15NsE779Q9MY4S9ItbUom3ahZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566826406299" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/LibraryV2" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/log4j-1.2.15.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.updates" />
   </component>
   <component name="RunDashboard">
@@ -73,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.CinemaApp">
     <configuration name="CinemaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.CinemaApp" />
       <module name="Cinema" />
@@ -87,9 +98,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JarApplication">
+      <log_file alias="mat" path="$PROJECT_DIR$/src/log4j.properties" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/src/log4j-1.2.15.jar" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="log4j-1.2.15.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/src/log4j-1.2.15.jar" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.CinemaApp" />
+      <item itemvalue="JAR Application.log4j-1.2.15.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.CinemaApp" />
+        <item itemvalue="JAR Application.log4j-1.2.15.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -209,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566826395604</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update">
+      <created>1566929597037</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1566929597038</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -227,7 +260,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -250,106 +285,19 @@
     <MESSAGE value="InputMismatch handling in method readAndCreateTimeOfSeance from DataReader" />
     <MESSAGE value="New Classes in logic package" />
     <MESSAGE value="Add log4j.properties file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add log4j.properties file" />
+    <MESSAGE value="update" />
+    <MESSAGE value="log4j lib added" />
+    <option name="LAST_COMMIT_MESSAGE" value="log4j lib added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/app/CinemaApp.java</url>
-          <line>13</line>
+          <line>17</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/logic/CinemaControl.java</url>
-          <line>196</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/logic/TicketController.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/Cinema.java</url>
-          <line>8</line>
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>11</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Cinema</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

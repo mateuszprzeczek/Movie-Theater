@@ -18,6 +18,8 @@ public class CinemaUser extends User {
         return tickets;
     }
 
+    //public boolean removeTicket(){}
+
     @Override
     public String toString() {
         return super.toString()+ " rezerwacja biletu na " + tickets.toString();

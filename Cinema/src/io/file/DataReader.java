@@ -50,7 +50,7 @@ public class DataReader implements Serializable {
             try {
                 logger.info("Podaj godzinę seansu:");
                 int hourOfSeance = sc.nextInt();
-                sc.nextLine();
+
                 logger.info("Podaj, w której minucie zaczyna się seans: ");
                 int minutes = sc.nextInt();
                 sc.nextLine();
@@ -62,6 +62,7 @@ public class DataReader implements Serializable {
                 }
             }catch (InputMismatchException e){
                 logger.info("Niepoprawny format wpisywanych danych, spróbuj jeszcze raz");
+                sc.nextLine();
             }
         }
             return localTime;

@@ -54,7 +54,7 @@ public class Movie implements Serializable{
     @Override
     public String toString() {
         return
-                "Tytuł: " + title +
+                 title +
                 ", Czas trwania " + length + " minut" +
                 ", Godziny seansów " + playingHours.toString() +
                 ", Cena " + price + " zł" ;

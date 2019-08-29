@@ -1,34 +1,26 @@
 package logic;
 
-import exception.DataImportException;
-import exception.InvalidDataException;
 import io.file.ConsolePrinter;
 import io.file.DataReader;
-import io.file.FileManager;
-import io.file.SerializableFileManager;
 import model.*;
 import org.apache.log4j.Logger;
-
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class TicketController {
     private Logger logger = Logger.getLogger(TicketController.class);
     private Scanner sc = new Scanner(System.in);
-    private Cinema cinema;
+    private MovieController movieController;
 
-    public TicketController() {
-        FileManager fileManager = new SerializableFileManager();
+    public TicketController(MovieController movieController){
+        this.movieController = movieController;
+    }
+    public void addUser() {
         try {
-            cinema = fileManager.importData();
-            logger.info("Zaimplementowane dane z pliku: ");
-        } catch (DataImportException | InvalidDataException e) {
-            logger.info(e.getMessage());
-            logger.info("Zainicjowano nową bazę.");
-            cinema = new Cinema();
+            CinemaUser user = createUser();
+            movieController.cinema.addUser(user);
+        } catch (InputMismatchException e) {
+            logger.warn("Niepoprawne dane!");
         }
     }
 
@@ -41,7 +33,7 @@ public class TicketController {
         int rowNumber = random.nextInt(10);
         int seatNumber = random.nextInt(17);
         Ticket ticket = new Ticket(userMovie, rowNumber, seatNumber);
-        System.out.println("Dodano rezerwację: " + ticket.toString() + "\n");
+        logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
         return ticket;
     }
     public void choosePlayingHour(Movie movie) {
@@ -65,10 +57,10 @@ public class TicketController {
         }
     }
     public void addTicket() {
-        System.out.println("Podaj nazwisko");
+        logger.info("Podaj nazwisko");
         String lastName = sc.nextLine();
         try {
-            CinemaUser user = cinema.findUser(lastName);
+            CinemaUser user = movieController.cinema.findUser(lastName);
             if (user != null){
                 user.addTicketToList(createTicket());
             }else {
@@ -76,14 +68,14 @@ public class TicketController {
                 logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
             }
         } catch (NullPointerException e) {
-            logger.info("Nie posiadamy takiego filmu w repertuarze");
+            logger.warn("Nie posiadamy takiego filmu w repertuarze");
         }
     }
     public void printUserTickets() {
         logger.info("Podaj Nazwisko");
         String lastName = sc.nextLine();
         String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
-        cinema.findUserByName(lastName)
+        movieController.cinema.findUserByName(lastName)
                 .map(User::toString)
                 .ifPresentOrElse(System.out::println, () -> logger.error(notFoundMessage));
     }
@@ -99,7 +91,7 @@ public class TicketController {
         return new CinemaUser(firstName, lastName, listOfTickets);
     }
     public void printUsers() {
-        ConsolePrinter.printUsers(cinema.getUsers());
+        ConsolePrinter.printUsers(movieController.cinema.getUsers());
     }
 
 
@@ -109,18 +101,18 @@ public class TicketController {
         while (!ok) {
             try {
                 logger.info("Podaj tytuł filmu, który chcesz zarezerwować");
-                movie = cinema.findMovieByTitle(sc.nextLine());
+                movie = movieController.cinema.findMovieByTitle(sc.nextLine());
                 if (movie!=null)
                     ok = true;
                 else {
                     logger.info("W naszym repertuarze nie ma filmu o podanym tytule, spróbuj jeszcze raz"
                             + "\n" + "Dostępne Filmy:" + "\n");
-                    ConsolePrinter.printMovies(cinema.getMovies());
+                    ConsolePrinter.printMovies(movieController.cinema.getMovies());
                 }
             } catch (NullPointerException e) {
                 logger.error(
                         "Nie posiadamy takiego filmu w naszym repertuarze, podaj ponownie", e);
-                ConsolePrinter.printMovies(cinema.getMovies());
+                ConsolePrinter.printMovies(movieController.cinema.getMovies());
             }
         }return movie;
     }

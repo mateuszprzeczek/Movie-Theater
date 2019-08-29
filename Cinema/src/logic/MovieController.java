@@ -1,5 +1,6 @@
 package logic;
 
+import exception.DataExportException;
 import exception.DataImportException;
 import exception.InvalidDataException;
 import io.file.ConsolePrinter;
@@ -9,17 +10,19 @@ import io.file.SerializableFileManager;
 import model.Cinema;
 import model.Movie;
 import org.apache.log4j.Logger;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MovieController {
     private Logger logger = Logger.getLogger(MovieController.class);
     private Scanner sc = new Scanner(System.in);
-    private Cinema cinema;
+    private FileManager fileManager;
+    public Cinema cinema;
 
-
-    public MovieController() {
-        FileManager fileManager = new SerializableFileManager();
+    public MovieController(){}
+    public Cinema importData(){
+        fileManager = new SerializableFileManager();
         try {
             cinema = fileManager.importData();
             System.out.println("Zaimplementowane dane z pliku: ");
@@ -28,6 +31,11 @@ public class MovieController {
             System.out.println("Zainicjowano nową bazę.");
             cinema = new Cinema();
         }
+        return cinema;
+    }
+
+    public MovieController(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public void addMovie() {
@@ -80,6 +88,8 @@ public class MovieController {
                 }
             } catch (NullPointerException e) {
                 logger.error("Nie ma takiego filmu");
+            } catch (InputMismatchException e){
+                logger.error("Niepoprawne dane!");
             }
         }
 
@@ -92,8 +102,18 @@ public class MovieController {
                 else
                     logger.warn("Brak wskazanego filmu");
             } catch (InputMismatchException e) {
-                logger.error("Nie udało się utworzyć filmu, niepoprawne dane");
+                logger.error("Nie udało się usunąć filmu, niepoprawne dane");
             }
         }
+    public void exit() {
+        try {
+            fileManager.exportData(cinema);
+            System.out.println("Eksport danych do pliku zakonczony powodzeniem");
+        } catch (DataExportException e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Koniec programu...");
+        sc.close();
+    }
     }
 

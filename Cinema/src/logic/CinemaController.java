@@ -1,44 +1,34 @@
 package logic;
 
-import exception.*;
-import model.*;
-import io.file.ConsolePrinter;
-import io.file.DataReader;
-import io.file.FileManager;
-import io.file.SerializableFileManager;
+import exception.NoSuchOptionException;
+import model.Cinema;
 import options.InitialOptions;
 import options.SystemOptions;
 import options.UserOptions;
+import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-
-public class CinemaControl {
+public class CinemaController {
     private Scanner sc = new Scanner(System.in);
-    private FileManager fileManager;
-    private Cinema cinema;
+    public Cinema cinema;
     private TicketController ticketController;
     private MovieController movieController;
+    private Logger logger = Logger.getLogger(CinemaController.class);
 
 
-    public CinemaControl(TicketController ticketController, MovieController movieController) {
+
+    public CinemaController(TicketController ticketController, MovieController movieController, Cinema cinema) {
+        this.cinema = cinema;
         this.ticketController = ticketController;
         this.movieController = movieController;
-        fileManager = new SerializableFileManager();
-        try {
-            cinema = fileManager.importData();
-            System.out.println("Zaimplementowane dane z pliku: ");
-        } catch (DataImportException | InvalidDataException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Zainicjowano nową bazę.");
-            cinema = new Cinema();
-        }
     }
 
     public void initialLoop() {
         InitialOptions iOptions;
-        System.out.println("Witamy serdecznie w naszym kinie!");
-        System.out.println("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
+        logger.info("Witamy serdecznie w naszym kinie!");
+        logger.info("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
         do {
             printInitialOptions();
             iOptions = getInitialOptions();
@@ -50,10 +40,10 @@ public class CinemaControl {
                     systemLoop();
                     break;
                 case EXIT:
-                    exit();
+                    movieController.exit();
                     break;
                 default:
-                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
+                    logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (iOptions != InitialOptions.EXIT );
     }
@@ -67,25 +57,16 @@ public class CinemaControl {
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                System.out.println(e.getMessage() + "Podaj ponownie: ");
+                logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException i) {
-                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
+                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
         }return option;
     }
     private void printInitialOptions() {
         for (InitialOptions option : InitialOptions.values())
-            System.out.println(option.toString());
+            logger.info(option.toString());
     }
-    private void exit() {
-        try {
-            fileManager.exportData(cinema);
-            System.out.println("Eksport danych do pliku zakonczony powodzeniem");
-        } catch (DataExportException e){
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Koniec programu...");
-        sc.close();
-    }
+
 
     private void userLoop() {
         UserOptions uOptions;
@@ -97,7 +78,7 @@ public class CinemaControl {
                     printMovies();
                     break;
                 case USER_REGISTRATION:
-                    addUser();
+                    ticketController.addUser();
                     break;
                 case ADD_TICKET:
                     ticketController.addTicket();
@@ -108,7 +89,7 @@ public class CinemaControl {
                 case BACK:
                     break;
                 default:
-                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
+                    logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (uOptions != UserOptions.BACK);
     }
@@ -121,26 +102,19 @@ public class CinemaControl {
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                System.out.println(e.getMessage() + "Podaj ponownie: ");
+                logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
             }
         }return option;
     }
     private void printUserOptions() {
-        System.out.println("Wybierz opcję: ");
+        logger.info("Wybierz opcję: ");
         for (UserOptions option : UserOptions.values())
-            System.out.println(option.toString());
+            logger.info(option.toString());
     }
 
-    private void addUser() {
-        try {
-            CinemaUser user = ticketController.createUser();
-            cinema.addUser(user);
-        } catch (InputMismatchException e) {
-            System.out.println("Niepoprawne dane!");
-        }
-    }
+
 
     private void systemLoop(){
         SystemOptions sOptions;
@@ -169,7 +143,7 @@ public class CinemaControl {
                 case BACK:
                     break;
                 default:
-                    System.out.println("Nie ma takiej opcji. Wybierz ponownie: ");
+                    logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
         } while (sOptions != SystemOptions.BACK);
     }
@@ -183,20 +157,20 @@ public class CinemaControl {
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
-                System.out.println(e.getMessage() + "Podaj ponownie: ");
+                logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                System.out.println("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: "); }
+                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: "); }
         }return option;
     }
     private void printSystemOptions() {
-        System.out.println("Wybierz opcję: ");
+        logger.info("Wybierz opcję: ");
         for (SystemOptions option : SystemOptions.values())
-            System.out.println(option.toString());
+            logger.info(option.toString());
     }
     private void addTimeOfSeance(){
         movieController.addTimeOfSeance();
     }
-    public void addMovie(){
+    private void addMovie(){
         movieController.addMovie();
     }
 
@@ -206,7 +180,7 @@ public class CinemaControl {
     private void printMovies(){
         movieController.printMovies();
     }
-    public void printUsers() {
+    private void printUsers() {
         ticketController.printUsers();
     }
 }

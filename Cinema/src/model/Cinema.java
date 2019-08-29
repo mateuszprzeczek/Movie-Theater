@@ -10,6 +10,9 @@ public class Cinema implements Serializable {
     public Map<String, CinemaUser> users = new HashMap<>();
 
 
+    public Cinema() {
+    }
+
     public void addMovie(Movie movie){
     if (movies.containsKey(movie.getTitle())){
         throw new MovieAlreadyExistsException(
@@ -38,7 +41,7 @@ public class Cinema implements Serializable {
             try{
          users.get(lastName);
     }catch (NullPointerException e){
-                System.out.println("Nie ma");
+                System.out.println("Nie ma takiego użytkownika");
             }
             return users.get(lastName);
         }

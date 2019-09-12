@@ -18,13 +18,22 @@ public class Movie implements Serializable{
         this.cinemaHallNumber = cinemaHallNumber;
         this.price = price;
     }
+    public Movie(){}
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setCinemaHallNumber(int cinemaHallNumber) {
+        this.cinemaHallNumber = cinemaHallNumber;
+    }
 
     public String getTitle() {
         return title;
-    }
-
-    public void addPlayingHourToList(LocalTime localTime){
-        playingHours.add(localTime);
     }
 
     public int getCinemaHallNumber() {

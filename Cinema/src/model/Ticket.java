@@ -3,11 +3,13 @@ package model;
 import java.io.Serializable;
 
   public class Ticket implements Serializable {
+      private User owner;
       private Movie movie;
       private int rowNumber;
       private int seatNumber;
 
-      public Ticket(Movie movie, int rowNumber, int seatNumber) {
+      public Ticket(User owner, Movie movie, int rowNumber, int seatNumber) {
+          this.owner = owner;
           this.movie = movie;
           this.rowNumber = rowNumber;
           this.seatNumber = seatNumber;
@@ -15,7 +17,7 @@ import java.io.Serializable;
 
       @Override
       public String toString() {
-          return " Film pt:  " + movie.toString() + "\n" +
+          return  owner.toString() + " Film pt:  " + movie.toString() + "\n" +
                   ", Numer sali kinowej-" + movie.getCinemaHallNumber() +
                   ", Rząd-" + rowNumber +
                   ", Miejsce-" + seatNumber + "\n";

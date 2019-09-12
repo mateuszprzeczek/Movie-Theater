@@ -1,21 +1,24 @@
 package app;
 
+import logic.BookingController;
 import logic.CinemaController;
 import logic.MovieController;
-import logic.TicketController;
-import model.Cinema;
+import logic.UserController;
+import view.ApplicationDisplay;
 
 public class CinemaApp {
     public static void main(String[] args)  {
         final String APP_NAME = "Kino v5.0";
         System.out.println(APP_NAME);
-
         MovieController movieController = new MovieController();
-        TicketController ticketController = new TicketController(movieController);
-        Cinema cinema = movieController.importData();
+        CinemaController cinemaController = new CinemaController(movieController);
 
-        CinemaController cinemaControl = new CinemaController(ticketController, movieController, cinema);
-        cinemaControl.initialLoop();
+        cinemaController.importData();
+        UserController userController = new UserController(movieController);
+        BookingController bookingController = new BookingController(movieController, userController);
+
+        ApplicationDisplay applicationDisplay = new ApplicationDisplay(bookingController, movieController, cinemaController, userController);
+        applicationDisplay.mainMenu();
     }
 
 }

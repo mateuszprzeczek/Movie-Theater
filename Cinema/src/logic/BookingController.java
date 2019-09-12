@@ -1,30 +1,44 @@
 package logic;
 
+import helpers.MovieBuilderHelper;
 import io.file.ConsolePrinter;
-import io.file.DataReader;
-import model.*;
+import model.Movie;
+import model.Ticket;
+import model.User;
 import org.apache.log4j.Logger;
+
 import java.time.LocalTime;
 import java.util.*;
 
-public class TicketController {
-    private Logger logger = Logger.getLogger(TicketController.class);
+public class BookingController {
+    private Logger logger = Logger.getLogger(BookingController.class);
     private Scanner sc = new Scanner(System.in);
     private MovieController movieController;
+    private UserController userController;
 
-    public TicketController(MovieController movieController){
+    public BookingController(MovieController movieController, UserController userController){
         this.movieController = movieController;
+        this.userController = userController;
     }
-    public void addUser() {
+
+    public void addTicket() {
+        logger.info("Podaj nazwisko");
+        String lastName = sc.nextLine();
         try {
-            CinemaUser user = createUser();
-            movieController.cinema.addUser(user);
-        } catch (InputMismatchException e) {
-            logger.warn("Niepoprawne dane!");
+            User user = userController.findUser(lastName);
+            if (user != null){
+                movieController.cinema.getTickets()
+                        .put(user.getLastName(), createTicket(user));
+            }else {
+                logger.info("Użytkownik o podanym nazwisku nie istnieje");
+                logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
+            }
+        } catch (NullPointerException e) {
+            logger.warn("Nie posiadamy takiego filmu w repertuarze");
         }
     }
 
-    public Ticket createTicket() {
+    private Ticket createTicket(User user) {
         Movie movie = findMovie();
         Movie userMovie = new Movie(movie.getTitle(), movie.getLength(),
                 movie.getPlayingHours(), movie.getCinemaHallNumber(), movie.getPrice());
@@ -32,18 +46,19 @@ public class TicketController {
         Random random = new Random();
         int rowNumber = random.nextInt(10);
         int seatNumber = random.nextInt(17);
-        Ticket ticket = new Ticket(userMovie, rowNumber, seatNumber);
+        Ticket ticket = new Ticket(user, userMovie, rowNumber, seatNumber);
         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
         return ticket;
     }
-    public void choosePlayingHour(Movie movie) {
+
+    private void choosePlayingHour(Movie movie) {
         boolean ok = false;
         while (!ok) {
             try {
                 logger.info("Dostępne godziny");
                 logger.info(movie.getPlayingHours().toString());
                 List<LocalTime> selectedTime = new ArrayList<>();
-                LocalTime readPlayingHour = DataReader.createTimeOfSeance();
+                LocalTime readPlayingHour = MovieBuilderHelper.createTimeOfSeance();
                 if (movie.getPlayingHours().contains(readPlayingHour)){
                     selectedTime.add(readPlayingHour);
                     movie.setPlayingHours(selectedTime);
@@ -56,44 +71,15 @@ public class TicketController {
             }
         }
     }
-    public void addTicket() {
-        logger.info("Podaj nazwisko");
-        String lastName = sc.nextLine();
-        try {
-            CinemaUser user = movieController.cinema.findUser(lastName);
-            if (user != null){
-                user.addTicketToList(createTicket());
-            }else {
-                logger.info("Użytkownik o podanym nazwisku nie istnieje");
-                logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
-            }
-        } catch (NullPointerException e) {
-            logger.warn("Nie posiadamy takiego filmu w repertuarze");
-        }
-    }
+
     public void printUserTickets() {
         logger.info("Podaj Nazwisko");
         String lastName = sc.nextLine();
         String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
-        movieController.cinema.findUserByName(lastName)
-                .map(User::toString)
+        userController.findUserTicketsByName(lastName)
+                .map(Ticket::toString)
                 .ifPresentOrElse(System.out::println, () -> logger.error(notFoundMessage));
     }
-    public CinemaUser createUser(){
-        logger.info("Podaj imię");
-        String firstName = sc.nextLine();
-        logger.info("Podaj nazwisko");
-        String lastName = sc.nextLine();
-        logger.info("Rejestracja "+ firstName + " " + lastName + " zakończona powodzeniem.");
-        List<Ticket> listOfTickets = new ArrayList<>();
-        Ticket ticket = createTicket();
-        listOfTickets.add(ticket);
-        return new CinemaUser(firstName, lastName, listOfTickets);
-    }
-    public void printUsers() {
-        ConsolePrinter.printUsers(movieController.cinema.getUsers());
-    }
-
 
     private Movie findMovie() {
         Movie movie = null;
@@ -101,7 +87,7 @@ public class TicketController {
         while (!ok) {
             try {
                 logger.info("Podaj tytuł filmu, który chcesz zarezerwować");
-                movie = movieController.cinema.findMovieByTitle(sc.nextLine());
+                movie = movieController.findMovieByTitle(sc.nextLine());
                 if (movie!=null)
                     ok = true;
                 else {

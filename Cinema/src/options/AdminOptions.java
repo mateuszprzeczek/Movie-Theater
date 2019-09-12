@@ -2,19 +2,18 @@ package options;
 
 import exception.NoSuchOptionException;
 
-public enum SystemOptions {
+public enum AdminOptions {
         PRINT_MOVIES(1, "Wyświetlanie dostępnych filmów"),
         ADD_MOVIE(2, "Dodaj film"),
-        ADD_TIME_OF_SEANCE(3, "Dodaj godzinę seansu"),
-        CHANGE_PRICE(4, "Zmień cenę biletu"),
-        PRINT_TICKETS(5, "Pokaż zarezerwowane filmy"),
-        DELETE_MOVIE(6, "Usuń film"),
-        BACK(7, "Wstecz");
+        PRINT_USERS(3, "Wyświetl zarejestrowanych użytkowników"),
+        PRINT_TICKETS(4, "Wyświetl zarezerwowane filmy"),
+        CHANGE_MOVIE_VALUES(5, "Zmień godzinę/cenę/usuń film"),
+        BACK(6, "Wstecz");
 
         private int value;
         private String description;
 
-        SystemOptions(int value, String description) {
+        AdminOptions(int value, String description) {
             this.value = value;
             this.description = description;
         }
@@ -24,9 +23,9 @@ public enum SystemOptions {
             return value + "-" + description;
         }
 
-        public static SystemOptions createFromInt(int option) throws NoSuchOptionException {
+        public static AdminOptions createFromInt(int option) throws NoSuchOptionException {
             try {
-                return SystemOptions.values()[option-1];
+                return AdminOptions.values()[option-1];
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new NoSuchOptionException("Brak opcji o id: " + option);
             }

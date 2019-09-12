@@ -1,42 +1,40 @@
 package io.file;
 
 import model.Movie;
+import model.Ticket;
 import model.User;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ConsolePrinter {
    private static Logger logger = Logger.getLogger(ConsolePrinter.class);
 
-        public static void printMovies(List<Movie> movies){
+        public static void printMovies(Map<String, Movie> movies){
             if (movies.size() == 0){
                 logger.info("Brak filmów");
             }else {
-                movies.forEach(System.out::println);
+                List<Movie> movieList = new ArrayList<>(movies.values());
+
+                movieList.forEach(System.out::println);
             }
         }
-        public static void printUsers(List<User> users){
+        public static void printUsers(Map<String, User> users){
             if (users.size() == 0){
                 logger.info("Brak użytkowników");
             }else {
-                users.stream().forEach(System.out::println);
+                List<User> userList = new ArrayList<>(users.values());
+                userList.forEach(System.out::println);
             }
         }
-        /*public void printTickets(List<Ticket> tickets){
-            long count = 0L;
-            for (Ticket ticket : tickets) {
-                    String toString = ticket.toString();
-                    printLine(toString);
-                    count++;
-            }
-            if (count == 0){
-                System.out.println("Brak użytkowników.");
+        public static void printTickets(Map<String, Ticket> tickets){
+            if (tickets.size() == 0){
+                logger.info("Brak zakupionych biletów");
+            }else {
+                List<Ticket> ticketList = new ArrayList<>(tickets.values());
+                ticketList.forEach(System.out::println);
             }
         }
-        public void printUser(User user){
-            user.toString();
-            printTickets(user.getTicket());
-            }*/
-
 }

@@ -2,30 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="log4j lib added">
-      <change afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Cinema/logic/TicketController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Cinema/model/CinemaUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaControl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/DataReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/TicketController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/CinemaUser.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/InitialOptions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/SystemOptions.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/DataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/DataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j-1.2.15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/log4j-1.2.15.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/CinemaControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/DataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builder/MovieBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/CinemaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ApplicationDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/CinemaUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CinemaUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CinemaUser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/InitialOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/MainOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/SystemOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/AdminOptions.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,9 +42,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -65,12 +68,12 @@
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566826406299" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/.." />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/log4j-1.2.15.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -90,7 +93,7 @@
       <module name="Cinema" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="logic.*" />
+          <option name="PATTERN" value="view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -242,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566929597038</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="log4j lib added">
+      <created>1567074971611</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1567074971611</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -293,9 +303,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/app/CinemaApp.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/logic/UserController.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

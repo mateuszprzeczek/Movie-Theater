@@ -38,7 +38,7 @@ public class MovieController {
 
     public void addTimeOfSeance() {
         try {
-            System.out.println("Podaj tytuł filmu");
+            logger.info("Podaj tytuł filmu");
             String title = sc.nextLine();
             Movie movie = findMovieByTitle(title);
             if (movie != null) {
@@ -46,11 +46,11 @@ public class MovieController {
                 playingHours.add(MovieBuilderHelper.createTimeOfSeance());
                 movie.setPlayingHours(playingHours);
             } else {
-                System.out.println("Nie ma takiego filmu. Dostępne filmy: ");
+                logger.info("Nie ma takiego filmu. Dostępne filmy: ");
                 printMovies();
             }
         } catch (NullPointerException e) {
-            System.out.println("Nie ma takiego filmu");
+            logger.warn("Nie ma takiego filmu");
         }
     }
 

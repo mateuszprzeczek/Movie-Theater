@@ -4,7 +4,7 @@ import logic.BookingController;
 import logic.CinemaController;
 import logic.MovieController;
 import logic.UserController;
-import view.ApplicationDisplay;
+import logic.ApplicationDisplay;
 
 public class CinemaApp {
     public static void main(String[] args)  {

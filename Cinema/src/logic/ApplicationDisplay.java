@@ -1,16 +1,7 @@
-package view;
-
-import io.file.ConsolePrinter;
-import logic.BookingController;
-import logic.CinemaController;
-import logic.MovieController;
-import logic.UserController;
-import options.AdminOptions;
-import options.MainOptions;
-import options.MovieFieldsOptions;
-import options.UserOptions;
+package logic;
 import org.apache.log4j.Logger;
-
+import io.file.ConsolePrinter;
+import options.*;
 import static helpers.OptionsHelper.*;
 
 public class ApplicationDisplay {

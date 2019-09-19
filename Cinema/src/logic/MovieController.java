@@ -25,7 +25,7 @@ public class MovieController {
     public MovieController(){}
 
 
-    public void addMovie() {
+    void addMovie() {
         try {
             Movie movie = MovieBuilder.addMovie();
             cinema.movies.put(movie.getTitle(), movie);
@@ -36,7 +36,7 @@ public class MovieController {
         }
     }
 
-    public void addTimeOfSeance() {
+    void addTimeOfSeance() {
         try {
             logger.info("Podaj tytuł filmu");
             String title = sc.nextLine();
@@ -44,7 +44,7 @@ public class MovieController {
             if (movie != null) {
                 List<LocalTime> playingHours = movie.getPlayingHours();
                 playingHours.add(MovieBuilderHelper.createTimeOfSeance());
-                movie.setPlayingHours(playingHours);
+                movie = Movie.Builder.newInstance().setPlayingHours(playingHours).build();
             } else {
                 logger.info("Nie ma takiego filmu. Dostępne filmy: ");
                 printMovies();
@@ -54,21 +54,21 @@ public class MovieController {
         }
     }
 
-    public void printMovies() {
+    void printMovies() {
         ConsolePrinter.printMovies(cinema.getMovies());
     }
     Movie findMovieByTitle(String title) {
         return cinema.movies.get(title);
     }
 
-        public void changeMoviePrice () {
+        void changeMoviePrice() {
             logger.info("Podaj tytuł filmu");
             String title = sc.nextLine();
             try {
                 Movie movie = findMovieByTitle(title);
                 if (movie != null) {
                     logger.info("Podaj nową cenę: ");
-                    movie.setPrice(sc.nextInt());
+                    movie = Movie.Builder.newInstance().setPrice(sc.nextInt()).build();
                     sc.nextLine();
                 } else {
                     logger.warn("Nie ma takiego filmu. Dostępne filmy: ");
@@ -81,7 +81,7 @@ public class MovieController {
             }
         }
 
-        public void deleteMovie() {
+        void deleteMovie() {
             try {
                 logger.info("Podaj tytuł filmu, który chcesz usunąć: ");
                 Movie movie = findMovieByTitle(sc.nextLine());

@@ -26,5 +26,14 @@ public class Cinema implements Serializable {
         return tickets;
     }
 
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "movies=" + movies +
+                ", users=" + users +
+                ", tickets=" + tickets +
+                '}';
+    }
 }
+
 

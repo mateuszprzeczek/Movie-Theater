@@ -4,20 +4,29 @@
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/view/ApplicationDisplay$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/view/ApplicationDisplay.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/MovieBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/builder/MovieBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/UserBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/FileManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/SerializableFileManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/builder/MovieBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builder/MovieBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builder/UserBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ApplicationDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -302,5 +311,21 @@
     <MESSAGE value="log4j lib added" />
     <MESSAGE value="Update" />
     <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/logic/CinemaController.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/logic/CinemaController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -11,49 +11,67 @@ public class Movie implements Serializable{
     private int cinemaHallNumber;
     private double price;
 
-    public Movie(String title, int length, List<LocalTime> playingHours, int cinemaHallNumber, double price) {
-        this.title = title;
-        this.length = length;
-        this.playingHours = playingHours;
-        this.cinemaHallNumber = cinemaHallNumber;
-        this.price = price;
-    }
-    public Movie(){}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    private Movie(){}
 
-    public void setLength(int length) {
-        this.length = length;
-    }
+    public static class Builder{
+        private String title;
+        private int length;
+        private List<LocalTime> playingHours;
+        private int cinemaHallNumber;
+        private double price;
 
-    public void setCinemaHallNumber(int cinemaHallNumber) {
-        this.cinemaHallNumber = cinemaHallNumber;
+        public static Builder newInstance(){
+            return new Builder();
+        }
+        private Builder(){}
+
+        public Builder setTitle(String title){
+            this.title = title;
+            return this;
+        }
+        public Builder setLength(int length){
+            this.length = length;
+            return this;
+        }
+        public Builder setPlayingHours(List<LocalTime> playingHours){
+            this.playingHours = playingHours;
+            return this;
+        }
+        public Builder setCinemaHallNumber(int cinemaHallNumber){
+            this.cinemaHallNumber = cinemaHallNumber;
+            return this;
+        }
+        public Builder setPrice(double price){
+            this.price = price;
+            return this;
+        }
+        public Movie build(){
+            Movie movie = new Movie();
+            movie.title = this.title;
+            movie.length = this.length;
+            movie.playingHours = this.playingHours;
+            movie.cinemaHallNumber = this.cinemaHallNumber;
+            movie.price = this.price;
+
+            return movie;
+        }
     }
 
     public String getTitle() {
         return title;
     }
 
-    public int getCinemaHallNumber() {
-        return cinemaHallNumber;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public int getLength() {
+        return length;
     }
 
     public List<LocalTime> getPlayingHours() {
         return playingHours;
     }
 
-    public void setPlayingHours(List<LocalTime> playingHours) {
-        this.playingHours = playingHours;
-    }
-
-    public int getLength() {
-        return length;
+    public int getCinemaHallNumber() {
+        return cinemaHallNumber;
     }
 
     public double getPrice() {
@@ -63,10 +81,9 @@ public class Movie implements Serializable{
     @Override
     public String toString() {
         return
-                 title +
-                ", Czas trwania " + length + " minut" +
-                ", Godziny seansów " + playingHours.toString() +
-                ", Cena " + price + " zł" ;
+                new StringBuilder().append(this.title).append(", Czas trwania ").append(this.length)
+                        .append(" minut").append(", Godziny seansów ").append(this.playingHours.toString())
+                        .append(", Cena ").append(this.price).append(" zł").toString();
     }
 
 }

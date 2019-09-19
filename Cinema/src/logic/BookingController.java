@@ -1,5 +1,6 @@
 package logic;
 
+import builder.TicketBuilder;
 import helpers.MovieBuilderHelper;
 import io.file.ConsolePrinter;
 import model.Movie;
@@ -21,7 +22,7 @@ public class BookingController {
         this.userController = userController;
     }
 
-    public void addTicket() {
+    void addTicket() {
         logger.info("Podaj nazwisko");
         String lastName = sc.nextLine();
         try {
@@ -38,15 +39,17 @@ public class BookingController {
         }
     }
 
-    private Ticket createTicket(User user) {
+    private Ticket createTicket(User owner) {
         Movie movie = findMovie();
-        Movie userMovie = new Movie(movie.getTitle(), movie.getLength(),
-                movie.getPlayingHours(), movie.getCinemaHallNumber(), movie.getPrice());
-        choosePlayingHour(userMovie);
-        Random random = new Random();
-        int rowNumber = random.nextInt(10);
-        int seatNumber = random.nextInt(17);
-        Ticket ticket = new Ticket(user, userMovie, rowNumber, seatNumber);
+        Movie selectedMovie = Movie.Builder.newInstance()
+                .setTitle(movie.getTitle())
+                .setLength(movie.getLength())
+                .setPlayingHours(movie.getPlayingHours())
+                .setCinemaHallNumber(movie.getCinemaHallNumber())
+                .setPrice(movie.getPrice())
+                .build();
+        choosePlayingHour(selectedMovie);
+        Ticket ticket = TicketBuilder.addTicket(owner, selectedMovie);
         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
         return ticket;
     }
@@ -61,7 +64,7 @@ public class BookingController {
                 LocalTime readPlayingHour = MovieBuilderHelper.createTimeOfSeance();
                 if (movie.getPlayingHours().contains(readPlayingHour)){
                     selectedTime.add(readPlayingHour);
-                    movie.setPlayingHours(selectedTime);
+                    movie = Movie.Builder.newInstance().setPlayingHours(selectedTime).build();
                     ok = true;
                 } else {
                     logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
@@ -72,12 +75,12 @@ public class BookingController {
         }
     }
 
-    public void printUserTickets() {
+    void printUserTickets() {
         logger.info("Podaj Nazwisko");
         String lastName = sc.nextLine();
         String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
         userController.findUserTicketsByName(lastName)
-                .map(Ticket::toString)
+                .map(model.Ticket::toString)
                 .ifPresentOrElse(System.out::println, () -> logger.error(notFoundMessage));
     }
 

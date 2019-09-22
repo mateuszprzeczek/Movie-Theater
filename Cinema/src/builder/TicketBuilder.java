@@ -3,14 +3,8 @@ package builder;
 import model.Movie;
 import model.Ticket;
 import model.User;
-import org.apache.log4j.Logger;
-
-import java.util.Random;
-import java.util.Scanner;
 
 public class TicketBuilder {
-    private static Logger logger = Logger.getLogger(MovieBuilder.class);
-    private static Scanner sc = new Scanner(System.in);
     private  User owner;
     private  Movie movie;
     private  int rowNumber;
@@ -50,15 +44,5 @@ public class TicketBuilder {
         }
 
 
-    public static Ticket addTicket(User user, Movie movie){
-        Random random = new Random();
-        int rowNumber = random.nextInt(10);
-        int seatNumber = random.nextInt(17);
-        return TicketBuilder.newInstance()
-                .setOwner(user)
-                .setMovie(movie)
-                .setRowNumber(rowNumber)
-                .setSeatNumber(seatNumber)
-                .build();
-    }
+
 }

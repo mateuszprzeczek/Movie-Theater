@@ -1,6 +1,5 @@
 package helpers;
 
-import builder.MovieBuilder;
 import org.apache.log4j.Logger;
 
 import java.time.DateTimeException;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MovieBuilderHelper {
-    private static Logger logger = Logger.getLogger(MovieBuilder.class);
+    private static Logger logger = Logger.getLogger(MovieBuilderHelper.class);
     private static Scanner sc = new Scanner(System.in);
 
     public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay){

@@ -49,7 +49,15 @@ public class BookingController {
                 .setPrice(movie.getPrice())
                 .build();
         choosePlayingHour(selectedMovie);
-        Ticket ticket = TicketBuilder.addTicket(owner, selectedMovie);
+            Random random = new Random();
+            int rowNumber = random.nextInt(10);
+            int seatNumber = random.nextInt(17);
+            Ticket ticket = TicketBuilder.newInstance()
+                    .setOwner(owner)
+                    .setMovie(movie)
+                    .setRowNumber(rowNumber)
+                    .setSeatNumber(seatNumber)
+                    .build();
         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
         return ticket;
     }

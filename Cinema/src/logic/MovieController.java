@@ -1,6 +1,5 @@
 package logic;
 
-import builder.MovieBuilder;
 import helpers.MovieBuilderHelper;
 import io.file.ConsolePrinter;
 import model.Cinema;
@@ -18,22 +17,43 @@ public class MovieController {
     public Cinema cinema;
     private CinemaController cinemaController;
 
-    public MovieController(CinemaController cinemaController) {
+
+    public MovieController(CinemaController cinemaController){
         this.cinemaController = cinemaController;
     }
 
-    public MovieController(){}
-
+    public MovieController() {
+    }
 
     void addMovie() {
         try {
-            Movie movie = MovieBuilder.addMovie();
+            Movie movie = createMovie();
             cinema.movies.put(movie.getTitle(), movie);
         } catch (InputMismatchException e) {
             System.out.println("Nie udało się utworzyć filmu. Niepoprawne dane!");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Nie można utworzyć kolejnego filmu. Osiągnięto limit pojemności.");
         }
+    }
+    private Movie createMovie() {
+        logger.info("Tytuł filmu: ");
+        String title = sc.nextLine();
+        logger.info("Długość filmu w minutach: ");
+        int length = sc.nextInt();
+        logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
+        List<LocalTime> playingHours = MovieBuilderHelper.setNumbersOfViewsPerDay(sc.nextInt());
+        logger.info("Podaj nr sali kinowej: ");
+        int cinemaHallNumber = sc.nextInt();
+        logger.info("Podaj cenę ");
+        double price = sc.nextDouble();
+        sc.nextLine();
+        return Movie.Builder.newInstance()
+                .setTitle(title)
+                .setLength(length)
+                .setPlayingHours(playingHours)
+                .setCinemaHallNumber(cinemaHallNumber)
+                .setPrice(price)
+                .build();
     }
 
     void addTimeOfSeance() {

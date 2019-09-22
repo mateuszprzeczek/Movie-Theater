@@ -16,7 +16,7 @@ public class UserController {
     public UserController(MovieController movieController) {
         this.movieController = movieController;
     }
-    public void addUser() {
+    void addUser() {
         try {
             User user = userRegistration();
             movieController.cinema.getUsers()
@@ -25,7 +25,7 @@ public class UserController {
             logger.warn("Niepoprawne dane!");
         }
     }
-    public User userRegistration(){
+    private User userRegistration(){
         logger.info("Podaj imię");
         String firstName = sc.nextLine();
         logger.info("Podaj nazwisko");

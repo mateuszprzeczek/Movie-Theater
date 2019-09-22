@@ -39,7 +39,7 @@ public class CinemaController {
             return false;
         }
     }
-    public void exit() {
+    void exit() {
         try {
             fileManager.exportData(movieController.cinema);
             System.out.println("Eksport danych do pliku zakonczony powodzeniem");

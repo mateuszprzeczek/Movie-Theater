@@ -81,9 +81,9 @@ public class Movie implements Serializable{
     @Override
     public String toString() {
         return
-                new StringBuilder().append(this.title).append(", Czas trwania ").append(this.length)
-                        .append(" minut").append(", Godziny seansów ").append(this.playingHours.toString())
-                        .append(", Cena ").append(this.price).append(" zł").toString();
+                this.title + ", Czas trwania " + this.length +
+                        " minut" + ", Godziny seansów " + this.playingHours.toString() +
+                        ", Cena " + this.price + " zł";
     }
 
 }

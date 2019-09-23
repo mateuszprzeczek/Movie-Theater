@@ -1,21 +1,19 @@
-package logic;
+package io.file;
 
 import exception.DataExportException;
 import exception.DataImportException;
 import exception.InvalidDataException;
-import io.file.FileManager;
-import io.file.SerializableFileManager;
+import logic.MovieController;
 import model.Cinema;
-import model.Movie;
 
 import java.util.Scanner;
 
-public class CinemaController {
+public class ImportExport {
     private FileManager fileManager;
     private Scanner sc = new Scanner(System.in);
     private MovieController movieController;
 
-    public CinemaController(MovieController movieController) {
+    public ImportExport(MovieController movieController) {
         this.movieController = movieController;
     }
 
@@ -31,15 +29,8 @@ public class CinemaController {
         }
     }
 
-    boolean removeMovie(Movie movie){
-        if (movieController.cinema.movies.containsValue(movie)){
-            movieController.cinema.movies.remove(movie.getTitle());
-            return true;
-        }else {
-            return false;
-        }
-    }
-    void exit() {
+
+    public void exit() {
         try {
             fileManager.exportData(movieController.cinema);
             System.out.println("Eksport danych do pliku zakonczony powodzeniem");

@@ -3,25 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/MovieBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/MovieBuilderHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/helpers/MovieBuilderHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/MovieBuilderHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/CinemaController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builder/MovieBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builder/TicketBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builder/TicketBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/MovieBuilderHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieBuilderHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/AdminOptions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/options/AdminOptions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MainOptions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/options/MainOptions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MovieFieldsOptions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/options/MovieFieldsOptions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/UserOptions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/options/UserOptions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/MovieBuilderHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/CinemaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/CinemaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/CinemaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ImportExport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/AdminOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/AdminOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/MainOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/MainOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/MovieFieldsOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/MovieFieldsOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/UserOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/options/UserOptions.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +90,7 @@
       <module name="Cinema" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="logic.*" />
+          <option name="PATTERN" value="io.file.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -266,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568916062345</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Validate builders">
+      <created>1569136748960</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1569136748960</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -313,6 +324,18 @@
     <MESSAGE value="log4j lib added" />
     <MESSAGE value="Update" />
     <MESSAGE value="Builders append" />
-    <option name="LAST_COMMIT_MESSAGE" value="Builders append" />
+    <MESSAGE value="Validate builders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validate builders" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/helpers/OptionsHelper.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

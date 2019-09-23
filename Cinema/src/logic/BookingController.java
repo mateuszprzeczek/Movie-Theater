@@ -1,7 +1,7 @@
 package logic;
 
 import builder.TicketBuilder;
-import helpers.MovieBuilderHelper;
+import helpers.MovieTimeOfSeanceHelper;
 import io.file.ConsolePrinter;
 import model.Movie;
 import model.Ticket;
@@ -69,7 +69,7 @@ public class BookingController {
                 logger.info("Dostępne godziny");
                 logger.info(movie.getPlayingHours().toString());
                 List<LocalTime> selectedTime = new ArrayList<>();
-                LocalTime readPlayingHour = MovieBuilderHelper.createTimeOfSeance();
+                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
                 if (movie.getPlayingHours().contains(readPlayingHour)){
                     selectedTime.add(readPlayingHour);
                     movie = Movie.Builder.newInstance().setPlayingHours(selectedTime).build();

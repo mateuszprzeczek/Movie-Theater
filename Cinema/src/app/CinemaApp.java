@@ -1,7 +1,7 @@
 package app;
 
 import logic.BookingController;
-import logic.CinemaController;
+import io.file.ImportExport;
 import logic.MovieController;
 import logic.UserController;
 import logic.ApplicationDisplay;
@@ -11,13 +11,13 @@ public class CinemaApp {
         final String APP_NAME = "Kino v5.0";
         System.out.println(APP_NAME);
         MovieController movieController = new MovieController();
-        CinemaController cinemaController = new CinemaController(movieController);
+        ImportExport importExport = new ImportExport(movieController);
 
-        cinemaController.importData();
+        importExport.importData();
         UserController userController = new UserController(movieController);
         BookingController bookingController = new BookingController(movieController, userController);
 
-        ApplicationDisplay applicationDisplay = new ApplicationDisplay(bookingController, movieController, cinemaController, userController);
+        ApplicationDisplay applicationDisplay = new ApplicationDisplay(bookingController, movieController, importExport, userController);
         applicationDisplay.mainMenu();
     }
 

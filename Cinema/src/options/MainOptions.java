@@ -1,7 +1,5 @@
 package options;
 
-import exception.NoSuchOptionException;
-
 public enum MainOptions {
     EXIT(0, "Wyjście."),
     USER(1, "Klient"),
@@ -17,14 +15,6 @@ public enum MainOptions {
     @Override
     public String toString() {
         return value + "-" + description;
-    }
-
-    public static MainOptions createFromInt(int option) throws NoSuchOptionException {
-        try {
-            return MainOptions.values()[option];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchOptionException("Brak opcji o id: " + option);
-        }
     }
 }
 

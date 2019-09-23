@@ -9,8 +9,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class MovieBuilderHelper {
-    private static Logger logger = Logger.getLogger(MovieBuilderHelper.class);
+public class MovieTimeOfSeanceHelper {
+    private static Logger logger = Logger.getLogger(MovieTimeOfSeanceHelper.class);
     private static Scanner sc = new Scanner(System.in);
 
     public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay){
@@ -51,4 +51,5 @@ public class MovieBuilderHelper {
         if (hour <= 23) if (hour >= 0) if (minutes <= 60) return minutes >= 0;
         return false;
     }
+
 }

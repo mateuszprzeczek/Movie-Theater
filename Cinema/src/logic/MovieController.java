@@ -1,6 +1,7 @@
 package logic;
 
-import helpers.MovieBuilderHelper;
+import helpers.MovieTimeOfSeanceHelper;
+import io.file.ImportExport;
 import io.file.ConsolePrinter;
 import model.Cinema;
 import model.Movie;
@@ -15,11 +16,11 @@ public class MovieController {
     private Logger logger = Logger.getLogger(MovieController.class);
     private Scanner sc = new Scanner(System.in);
     public Cinema cinema;
-    private CinemaController cinemaController;
+    private ImportExport importExport;
 
 
-    public MovieController(CinemaController cinemaController){
-        this.cinemaController = cinemaController;
+    public MovieController(ImportExport importExport){
+        this.importExport = importExport;
     }
 
     public MovieController() {
@@ -41,7 +42,7 @@ public class MovieController {
         logger.info("Długość filmu w minutach: ");
         int length = sc.nextInt();
         logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
-        List<LocalTime> playingHours = MovieBuilderHelper.setNumbersOfViewsPerDay(sc.nextInt());
+        List<LocalTime> playingHours = MovieTimeOfSeanceHelper.setNumbersOfViewsPerDay(sc.nextInt());
         logger.info("Podaj nr sali kinowej: ");
         int cinemaHallNumber = sc.nextInt();
         logger.info("Podaj cenę ");
@@ -63,7 +64,7 @@ public class MovieController {
             Movie movie = findMovieByTitle(title);
             if (movie != null) {
                 List<LocalTime> playingHours = movie.getPlayingHours();
-                playingHours.add(MovieBuilderHelper.createTimeOfSeance());
+                playingHours.add(MovieTimeOfSeanceHelper.createTimeOfSeance());
                 movie = Movie.Builder.newInstance().setPlayingHours(playingHours).build();
             } else {
                 logger.info("Nie ma takiego filmu. Dostępne filmy: ");
@@ -100,12 +101,19 @@ public class MovieController {
                 logger.error("Niepoprawne dane!");
             }
         }
-
+    boolean removeMovie(Movie movie){
+        if (cinema.movies.containsValue(movie)){
+            cinema.movies.remove(movie.getTitle());
+            return true;
+        }else {
+            return false;
+        }
+    }
         void deleteMovie() {
             try {
                 logger.info("Podaj tytuł filmu, który chcesz usunąć: ");
                 Movie movie = findMovieByTitle(sc.nextLine());
-                if (cinemaController.removeMovie(movie))
+                if (removeMovie(movie))
                     logger.info("Usunięto film");
                 else
                     logger.warn("Brak wskazanego filmu");

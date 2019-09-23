@@ -20,7 +20,7 @@ public class OptionsHelper {
         MainOptions option = null;
         while (!optionOk) {
             try {
-                option = MainOptions.createFromInt(sc.nextInt());
+                option = createMainOptionsFromInt(sc.nextInt());
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
@@ -29,26 +29,41 @@ public class OptionsHelper {
                 logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
         }return option;
     }
-    public static void printInitialOptions() {
+    public static MainOptions createMainOptionsFromInt(int option) throws NoSuchOptionException {
+        try {
+            return MainOptions.values()[option];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id: " + option);
+        }
+    }
+    public static void printMainOptions() {
         for (MainOptions option : MainOptions.values())
             logger.info(option.toString());
     }
 
     public static AdminOptions getAdminOptions() {
-        boolean optionOk = false;
+        boolean optionValueExist = false;
         AdminOptions option = null;
-        while (!optionOk) {
+        while (!optionValueExist) {
             try {
-                option = AdminOptions.createFromInt(sc.nextInt());
-                sc.nextLine();
-                optionOk = true;
+                option = createAdminOptionsFromInt(sc.nextInt());
+                optionValueExist = true;
+            } catch (InputMismatchException e) {
+                logger.info("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
             } catch (NoSuchOptionException e) {
                 logger.warn(e.getMessage() + "Podaj ponownie: ");
-            } catch (InputMismatchException ignored) {
-                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: "); }
-        }return option;
+            }
+        }
+            return option;
     }
-    public static void printSystemOptions() {
+    public static AdminOptions createAdminOptionsFromInt(int option) throws NoSuchOptionException {
+        try {
+            return AdminOptions.values()[option-1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id: " + option);
+        }
+    }
+    public static void printAdminOptions() {
         logger.info("Wybierz opcję: ");
         for (AdminOptions option : AdminOptions.values())
             logger.info(option.toString());
@@ -59,7 +74,7 @@ public class OptionsHelper {
         UserOptions option = null;
         while (!optionOk) {
             try {
-                option = UserOptions.createFromInt(sc.nextInt());
+                option = createUserOptionsFromInt(sc.nextInt());
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
@@ -74,12 +89,19 @@ public class OptionsHelper {
         for (UserOptions option : UserOptions.values())
             logger.info(option.toString());
     }
+    public static UserOptions createUserOptionsFromInt(int option) throws NoSuchOptionException {
+        try {
+            return UserOptions.values()[option-1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id: " + option);
+        }
+    }
     public static MovieFieldsOptions getMovieFieldsOption() {
         boolean optionOk = false;
         MovieFieldsOptions movieFieldsOptions = null;
         while (!optionOk) {
             try {
-                movieFieldsOptions = MovieFieldsOptions.createFromInt(sc.nextInt());
+                movieFieldsOptions = createMovieFieldsOptionsFromInt(sc.nextInt());
                 sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
@@ -89,10 +111,18 @@ public class OptionsHelper {
             }
         }return movieFieldsOptions;
     }
+    public static MovieFieldsOptions createMovieFieldsOptionsFromInt(int option) throws NoSuchOptionException {
+        try {
+            return MovieFieldsOptions.values()[option-1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id: " + option);
+        }
+    }
     public static void printMovieFieldsOptions() {
         logger.info("Wybierz opcję: ");
         for (MovieFieldsOptions option : MovieFieldsOptions.values())
             logger.info(option.toString());
     }
+
 
 }

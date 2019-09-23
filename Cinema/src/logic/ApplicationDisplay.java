@@ -1,4 +1,5 @@
 package logic;
+import io.file.ImportExport;
 import org.apache.log4j.Logger;
 import io.file.ConsolePrinter;
 import options.*;
@@ -7,14 +8,14 @@ import static helpers.OptionsHelper.*;
 public class ApplicationDisplay {
     private BookingController bookingController;
     private MovieController movieController;
-    private CinemaController cinemaController;
+    private ImportExport importExport;
     private UserController userController;
     private Logger logger = Logger.getLogger(ApplicationDisplay.class);
 
-    public ApplicationDisplay(BookingController bookingController, MovieController movieController, CinemaController cinemaController, UserController userController) {
+    public ApplicationDisplay(BookingController bookingController, MovieController movieController, ImportExport importExport, UserController userController) {
         this.bookingController = bookingController;
         this.movieController = movieController;
-        this.cinemaController = cinemaController;
+        this.importExport = importExport;
         this.userController = userController;
     }
 
@@ -23,7 +24,7 @@ public class ApplicationDisplay {
         logger.info("Witamy serdecznie w naszym kinie!");
         logger.info("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
         do {
-            printInitialOptions();
+            printMainOptions();
             mainOptions = getMainOptions();
             switch (mainOptions){
                 case USER:
@@ -33,7 +34,7 @@ public class ApplicationDisplay {
                     adminMenuDisplay();
                     break;
                 case EXIT:
-                    cinemaController.exit();
+                    importExport.exit();
                     break;
                 default:
                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
@@ -69,7 +70,7 @@ public class ApplicationDisplay {
     private void adminMenuDisplay(){
         AdminOptions adminOptions;
         do {
-            printSystemOptions();
+            printAdminOptions();
             adminOptions = getAdminOptions();
             switch (adminOptions) {
                 case PRINT_MOVIES:

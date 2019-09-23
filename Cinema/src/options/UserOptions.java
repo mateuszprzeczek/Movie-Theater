@@ -1,7 +1,5 @@
 package options;
 
-import exception.NoSuchOptionException;
-
 public enum UserOptions {
     PRINT_MOVIES(1, "Wyświetl obecny repertuar."),
     USER_REGISTRATION(2, "Rejestracja użytkownika"),
@@ -21,14 +19,5 @@ public enum UserOptions {
     public String toString() {
         return value + "-" + description;
     }
-
-    public static UserOptions createFromInt(int option) throws NoSuchOptionException {
-        try {
-            return UserOptions.values()[option-1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchOptionException("Brak opcji o id: " + option);
-        }
-    }
-
 }
 

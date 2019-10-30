@@ -20,13 +20,14 @@ public class OptionsHelper {
         MainOptions option = null;
         while (!optionOk) {
             try {
-                option = createMainOptionsFromInt(sc.nextInt());
-                sc.nextLine();
+                int userInput = sc.nextInt();
+                option = createMainOptionsFromInt(userInput);
                 optionOk = true;
             } catch (NoSuchOptionException e) {
                 logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException i) {
-                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");}
+                sc.nextLine();
+                logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");}
         }return option;
     }
     public static MainOptions createMainOptionsFromInt(int option) throws NoSuchOptionException {
@@ -48,10 +49,11 @@ public class OptionsHelper {
             try {
                 option = createAdminOptionsFromInt(sc.nextInt());
                 optionValueExist = true;
-            } catch (InputMismatchException e) {
-                logger.info("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
-            } catch (NoSuchOptionException e) {
-                logger.warn(e.getMessage() + "Podaj ponownie: ");
+            } //catch (InputMismatchException e) {
+                //logger.info("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+             catch (InputMismatchException | NoSuchOptionException e) {
+                 sc.nextLine();
+                logger.warn("Nie ma takiej opcji. Podaj ponownie: ");
             }
         }
             return option;
@@ -75,12 +77,13 @@ public class OptionsHelper {
         while (!optionOk) {
             try {
                 option = createUserOptionsFromInt(sc.nextInt());
-                sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
+                sc.nextLine();
                 logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+                sc.nextLine();
+                logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");
             }
         }return option;
     }
@@ -102,12 +105,13 @@ public class OptionsHelper {
         while (!optionOk) {
             try {
                 movieFieldsOptions = createMovieFieldsOptionsFromInt(sc.nextInt());
-                sc.nextLine();
                 optionOk = true;
             } catch (NoSuchOptionException e) {
+                sc.nextLine();
                 logger.warn(e.getMessage() + "Podaj ponownie: ");
             } catch (InputMismatchException ignored) {
-                logger.warn("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+                sc.nextLine();
+                logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");
             }
         }return movieFieldsOptions;
     }

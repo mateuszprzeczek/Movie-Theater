@@ -1,6 +1,6 @@
 package logic;
 
-import model.Ticket;
+import model.CinemaUser;
 import model.User;
 import org.apache.log4j.Logger;
 
@@ -34,16 +34,27 @@ public class UserController {
         return new User(firstName, lastName);
     }
 
-    User findUser(String lastName) throws NullPointerException {
-        try{
-            movieController.cinema.users.get(lastName);
+    User findUser(String lastName) {
+        try{if
+        (movieController.cinema.users.get(lastName) == null){
+            System.out.println("Nie ma takiego użytkownika");
+        }
         }catch (NullPointerException e){
             System.out.println("Nie ma takiego użytkownika");
         }
         return movieController.cinema.users.get(lastName);
     }
-    Optional<Ticket> findUserTicketsByName(String lastName) {
-        return Optional.ofNullable(movieController.cinema.tickets.get(lastName));
+    CinemaUser findCinemaUser(String lastName){
+        try{if (movieController.cinema.cinemaUserMap.get(lastName) == null){
+            System.out.println("Nie ma takiego użytkownika");
+        }
+        }catch (NullPointerException e){
+            System.out.println("Nie ma takiego użytkownika");
+        }
+        return movieController.cinema.cinemaUserMap.get(lastName);
+    }
+    Optional<CinemaUser> findUserTicketsByName(String lastName) {
+        return Optional.ofNullable(movieController.cinema.cinemaUserMap.get(lastName));
     }
 
 }

@@ -2,10 +2,8 @@ package builder;
 
 import model.Movie;
 import model.Ticket;
-import model.User;
 
 public class TicketBuilder {
-    private  User owner;
     private  Movie movie;
     private  int rowNumber;
     private  int seatNumber;
@@ -18,10 +16,6 @@ public class TicketBuilder {
         private TicketBuilder() {
         }
 
-        public TicketBuilder setOwner(User owner) {
-            this.owner = owner;
-            return this;
-        }
         public TicketBuilder setMovie(Movie movie){
             this.movie = movie;
             return this;
@@ -36,7 +30,6 @@ public class TicketBuilder {
         }
         public Ticket build(){
             Ticket ticket = new Ticket();
-            ticket.owner = this.owner;
             ticket.movie = this.movie;
             ticket.rowNumber = this.rowNumber;
             ticket.seatNumber = this.seatNumber;

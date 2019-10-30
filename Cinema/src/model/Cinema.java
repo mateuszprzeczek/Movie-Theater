@@ -7,8 +7,9 @@ import java.util.Map;
 public class Cinema implements Serializable {
 
     public Map<String, Movie> movies = new HashMap<>();
-    public Map<String, User> users = new HashMap<>();
     public Map<String, Ticket> tickets = new HashMap<>();
+    public Map<String, User> users = new HashMap<>();
+    public Map<String, CinemaUser> cinemaUserMap = new HashMap<>();
 
 
     public Cinema() {
@@ -18,19 +19,24 @@ public class Cinema implements Serializable {
         return movies;
     }
 
-    public Map<String, User> getUsers() {
-        return users;
-    }
 
     public Map<String, Ticket> getTickets() {
         return tickets;
     }
 
+    public Map<String, CinemaUser> getCinemaUserMap() {
+        return cinemaUserMap;
+    }
+
+    public Map<String, User> getUsers() {
+        return users;
+    }
+
     @Override
     public String toString() {
-        return   movies +
-                ", użytkownik" + users +
-                ", bilety" + tickets +
+        return   movies.values().toString() +
+                ", użytkownik" + cinemaUserMap.values().toString() +
+                ", bilety" + tickets.values().toString() +
                 '}';
     }
 }

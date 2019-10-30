@@ -89,7 +89,7 @@ public class MovieController {
                 Movie movie = findMovieByTitle(title);
                 if (movie != null) {
                     logger.info("Podaj nową cenę: ");
-                    movie = Movie.Builder.newInstance().setPrice(sc.nextInt()).build();
+                    movie.setPrice(sc.nextDouble());
                     sc.nextLine();
                 } else {
                     logger.warn("Nie ma takiego filmu. Dostępne filmy: ");

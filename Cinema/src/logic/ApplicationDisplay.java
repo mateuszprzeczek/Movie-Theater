@@ -1,8 +1,12 @@
 package logic;
-import io.file.ImportExport;
-import org.apache.log4j.Logger;
 import io.file.ConsolePrinter;
-import options.*;
+import io.file.ImportExport;
+import options.AdminOptions;
+import options.MainOptions;
+import options.MovieFieldsOptions;
+import options.UserOptions;
+import org.apache.log4j.Logger;
+
 import static helpers.OptionsHelper.*;
 
 public class ApplicationDisplay {
@@ -23,23 +27,23 @@ public class ApplicationDisplay {
         MainOptions mainOptions;
         logger.info("Witamy serdecznie w naszym kinie!");
         logger.info("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
-        do {
-            printMainOptions();
-            mainOptions = getMainOptions();
-            switch (mainOptions){
-                case USER:
-                    userMenuDisplay();
-                    break;
-                case ADMIN:
-                    adminMenuDisplay();
-                    break;
-                case EXIT:
-                    importExport.exit();
-                    break;
-                default:
-                    logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
-            }
-        } while (mainOptions != MainOptions.EXIT );
+            do {
+                printMainOptions();
+                mainOptions = getMainOptions();
+                switch (mainOptions) {
+                    case USER:
+                        userMenuDisplay();
+                        break;
+                    case ADMIN:
+                        adminMenuDisplay();
+                        break;
+                    case EXIT:
+                        importExport.exit();
+                        break;
+                    default:
+                        logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
+                }
+            } while (mainOptions != MainOptions.EXIT);
     }
     private void userMenuDisplay() {
         UserOptions userOptions;
@@ -80,7 +84,7 @@ public class ApplicationDisplay {
                     movieController.addMovie();
                     break;
                 case PRINT_TICKETS:
-                    ConsolePrinter.printTickets(movieController.cinema.getTickets());
+                    ConsolePrinter.printTickets(movieController.cinema.getCinemaUserMap());
                     break;
                 case PRINT_USERS:
                     ConsolePrinter.printUsers(movieController.cinema.getUsers());

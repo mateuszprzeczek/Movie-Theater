@@ -3,13 +3,17 @@ package logic;
 import builder.TicketBuilder;
 import helpers.MovieTimeOfSeanceHelper;
 import io.file.ConsolePrinter;
+import model.CinemaUser;
 import model.Movie;
 import model.Ticket;
 import model.User;
 import org.apache.log4j.Logger;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class BookingController {
     private Logger logger = Logger.getLogger(BookingController.class);
@@ -25,11 +29,17 @@ public class BookingController {
     void addTicket() {
         logger.info("Podaj nazwisko");
         String lastName = sc.nextLine();
-        try {
+        try { CinemaUser cinemaUser = userController.findCinemaUser(lastName);
             User user = userController.findUser(lastName);
-            if (user != null){
-                movieController.cinema.getTickets()
-                        .put(user.getLastName(), createTicket(user));
+            if (cinemaUser != null){
+                movieController.cinema.getCinemaUserMap()
+                        .put(cinemaUser.getLastName(), createTicket(cinemaUser));
+            }
+            else if (user != null){
+                List<Ticket>tickets = new ArrayList<>();
+                CinemaUser cinemaUser1 = new CinemaUser(user.getFirstName(), user.getLastName(), tickets);
+                movieController.cinema.getCinemaUserMap()
+                        .put(cinemaUser1.getLastName(), createTicket(cinemaUser1));
             }else {
                 logger.info("Użytkownik o podanym nazwisku nie istnieje");
                 logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
@@ -39,7 +49,7 @@ public class BookingController {
         }
     }
 
-    private Ticket createTicket(User owner) {
+    private CinemaUser createTicket(CinemaUser owner) {
         Movie movie = findMovie();
         Movie selectedMovie = Movie.Builder.newInstance()
                 .setTitle(movie.getTitle())
@@ -53,13 +63,15 @@ public class BookingController {
             int rowNumber = random.nextInt(10);
             int seatNumber = random.nextInt(17);
             Ticket ticket = TicketBuilder.newInstance()
-                    .setOwner(owner)
                     .setMovie(movie)
                     .setRowNumber(rowNumber)
                     .setSeatNumber(seatNumber)
                     .build();
+            List<Ticket> ticketList = owner.getUserTickets();
+            ticketList.add(ticket);
+            owner.setUserTickets(ticketList);
         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
-        return ticket;
+        return owner;
     }
 
     private void choosePlayingHour(Movie movie) {
@@ -88,7 +100,7 @@ public class BookingController {
         String lastName = sc.nextLine();
         String notFoundMessage = "Nie odnaleziono uzytkownika o podanym nazwisku";
         userController.findUserTicketsByName(lastName)
-                .map(model.Ticket::toString)
+                .map(model.CinemaUser::toString)
                 .ifPresentOrElse(System.out::println, () -> logger.error(notFoundMessage));
     }
 

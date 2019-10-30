@@ -1,7 +1,7 @@
 package io.file;
 
+import model.CinemaUser;
 import model.Movie;
-import model.Ticket;
 import model.User;
 import org.apache.log4j.Logger;
 
@@ -26,14 +26,16 @@ public class ConsolePrinter {
                 logger.info("Brak użytkowników");
             }else {
                 List<User> userList = new ArrayList<>(users.values());
-                userList.forEach(System.out::println);
+                for (User user : userList) {
+                    System.out.println(user);
+                }
             }
         }
-        public static void printTickets(Map<String, Ticket> tickets){
+        public static void printTickets(Map<String, CinemaUser> tickets){
             if (tickets.size() == 0){
                 logger.info("Brak zakupionych biletów");
             }else {
-                List<Ticket> ticketList = new ArrayList<>(tickets.values());
+                List<CinemaUser> ticketList = new ArrayList<>(tickets.values());
                 ticketList.forEach(System.out::println);
             }
         }

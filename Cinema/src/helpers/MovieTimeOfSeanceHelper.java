@@ -22,6 +22,7 @@ public class MovieTimeOfSeanceHelper {
 
             if (localTime1 != null && localTime1.isAfter(localTime)){
                 System.out.println("Nie możesz ustawić tej godziny. Długość filmu na to nie pozwala");
+                i--;
             }else {
                 localTimes.add(localTime);
             }

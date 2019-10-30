@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/UserController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572424099680</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Update">
+      <created>1572435892083</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1572435892083</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">

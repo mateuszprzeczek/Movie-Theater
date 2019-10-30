@@ -3,29 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builder/TicketBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builder/TicketBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569243427138</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Update">
+      <created>1572424099680</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1572424099680</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -333,5 +323,16 @@
     <MESSAGE value="Validate builders" />
     <MESSAGE value="Update" />
     <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

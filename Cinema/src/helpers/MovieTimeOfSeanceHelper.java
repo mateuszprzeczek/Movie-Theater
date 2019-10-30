@@ -13,12 +13,19 @@ public class MovieTimeOfSeanceHelper {
     private static Logger logger = Logger.getLogger(MovieTimeOfSeanceHelper.class);
     private static Scanner sc = new Scanner(System.in);
 
-    public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay){
+    public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay, int length){
         List<LocalTime> localTimes = new ArrayList<>();
+        LocalTime localTime1 = null;
         for (int i = 0; i < numbersOfViewsPerDay; i++){
             logger.info("Seans nr " + (i + 1));
             LocalTime localTime = createTimeOfSeance();
-            localTimes.add(localTime);
+
+            if (localTime1 != null && localTime1.isAfter(localTime)){
+                System.out.println("Nie możesz ustawić tej godziny. Długość filmu na to nie pozwala");
+            }else {
+                localTimes.add(localTime);
+            }
+            localTime1 = localTime.plusMinutes(length);
         }
         return localTimes;
     }

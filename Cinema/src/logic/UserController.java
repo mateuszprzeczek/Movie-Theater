@@ -37,19 +37,19 @@ public class UserController {
     User findUser(String lastName) {
         try{if
         (movieController.cinema.users.get(lastName) == null){
-            System.out.println("Nie ma takiego użytkownika");
+            System.out.println();
         }
         }catch (NullPointerException e){
-            System.out.println("Nie ma takiego użytkownika");
+            System.out.println();
         }
         return movieController.cinema.users.get(lastName);
     }
     CinemaUser findCinemaUser(String lastName){
         try{if (movieController.cinema.cinemaUserMap.get(lastName) == null){
-            System.out.println("Nie ma takiego użytkownika");
+            System.out.println();
         }
         }catch (NullPointerException e){
-            System.out.println("Nie ma takiego użytkownika");
+            System.out.println();
         }
         return movieController.cinema.cinemaUserMap.get(lastName);
     }

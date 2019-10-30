@@ -42,7 +42,7 @@ public class MovieController {
         logger.info("Długość filmu w minutach: ");
         int length = sc.nextInt();
         logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
-        List<LocalTime> playingHours = MovieTimeOfSeanceHelper.setNumbersOfViewsPerDay(sc.nextInt());
+        List<LocalTime> playingHours = MovieTimeOfSeanceHelper.setNumbersOfViewsPerDay(sc.nextInt(), length);
         logger.info("Podaj nr sali kinowej: ");
         int cinemaHallNumber = sc.nextInt();
         logger.info("Podaj cenę ");

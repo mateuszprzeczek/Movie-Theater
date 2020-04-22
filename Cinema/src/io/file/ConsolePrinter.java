@@ -2,6 +2,7 @@ package io.file;
 
 import model.CinemaUser;
 import model.Movie;
+import model.Seance;
 import model.User;
 import org.apache.log4j.Logger;
 
@@ -21,6 +22,15 @@ public class ConsolePrinter {
                 movieList.forEach(System.out::println);
             }
         }
+    public static void printSeances(Map<String, Seance> seances){
+        if (seances.size() == 0){
+            logger.info("Brak Seansów");
+        }else {
+            List<Seance> movieList = new ArrayList<>(seances.values());
+
+            movieList.forEach(System.out::println);
+        }
+    }
         public static void printUsers(Map<String, User> users){
             if (users.size() == 0){
                 logger.info("Brak użytkowników");
@@ -39,4 +49,15 @@ public class ConsolePrinter {
                 ticketList.forEach(System.out::println);
             }
         }
+    public static void printAudience(int [][]audience) {
+        System.out.println("            **************************** ekran ");
+        for (int i = 0; i < audience.length; i++) {
+            System.out.println();
+            System.out.print("Rząd nr " + (i+1) + ": ");
+            for (int j = 0; j < 16; ++j) {
+
+                System.out.print(audience[i][j] + " ");
+            }
+        }
+    }
 }

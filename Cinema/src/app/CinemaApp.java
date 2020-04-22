@@ -1,10 +1,10 @@
 package app;
 
 import logic.BookingController;
-import io.file.ImportExport;
+import helpers.ImportExport;
 import logic.MovieController;
 import logic.UserController;
-import logic.ApplicationDisplay;
+import logic.ViewController;
 
 public class CinemaApp {
     public static void main(String[] args)  {
@@ -17,7 +17,7 @@ public class CinemaApp {
         UserController userController = new UserController(movieController);
         BookingController bookingController = new BookingController(movieController, userController);
 
-        ApplicationDisplay applicationDisplay = new ApplicationDisplay(bookingController, movieController, importExport, userController);
+        ViewController applicationDisplay = new ViewController(bookingController, movieController, importExport, userController);
         applicationDisplay.mainMenu();
     }
 

@@ -1,19 +1,11 @@
 package logic;
 
-import builder.TicketBuilder;
-import helpers.MovieTimeOfSeanceHelper;
+import builders.TicketBuilder;
 import io.file.ConsolePrinter;
-import model.CinemaUser;
-import model.Movie;
-import model.Ticket;
-import model.User;
+import model.*;
 import org.apache.log4j.Logger;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class BookingController {
     private Logger logger = Logger.getLogger(BookingController.class);
@@ -37,9 +29,9 @@ public class BookingController {
             }
             else if (user != null){
                 List<Ticket>tickets = new ArrayList<>();
-                CinemaUser cinemaUser1 = new CinemaUser(user.getFirstName(), user.getLastName(), tickets);
+                CinemaUser newCinemaUser = new CinemaUser(user.getFirstName(), user.getLastName(), tickets);
                 movieController.cinema.getCinemaUserMap()
-                        .put(cinemaUser1.getLastName(), createTicket(cinemaUser1));
+                        .put(newCinemaUser.getLastName(), createTicket(newCinemaUser));
             }else {
                 logger.info("Użytkownik o podanym nazwisku nie istnieje");
                 logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
@@ -51,19 +43,32 @@ public class BookingController {
 
     private CinemaUser createTicket(CinemaUser owner) {
         Movie movie = findMovie();
-        Movie selectedMovie = Movie.Builder.newInstance()
-                .setTitle(movie.getTitle())
-                .setLength(movie.getLength())
-                .setPlayingHours(movie.getPlayingHours())
-                .setCinemaHallNumber(movie.getCinemaHallNumber())
-                .setPrice(movie.getPrice())
+        Seance seance = movieController.cinema.seancesRepository.get(movie.getTitle());
+
+        //choosePlayingHour(selectedMovie);
+
+        System.out.println("poidaj nr rzedu");
+        int rowNumber = sc.nextInt(10);
+
+        System.out.println("podaj nr siedzenia");
+        int seatNumber = sc.nextInt(17);
+        Map<Integer, Integer> choosenSeat = new HashMap<>();
+        choosenSeat.put(rowNumber, seatNumber);
+        CinemaHall cinemaHall = new CinemaHall.Builder(seance.getCinemaHall().getNumber()).audience(choosenSeat).build();
+        Seance seanceOnSelectedMovie = new Seance.Builder()
+                .setMovie(movie)
+                .setDateTimeOfSeance(seance.getTimeOfSeance())
+                .setCinemaHall(cinemaHall)
+                .setPrice(seance.getPrice())
                 .build();
-        choosePlayingHour(selectedMovie);
-            Random random = new Random();
-            int rowNumber = random.nextInt(10);
-            int seatNumber = random.nextInt(17);
+
+//        CinemaHall cinemaHall = new CinemaHall();
+//            cinemaHall.setNumber(movie.getCinemaHallNumber());
+//            cinemaHall.setPlayingHour(movie.getMovieDisplayPerDay());
+//            cinemaHall.setAudience(makeAudience(cinemaHall.getAudience(),rowNumber, seatNumber ));
+
             Ticket ticket = TicketBuilder.newInstance()
-                    .setMovie(movie)
+                    .setSeance(seanceOnSelectedMovie)
                     .setRowNumber(rowNumber)
                     .setSeatNumber(seatNumber)
                     .build();
@@ -73,27 +78,39 @@ public class BookingController {
         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
         return owner;
     }
-
-    private void choosePlayingHour(Movie movie) {
-        boolean ok = false;
-        while (!ok) {
-            try {
-                logger.info("Dostępne godziny");
-                logger.info(movie.getPlayingHours().toString());
-                List<LocalTime> selectedTime = new ArrayList<>();
-                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
-                if (movie.getPlayingHours().contains(readPlayingHour)){
-                    selectedTime.add(readPlayingHour);
-                    movie = Movie.Builder.newInstance().setPlayingHours(selectedTime).build();
-                    ok = true;
-                } else {
-                    logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
+    public static int[][] makeAudience(int [][]audience, int colNmb, int rowNmb) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 16; ++j) {
+                audience[i][j] = j;
+                if (i == colNmb-1 && j == rowNmb-1){
+                    audience[i][j] = 0;
                 }
-            }catch (Exception e){
-                e.printStackTrace();
             }
-        }
+        }return audience;
     }
+
+//    private void choosePlayingHour(Movie movie) {
+//        boolean ok = false;
+//        while (!ok) {
+//            try {
+//                logger.info("Dostępne godziny");
+//                Seance availableTimes = movieController.cinema.seancesRepository.get(movie.getTitle());
+//                logger.info(availableTimes.getTimeOfSeance().toString());
+////                List<LocalTime> selectedTime = new ArrayList<>();
+////                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
+////                if (availableTimes.getTimeOfSeance().equals(readPlayingHour)){
+////                    selectedTime.add(readPlayingHour);
+////                    movie = Movie.Builder.newInstance().setMovieDisplayPerDay(selectedTime).build();
+//
+//                    ok = true;
+//                } else {
+//                    logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
+//                }
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     void printUserTickets() {
         logger.info("Podaj Nazwisko");
@@ -106,13 +123,16 @@ public class BookingController {
 
     private Movie findMovie() {
         Movie movie = null;
-        boolean ok = false;
-        while (!ok) {
+        boolean movieBooked = false;
+        while (!movieBooked) {
             try {
                 logger.info("Podaj tytuł filmu, który chcesz zarezerwować");
-                movie = movieController.findMovieByTitle(sc.nextLine());
+                ConsolePrinter.printMovies(movieController.cinema.getMovies());
+                movie = movieController.findMovieByTitle();
+
                 if (movie!=null)
-                    ok = true;
+                    movieBooked = true;
+
                 else {
                     logger.info("W naszym repertuarze nie ma filmu o podanym tytule, spróbuj jeszcze raz"
                             + "\n" + "Dostępne Filmy:" + "\n");

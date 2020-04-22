@@ -10,8 +10,8 @@ public class SerializableFileManager implements FileManager{
     private static final String FILE_NAME = "Cinema.o";
     @Override
     public void exportData(Cinema cinema){
-        try (FileOutputStream fos = new FileOutputStream(FILE_NAME);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)){
+        try (var fos = new FileOutputStream(FILE_NAME);
+             var oos = new ObjectOutputStream(fos)){
             oos.writeObject(cinema);
         } catch (FileNotFoundException e){
             throw new DataExportException("Brak pliku " + FILE_NAME);
@@ -21,8 +21,8 @@ public class SerializableFileManager implements FileManager{
     }
     @Override
     public Cinema importData(){
-        try(FileInputStream fis = new FileInputStream(FILE_NAME);
-            ObjectInputStream ois = new ObjectInputStream(fis)
+        try(var fis = new FileInputStream(FILE_NAME);
+            var ois = new ObjectInputStream(fis)
         ){
             return (Cinema) ois.readObject();
         } catch (FileNotFoundException e){

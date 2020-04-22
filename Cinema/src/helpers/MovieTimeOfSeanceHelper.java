@@ -13,22 +13,22 @@ public class MovieTimeOfSeanceHelper {
     private static Logger logger = Logger.getLogger(MovieTimeOfSeanceHelper.class);
     private static Scanner sc = new Scanner(System.in);
 
-    public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay, int length){
-        List<LocalTime> localTimes = new ArrayList<>();
-        LocalTime localTime1 = null;
-        for (int i = 0; i < numbersOfViewsPerDay; i++){
+    public static List<LocalTime> setHowManyTimesMovieWillBeShownDuringTheDay (int howManyTimesMovieWillBeShownDuringTheDay, int movieLength){
+        List<LocalTime> movieDisplayHoursPerDay = new ArrayList<>();
+        LocalTime checkMovieTimeOverlapToNextMovie = null;
+        for (int i = 0; i < howManyTimesMovieWillBeShownDuringTheDay; i++){
             logger.info("Seans nr " + (i + 1));
-            LocalTime localTime = createTimeOfSeance();
+            LocalTime movieDisplayHour = createTimeOfSeance();
 
-            if (localTime1 != null && localTime1.isAfter(localTime)){
+            if (checkMovieTimeOverlapToNextMovie != null && checkMovieTimeOverlapToNextMovie.isAfter(movieDisplayHour)){
                 System.out.println("Nie możesz ustawić tej godziny. Długość filmu na to nie pozwala");
                 i--;
             }else {
-                localTimes.add(localTime);
+                movieDisplayHoursPerDay.add(movieDisplayHour);
             }
-            localTime1 = localTime.plusMinutes(length);
+            checkMovieTimeOverlapToNextMovie = movieDisplayHour.plusMinutes(movieLength);
         }
-        return localTimes;
+        return movieDisplayHoursPerDay;
     }
 
     public static LocalTime createTimeOfSeance() throws DateTimeException {

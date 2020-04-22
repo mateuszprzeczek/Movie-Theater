@@ -3,9 +3,42 @@
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie$Builder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/AdminOptions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MainOptions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MovieFieldsOptions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/UserOptions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builder/TicketBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/TicketBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/ImportExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/ImportExport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/AdminOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/MainOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/MovieFieldsOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options/UserOptions.java" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,8 +50,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -35,12 +68,24 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1Q15NsE779Q9MY4S9ItbUom3ahZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566826406299" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/.." />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
@@ -48,19 +93,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Application.CinemaApp">
     <configuration name="CinemaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -68,7 +101,7 @@
       <module name="Cinema" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.file.*" />
+          <option name="PATTERN" value="helpers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -276,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572435892083</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update">
+      <created>1572460882732</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1572460882732</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -326,12 +366,90 @@
     <MESSAGE value="Update" />
     <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser" timestamp="1587563207558">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1587563207558" />
+    <state x="449" y="168" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587129603944">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="449" y="168" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.864@0.0.1536.864" timestamp="1587129603944" />
+    <state x="473" y="116" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1587376670823">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="473" y="116" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1536.864@0.0.1536.864" timestamp="1587376670823" />
+    <state x="238" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586772551656">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="238" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1586772551656" />
+    <state x="400" y="27" key="CommitChangelistDialog2" timestamp="1587567261082">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="400" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1587567261082" />
+    <state width="1493" height="413" key="GridCell.Tab.0.bottom" timestamp="1587564043674">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="413" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
+    <state width="1493" height="413" key="GridCell.Tab.0.center" timestamp="1587564043674">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="413" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
+    <state width="1493" height="413" key="GridCell.Tab.0.left" timestamp="1587564043674">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="413" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
+    <state width="1493" height="413" key="GridCell.Tab.0.right" timestamp="1587564043674">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="413" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
+    <state width="1493" height="296" key="GridCell.Tab.1.bottom" timestamp="1587564043659">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
+    <state width="1493" height="296" key="GridCell.Tab.1.center" timestamp="1587564043659">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
+    <state width="1493" height="296" key="GridCell.Tab.1.left" timestamp="1587564043659">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
+    <state width="1493" height="296" key="GridCell.Tab.1.right" timestamp="1587564043659">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="296" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
+    <state x="277" y="75" key="SettingsEditor" timestamp="1583907744818">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="277" y="75" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1583907744818" />
+    <state x="460" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1587384769756">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="460" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1587384769756" />
+    <state x="490" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1587551836408">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="490" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.864@0.0.1536.864" timestamp="1587551836408" />
+    <state x="404" y="47" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586781970958">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="404" y="47" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1586781970958" />
+    <state x="573" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587567222438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="573" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1587567222438" />
+    <state x="182" y="53" key="new project wizard" timestamp="1587444826316">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="182" y="53" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1587444826316" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java</url>
-          <line>16</line>
+          <url>file://$PROJECT_DIR$/src/logic/UserController.java</url>
+          <line>20</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

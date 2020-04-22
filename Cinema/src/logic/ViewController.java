@@ -1,22 +1,20 @@
 package logic;
 import io.file.ConsolePrinter;
-import io.file.ImportExport;
-import options.AdminOptions;
-import options.MainOptions;
-import options.MovieFieldsOptions;
-import options.UserOptions;
+import helpers.ImportExport;
+import options.*;
 import org.apache.log4j.Logger;
 
 import static helpers.OptionsHelper.*;
 
-public class ApplicationDisplay {
+public class ViewController {
+
     private BookingController bookingController;
     private MovieController movieController;
     private ImportExport importExport;
     private UserController userController;
-    private Logger logger = Logger.getLogger(ApplicationDisplay.class);
+    private Logger logger = Logger.getLogger(ViewController.class);
 
-    public ApplicationDisplay(BookingController bookingController, MovieController movieController, ImportExport importExport, UserController userController) {
+    public ViewController(BookingController bookingController, MovieController movieController, ImportExport importExport, UserController userController) {
         this.bookingController = bookingController;
         this.movieController = movieController;
         this.importExport = importExport;
@@ -24,103 +22,106 @@ public class ApplicationDisplay {
     }
 
     public void mainMenu() {
-        MainOptions mainOptions;
         logger.info("Witamy serdecznie w naszym kinie!");
         logger.info("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
+        int mainOptions;
             do {
-                printMainOptions();
-                mainOptions = getMainOptions();
+                printOptions(Options.mainOptions);
+                mainOptions = getOptions(Options.mainOptions);
                 switch (mainOptions) {
-                    case USER:
+                    case 1:
                         userMenuDisplay();
                         break;
-                    case ADMIN:
+                    case 2:
                         adminMenuDisplay();
                         break;
-                    case EXIT:
+                    case 3:
                         importExport.exit();
                         break;
                     default:
                         logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
                 }
-            } while (mainOptions != MainOptions.EXIT);
+            } while (mainOptions != 3);
     }
+
     private void userMenuDisplay() {
-        UserOptions userOptions;
+        int userOptions;
         do {
-            printUserOptions();
-            userOptions = getUserOptions();
+            printOptions(Options.userOptions);
+            userOptions = getOptions(Options.userOptions);
             switch (userOptions){
-                case PRINT_MOVIES:
+                case 1:
                     movieController.printMovies();
                     break;
-                case USER_REGISTRATION:
+                case 2:
                     userController.addUser();
                     break;
-                case ADD_TICKET:
+                case 3:
                     bookingController.addTicket();
                     break;
-                case PRINT_TICKETS:
+                case 4:
                     bookingController.printUserTickets();
                     break;
-                case BACK:
+                case 5:
                     break;
                 default:
                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (userOptions != UserOptions.BACK);
+        } while (userOptions != 5);
     }
 
     private void adminMenuDisplay(){
-        AdminOptions adminOptions;
+        int adminOptions;
         do {
-            printAdminOptions();
-            adminOptions = getAdminOptions();
+            printOptions(Options.adminOptions);
+            adminOptions = getOptions(Options.adminOptions);
             switch (adminOptions) {
-                case PRINT_MOVIES:
-                    movieController.printMovies();
+                case 1:
+                    movieController.printSeances();
                     break;
-                case ADD_MOVIE:
+                case 2:
                     movieController.addMovie();
                     break;
-                case PRINT_TICKETS:
+                case 3:
+                    movieController.addSeance();
+                case 4:
                     ConsolePrinter.printTickets(movieController.cinema.getCinemaUserMap());
                     break;
-                case PRINT_USERS:
+                case 5:
                     ConsolePrinter.printUsers(movieController.cinema.getUsers());
                     break;
-                case CHANGE_MOVIE_VALUES:
+                case 6:
                     changeMovieValuesDisplay();
                     break;
-                case BACK:
+                case 7:
                     break;
                 default:
                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (adminOptions != AdminOptions.BACK);
+        } while (adminOptions != 7);
     }
 
     private void changeMovieValuesDisplay(){
-        MovieFieldsOptions movieFieldsOptions;
+        int movieValuesOptions;
         do {
-            printMovieFieldsOptions();
-            movieFieldsOptions = getMovieFieldsOption();
-            switch (movieFieldsOptions) {
-                case ADD_TIME_OF_SEANCE:
-                    movieController.addTimeOfSeance();
+            printOptions(Options.movieFieldsOptions);
+            movieValuesOptions = getOptions(Options.movieFieldsOptions);
+            switch (movieValuesOptions) {
+                case 1:
+                    movieController.printMovies();                        //addAdditionalDisplayTimeToSpecificMovie();
                     break;
-                case CHANGE_PRICE:
+                case 2:
                     movieController.changeMoviePrice();
                     break;
-                case DELETE_MOVIE:
+                case 3:
                     movieController.deleteMovie();
                     break;
-                case BACK:
+                case 4:
                     break;
                 default:
                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
             }
-        } while (movieFieldsOptions != MovieFieldsOptions.BACK);
+        } while (movieValuesOptions != 4);
     }
 
 

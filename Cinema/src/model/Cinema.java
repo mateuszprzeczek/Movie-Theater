@@ -10,6 +10,7 @@ public class Cinema implements Serializable {
     public Map<String, Ticket> tickets = new HashMap<>();
     public Map<String, User> users = new HashMap<>();
     public Map<String, CinemaUser> cinemaUserMap = new HashMap<>();
+    public Map<String, Seance> seancesRepository = new HashMap<>();
 
 
     public Cinema() {
@@ -17,6 +18,9 @@ public class Cinema implements Serializable {
 
     public Map<String, Movie> getMovies() {
         return movies;
+    }
+    public Map<String, Seance> getSeances() {
+        return seancesRepository;
     }
 
 

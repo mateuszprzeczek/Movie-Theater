@@ -1,93 +1,68 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalTime;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Movie implements Serializable{
+public class Movie implements Serializable {
     private String title;
     private int length;
-    private List<LocalTime> playingHours;
-    private int cinemaHallNumber;
-    private double price;
+    private Map<LocalDateTime, Seance> seances;
 
-
-    private Movie(){}
-
-    public static class Builder{
+    public static class Builder {
         private String title;
         private int length;
-        private List<LocalTime> playingHours;
-        private int cinemaHallNumber;
-        private double price;
+        private Map<LocalDateTime, Seance> seances = new HashMap<>();
 
-        public static Builder newInstance(){
-            return new Builder();
-        }
-        private Builder(){}
-
-        public Builder setTitle(String title){
+        public Builder(String title, int length) {
             this.title = title;
-            return this;
-        }
-        public Builder setLength(int length){
             this.length = length;
+        }
+        public Builder addSeance(Map<LocalDateTime, Seance> addedSeance) {
+            seances = addedSeance;
             return this;
         }
-        public Builder setPlayingHours(List<LocalTime> playingHours){
-            this.playingHours = playingHours;
-            return this;
+        public Movie build() {
+            return new Movie(this);
         }
-        public Builder setCinemaHallNumber(int cinemaHallNumber){
-            this.cinemaHallNumber = cinemaHallNumber;
-            return this;
-        }
-        public Builder setPrice(double price){
-            this.price = price;
-            return this;
-        }
-        public Movie build(){
-            Movie movie = new Movie();
-            movie.title = this.title;
-            movie.length = this.length;
-            movie.playingHours = this.playingHours;
-            movie.cinemaHallNumber = this.cinemaHallNumber;
-            movie.price = this.price;
-
-            return movie;
-        }
+    }
+    private Movie(Builder builder) {
+        title = builder.title;
+        length = builder.length;
+        seances = builder.seances;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public int getLength() {
         return length;
     }
 
-    public List<LocalTime> getPlayingHours() {
-        return playingHours;
+    public void setLength(int length) {
+        this.length = length;
     }
 
-    public int getCinemaHallNumber() {
-        return cinemaHallNumber;
+    public Map<LocalDateTime, Seance> getSeances() {
+        return seances;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSeances(Map<LocalDateTime, Seance> seances) {
+        this.seances = seances;
     }
 
     @Override
     public String toString() {
-        return
-                this.title + ", Czas trwania " + this.length +
-                        " minut" + ", Godziny seansów " + this.playingHours.toString() +
-                        ", Cena " + this.price + " zł";
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", length=" + length +
+                ", seances=" + seances +
+                '}';
     }
-
 }

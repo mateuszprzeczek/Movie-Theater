@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImportData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ImportData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/OptionsHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/ConsolePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/SerializableFileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +31,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="Mateusz Przęczek &lt;53494694+mateuszprzeczek@users.noreply.github.com&gt;" />
         <option value="mateuszprzeczek &lt;mateuszprzeczek@op.pl&gt;" />
+        <option value="Mateusz Przęczek &lt;53494694+mateuszprzeczek@users.noreply.github.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -316,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594107378453</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Update">
+      <created>1594107975431</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1594107975431</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -386,10 +388,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="212" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1594106436983" />
-    <state x="339" y="2" key="CommitChangelistDialog2" timestamp="1594107376960">
+    <state x="339" y="2" key="CommitChangelistDialog2" timestamp="1594107974348">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="339" y="2" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1594107376960" />
+    <state x="339" y="2" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1594107974348" />
     <state width="1493" height="413" key="GridCell.Tab.0.bottom" timestamp="1587564043674">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -430,10 +432,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="277" y="14" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1587994262689" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1594107380900">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1594107977286">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1594107380900" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1594107977286" />
     <state x="460" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1587384769756">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

@@ -108,7 +108,7 @@ public class ViewController {
             movieValuesOptions = getOptions(Options.movieFieldsOptions);
             switch (movieValuesOptions) {
                 case 1:
-                    movieController.printMovies();                        //addAdditionalDisplayTimeToSpecificMovie();
+                    movieController.printMovies();
                     break;
                 case 2:
                     movieController.changeMoviePrice();

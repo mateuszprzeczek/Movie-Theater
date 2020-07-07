@@ -43,43 +43,9 @@ public class MovieController {
         logger.info("Długość filmu w minutach: ");
         int movieLength = sc.nextInt();
 
-//        logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
-//        List<LocalTime> movieDisplayHoursPerDay = MovieTimeOfSeanceHelper
-//                .setHowManyTimesMovieWillBeShownDuringTheDay(sc.nextInt(), movieLength);
-//
-//        logger.info("Podaj nr sali kinowej: ");
-//        int cinemaHallNumber = sc.nextInt();
-//
-//        logger.info("Podaj cenę ");
-//        double price = sc.nextDouble();
-//        sc.nextLine();
-
-//        return Movie.Builder.newInstance()
-//                .setTitle(movieTitle)
-//                .setLength(movieLength)
-//                .setMovieDisplayPerDay(movieDisplayHoursPerDay)
-//                .setCinemaHallNumber(cinemaHallNumber)
-//                .setPrice(price)
-//                .build();
         return new Movie.Builder(movieTitle, movieLength).build();
     }
 
-//    void addAdditionalDisplayTimeToSpecificMovie() {
-//        try {
-//            Seance movie = findSeanceByMovieTitle();
-//
-//            if (movie != null) {
-//                List<LocalTime> movieDisplayPerDay = .getMovieDisplayPerDay();
-//                movieDisplayPerDay.add(MovieTimeOfSeanceHelper.createTimeOfSeance());
-//            }
-//            else {
-//                logger.info("Nie ma takiego filmu. Dostępne filmy: ");
-//                printMovies();
-//            }
-//        } catch (NullPointerException e) {
-//            logger.warn("Nie ma takiego filmu");
-//        }
-//    }
 
     Seance findSeanceByMovieTitle()
     {
@@ -146,23 +112,6 @@ public class MovieController {
     }
 
 
-//        int cinemaHallNumber = sc.nextInt();
-//
-//        logger.info("Podaj cenę ");
-//        double price = sc.nextDouble();
-//        sc.nextLine();
-
-//        return Movie.Builder.newInstance()
-//                .setTitle(movieTitle)
-//                .setLength(movieLength)
-//                .setMovieDisplayPerDay(movieDisplayHoursPerDay)
-//                .setCinemaHallNumber(cinemaHallNumber)
-//                .setPrice(price)
-//                .build();
-//private LocalDateTime dateTimeOfSeance;
-//    private CinemaHall cinemaHall;
-//    private Movie movie;
-//    private double price;
 
     void addSeance() {
         try {

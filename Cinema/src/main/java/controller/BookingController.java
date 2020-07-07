@@ -45,7 +45,6 @@ public class BookingController {
         Movie movie = findMovie();
         Seance seance = movieController.cinema.seancesRepository.get(movie.getTitle());
 
-        //choosePlayingHour(selectedMovie);
 
         System.out.println("poidaj nr rzedu");
         int rowNumber = sc.nextInt(10);
@@ -62,10 +61,6 @@ public class BookingController {
                 .setPrice(seance.getPrice())
                 .build();
 
-//        CinemaHall cinemaHall = new CinemaHall();
-//            cinemaHall.setNumber(movie.getCinemaHallNumber());
-//            cinemaHall.setPlayingHour(movie.getMovieDisplayPerDay());
-//            cinemaHall.setAudience(makeAudience(cinemaHall.getAudience(),rowNumber, seatNumber ));
 
             Ticket ticket = TicketBuilder.newInstance()
                     .setSeance(seanceOnSelectedMovie)
@@ -89,28 +84,6 @@ public class BookingController {
         }return audience;
     }
 
-//    private void choosePlayingHour(Movie movie) {
-//        boolean ok = false;
-//        while (!ok) {
-//            try {
-//                logger.info("Dostępne godziny");
-//                Seance availableTimes = movieController.cinema.seancesRepository.get(movie.getTitle());
-//                logger.info(availableTimes.getTimeOfSeance().toString());
-////                List<LocalTime> selectedTime = new ArrayList<>();
-////                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
-////                if (availableTimes.getTimeOfSeance().equals(readPlayingHour)){
-////                    selectedTime.add(readPlayingHour);
-////                    movie = Movie.Builder.newInstance().setMovieDisplayPerDay(selectedTime).build();
-//
-//                    ok = true;
-//                } else {
-//                    logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
-//                }
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     void printUserTickets() {
         logger.info("Podaj Nazwisko");

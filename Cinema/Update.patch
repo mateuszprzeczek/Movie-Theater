@@ -1,0 +1,1891 @@
+Index: Cinema/src/options/AdminOptions.java
+===================================================================
+--- Cinema/src/options/AdminOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/options/AdminOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
+@@ -1,23 +0,0 @@
+-package options;
+-
+-public enum AdminOptions {
+-        PRINT_MOVIES(1, "Wyświetlanie dostępnych filmów"),
+-        ADD_MOVIE(2, "Dodaj film"),
+-        PRINT_USERS(3, "Wyświetl zarejestrowanych użytkowników"),
+-        PRINT_TICKETS(4, "Wyświetl zarezerwowane filmy"),
+-        CHANGE_MOVIE_VALUES(5, "Zmień godzinę/cenę/usuń film"),
+-        BACK(6, "Wstecz");
+-
+-        private int value;
+-        private String description;
+-
+-        AdminOptions(int value, String description) {
+-            this.value = value;
+-            this.description = description;
+-        }
+-        @Override
+-        public String toString() {
+-            return value + "-" + description;
+-        }
+-}
+-
+Index: Cinema/src/options/MainOptions.java
+===================================================================
+--- Cinema/src/options/MainOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/options/MainOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
+@@ -1,20 +0,0 @@
+-package options;
+-
+-public enum MainOptions {
+-    EXIT(0, "Wyjście."),
+-    USER(1, "Klient"),
+-    ADMIN(2, "Administrator Systemu");
+-
+-    int value;
+-    String description;
+-
+-    MainOptions(int value, String description) {
+-        this.value = value;
+-        this.description = description;
+-    }
+-    @Override
+-    public String toString() {
+-        return value + "-" + description;
+-    }
+-}
+-
+Index: Cinema/src/options/MovieFieldsOptions.java
+===================================================================
+--- Cinema/src/options/MovieFieldsOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/options/MovieFieldsOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
+@@ -1,21 +0,0 @@
+-package options;
+-
+-public enum MovieFieldsOptions {
+-    ADD_TIME_OF_SEANCE(1, "Dodaj godzinę seansu"),
+-    CHANGE_PRICE(2, "Zmień cenę biletu"),
+-    DELETE_MOVIE(3, "Usuń film"),
+-    BACK(4, "Wstecz");
+-
+-    private int value;
+-    private String description;
+-
+-    MovieFieldsOptions(int value, String description) {
+-        this.value = value;
+-        this.description = description;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return value + "-" + description;
+-    }
+-}
+\ No newline at end of file
+Index: Cinema/src/options/UserOptions.java
+===================================================================
+--- Cinema/src/options/UserOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/options/UserOptions.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
+@@ -1,23 +0,0 @@
+-package options;
+-
+-public enum UserOptions {
+-    PRINT_MOVIES(1, "Wyświetl obecny repertuar."),
+-    USER_REGISTRATION(2, "Rejestracja użytkownika"),
+-    ADD_TICKET(3,"Zarezerwuj bilet"),
+-    PRINT_TICKETS(4, "Pokaż zarezerwowane filmy"),
+-    BACK(5, "Wstecz.");
+-
+-    int value;
+-    String description;
+-
+-    UserOptions(int value, String description) {
+-        this.value = value;
+-        this.description = description;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return value + "-" + description;
+-    }
+-}
+-
+Index: Cinema/src/logic/ApplicationDisplay.java
+===================================================================
+--- Cinema/src/logic/ApplicationDisplay.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/logic/ViewController.java	(date 1587563917575)
+@@ -1,22 +1,20 @@
+ package logic;
+ import io.file.ConsolePrinter;
+-import io.file.ImportExport;
+-import options.AdminOptions;
+-import options.MainOptions;
+-import options.MovieFieldsOptions;
+-import options.UserOptions;
++import helpers.ImportExport;
++import options.*;
+ import org.apache.log4j.Logger;
+ 
+ import static helpers.OptionsHelper.*;
+ 
+-public class ApplicationDisplay {
++public class ViewController {
++
+     private BookingController bookingController;
+     private MovieController movieController;
+     private ImportExport importExport;
+     private UserController userController;
+-    private Logger logger = Logger.getLogger(ApplicationDisplay.class);
++    private Logger logger = Logger.getLogger(ViewController.class);
+ 
+-    public ApplicationDisplay(BookingController bookingController, MovieController movieController, ImportExport importExport, UserController userController) {
++    public ViewController(BookingController bookingController, MovieController movieController, ImportExport importExport, UserController userController) {
+         this.bookingController = bookingController;
+         this.movieController = movieController;
+         this.importExport = importExport;
+@@ -24,103 +22,106 @@
+     }
+ 
+     public void mainMenu() {
+-        MainOptions mainOptions;
+         logger.info("Witamy serdecznie w naszym kinie!");
+         logger.info("Jeśli jesteś klientem wybierz 1. Administrator systemu-wybierz 2");
++        int mainOptions;
+             do {
+-                printMainOptions();
+-                mainOptions = getMainOptions();
++                printOptions(Options.mainOptions);
++                mainOptions = getOptions(Options.mainOptions);
+                 switch (mainOptions) {
+-                    case USER:
++                    case 1:
+                         userMenuDisplay();
+                         break;
+-                    case ADMIN:
++                    case 2:
+                         adminMenuDisplay();
+                         break;
+-                    case EXIT:
++                    case 3:
+                         importExport.exit();
+                         break;
+                     default:
+                         logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
+                 }
+-            } while (mainOptions != MainOptions.EXIT);
++            } while (mainOptions != 3);
+     }
++
+     private void userMenuDisplay() {
+-        UserOptions userOptions;
++        int userOptions;
+         do {
+-            printUserOptions();
+-            userOptions = getUserOptions();
++            printOptions(Options.userOptions);
++            userOptions = getOptions(Options.userOptions);
+             switch (userOptions){
+-                case PRINT_MOVIES:
++                case 1:
+                     movieController.printMovies();
+                     break;
+-                case USER_REGISTRATION:
++                case 2:
+                     userController.addUser();
+                     break;
+-                case ADD_TICKET:
++                case 3:
+                     bookingController.addTicket();
+                     break;
+-                case PRINT_TICKETS:
++                case 4:
+                     bookingController.printUserTickets();
+                     break;
+-                case BACK:
++                case 5:
+                     break;
+                 default:
+                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
+             }
+-        } while (userOptions != UserOptions.BACK);
++        } while (userOptions != 5);
+     }
+ 
+     private void adminMenuDisplay(){
+-        AdminOptions adminOptions;
++        int adminOptions;
+         do {
+-            printAdminOptions();
+-            adminOptions = getAdminOptions();
++            printOptions(Options.adminOptions);
++            adminOptions = getOptions(Options.adminOptions);
+             switch (adminOptions) {
+-                case PRINT_MOVIES:
+-                    movieController.printMovies();
++                case 1:
++                    movieController.printSeances();
+                     break;
+-                case ADD_MOVIE:
++                case 2:
+                     movieController.addMovie();
+                     break;
+-                case PRINT_TICKETS:
++                case 3:
++                    movieController.addSeance();
++                case 4:
+                     ConsolePrinter.printTickets(movieController.cinema.getCinemaUserMap());
+                     break;
+-                case PRINT_USERS:
++                case 5:
+                     ConsolePrinter.printUsers(movieController.cinema.getUsers());
+                     break;
+-                case CHANGE_MOVIE_VALUES:
++                case 6:
+                     changeMovieValuesDisplay();
+                     break;
+-                case BACK:
++                case 7:
+                     break;
+                 default:
+                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
+             }
+-        } while (adminOptions != AdminOptions.BACK);
++        } while (adminOptions != 7);
+     }
+ 
+     private void changeMovieValuesDisplay(){
+-        MovieFieldsOptions movieFieldsOptions;
++        int movieValuesOptions;
+         do {
+-            printMovieFieldsOptions();
+-            movieFieldsOptions = getMovieFieldsOption();
+-            switch (movieFieldsOptions) {
+-                case ADD_TIME_OF_SEANCE:
+-                    movieController.addTimeOfSeance();
++            printOptions(Options.movieFieldsOptions);
++            movieValuesOptions = getOptions(Options.movieFieldsOptions);
++            switch (movieValuesOptions) {
++                case 1:
++                    movieController.printMovies();                        //addAdditionalDisplayTimeToSpecificMovie();
+                     break;
+-                case CHANGE_PRICE:
++                case 2:
+                     movieController.changeMoviePrice();
+                     break;
+-                case DELETE_MOVIE:
++                case 3:
+                     movieController.deleteMovie();
+                     break;
+-                case BACK:
++                case 4:
+                     break;
+                 default:
+                     logger.info("Nie ma takiej opcji. Wybierz ponownie: ");
+             }
+-        } while (movieFieldsOptions != MovieFieldsOptions.BACK);
++        } while (movieValuesOptions != 4);
+     }
+ 
+ 
+Index: Cinema/src/io/file/ImportExport.java
+===================================================================
+--- Cinema/src/io/file/ImportExport.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/helpers/ImportExport.java	(date 1587135829888)
+@@ -1,8 +1,10 @@
+-package io.file;
++package helpers;
+ 
+ import exception.DataExportException;
+ import exception.DataImportException;
+ import exception.InvalidDataException;
++import io.file.FileManager;
++import io.file.SerializableFileManager;
+ import logic.MovieController;
+ import model.Cinema;
+ 
+Index: Cinema/src/io/file/SerializableFileManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/io/file/SerializableFileManager.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/io/file/SerializableFileManager.java	(date 1587394757072)
+@@ -10,8 +10,8 @@
+     private static final String FILE_NAME = "Cinema.o";
+     @Override
+     public void exportData(Cinema cinema){
+-        try (FileOutputStream fos = new FileOutputStream(FILE_NAME);
+-             ObjectOutputStream oos = new ObjectOutputStream(fos)){
++        try (var fos = new FileOutputStream(FILE_NAME);
++             var oos = new ObjectOutputStream(fos)){
+             oos.writeObject(cinema);
+         } catch (FileNotFoundException e){
+             throw new DataExportException("Brak pliku " + FILE_NAME);
+@@ -21,8 +21,8 @@
+     }
+     @Override
+     public Cinema importData(){
+-        try(FileInputStream fis = new FileInputStream(FILE_NAME);
+-            ObjectInputStream ois = new ObjectInputStream(fis)
++        try(var fis = new FileInputStream(FILE_NAME);
++            var ois = new ObjectInputStream(fis)
+         ){
+             return (Cinema) ois.readObject();
+         } catch (FileNotFoundException e){
+Index: Cinema/src/io/file/ConsolePrinter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/io/file/ConsolePrinter.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/io/file/ConsolePrinter.java	(date 1587563917596)
+@@ -2,6 +2,7 @@
+ 
+ import model.CinemaUser;
+ import model.Movie;
++import model.Seance;
+ import model.User;
+ import org.apache.log4j.Logger;
+ 
+@@ -21,6 +22,15 @@
+                 movieList.forEach(System.out::println);
+             }
+         }
++    public static void printSeances(Map<String, Seance> seances){
++        if (seances.size() == 0){
++            logger.info("Brak Seansów");
++        }else {
++            List<Seance> movieList = new ArrayList<>(seances.values());
++
++            movieList.forEach(System.out::println);
++        }
++    }
+         public static void printUsers(Map<String, User> users){
+             if (users.size() == 0){
+                 logger.info("Brak użytkowników");
+@@ -39,4 +49,15 @@
+                 ticketList.forEach(System.out::println);
+             }
+         }
++    public static void printAudience(int [][]audience) {
++        System.out.println("            **************************** ekran ");
++        for (int i = 0; i < audience.length; i++) {
++            System.out.println();
++            System.out.print("Rząd nr " + (i+1) + ": ");
++            for (int j = 0; j < 16; ++j) {
++
++                System.out.print(audience[i][j] + " ");
++            }
++        }
++    }
+ }
+Index: Cinema/src/app/CinemaApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/app/CinemaApp.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/app/CinemaApp.java	(date 1587135829868)
+@@ -1,10 +1,10 @@
+ package app;
+ 
+ import logic.BookingController;
+-import io.file.ImportExport;
++import helpers.ImportExport;
+ import logic.MovieController;
+ import logic.UserController;
+-import logic.ApplicationDisplay;
++import logic.ViewController;
+ 
+ public class CinemaApp {
+     public static void main(String[] args)  {
+@@ -17,7 +17,7 @@
+         UserController userController = new UserController(movieController);
+         BookingController bookingController = new BookingController(movieController, userController);
+ 
+-        ApplicationDisplay applicationDisplay = new ApplicationDisplay(bookingController, movieController, importExport, userController);
++        ViewController applicationDisplay = new ViewController(bookingController, movieController, importExport, userController);
+         applicationDisplay.mainMenu();
+     }
+ 
+Index: Cinema/src/logic/MovieController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/logic/MovieController.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/logic/MovieController.java	(date 1587563917585)
+@@ -1,16 +1,17 @@
+ package logic;
+ 
++import builders.MonthsBuilder;
++import helpers.ImportExport;
+ import helpers.MovieTimeOfSeanceHelper;
+-import io.file.ImportExport;
+ import io.file.ConsolePrinter;
+ import model.Cinema;
++import model.CinemaHall;
+ import model.Movie;
++import model.Seance;
+ import org.apache.log4j.Logger;
+ 
+ import java.time.LocalTime;
+-import java.util.InputMismatchException;
+-import java.util.List;
+-import java.util.Scanner;
++import java.util.*;
+ 
+ public class MovieController {
+     private Logger logger = Logger.getLogger(MovieController.class);
+@@ -28,68 +29,87 @@
+ 
+     void addMovie() {
+         try {
+-            Movie movie = createMovie();
++            Movie movie = addMovieToCinemaOffer();
+             cinema.movies.put(movie.getTitle(), movie);
+         } catch (InputMismatchException e) {
+             System.out.println("Nie udało się utworzyć filmu. Niepoprawne dane!");
+-        } catch (ArrayIndexOutOfBoundsException e) {
+-            System.out.println("Nie można utworzyć kolejnego filmu. Osiągnięto limit pojemności.");
+         }
+     }
+-    private Movie createMovie() {
++
++    private Movie addMovieToCinemaOffer() {
+         logger.info("Tytuł filmu: ");
+-        String title = sc.nextLine();
++        String movieTitle = sc.nextLine();
++
+         logger.info("Długość filmu w minutach: ");
+-        int length = sc.nextInt();
+-        logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
+-        List<LocalTime> playingHours = MovieTimeOfSeanceHelper.setNumbersOfViewsPerDay(sc.nextInt(), length);
+-        logger.info("Podaj nr sali kinowej: ");
+-        int cinemaHallNumber = sc.nextInt();
+-        logger.info("Podaj cenę ");
+-        double price = sc.nextDouble();
+-        sc.nextLine();
+-        return Movie.Builder.newInstance()
+-                .setTitle(title)
+-                .setLength(length)
+-                .setPlayingHours(playingHours)
+-                .setCinemaHallNumber(cinemaHallNumber)
+-                .setPrice(price)
+-                .build();
++        int movieLength = sc.nextInt();
++
++//        logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
++//        List<LocalTime> movieDisplayHoursPerDay = MovieTimeOfSeanceHelper
++//                .setHowManyTimesMovieWillBeShownDuringTheDay(sc.nextInt(), movieLength);
++//
++//        logger.info("Podaj nr sali kinowej: ");
++//        int cinemaHallNumber = sc.nextInt();
++//
++//        logger.info("Podaj cenę ");
++//        double price = sc.nextDouble();
++//        sc.nextLine();
++
++//        return Movie.Builder.newInstance()
++//                .setTitle(movieTitle)
++//                .setLength(movieLength)
++//                .setMovieDisplayPerDay(movieDisplayHoursPerDay)
++//                .setCinemaHallNumber(cinemaHallNumber)
++//                .setPrice(price)
++//                .build();
++        return new Movie.Builder(movieTitle, movieLength).build();
+     }
+ 
+-    void addTimeOfSeance() {
+-        try {
+-            logger.info("Podaj tytuł filmu");
+-            String title = sc.nextLine();
+-            Movie movie = findMovieByTitle(title);
+-            if (movie != null) {
+-                List<LocalTime> playingHours = movie.getPlayingHours();
+-                playingHours.add(MovieTimeOfSeanceHelper.createTimeOfSeance());
+-                movie = Movie.Builder.newInstance().setPlayingHours(playingHours).build();
+-            } else {
+-                logger.info("Nie ma takiego filmu. Dostępne filmy: ");
+-                printMovies();
+-            }
+-        } catch (NullPointerException e) {
+-            logger.warn("Nie ma takiego filmu");
+-        }
++//    void addAdditionalDisplayTimeToSpecificMovie() {
++//        try {
++//            Seance movie = findSeanceByMovieTitle();
++//
++//            if (movie != null) {
++//                List<LocalTime> movieDisplayPerDay = .getMovieDisplayPerDay();
++//                movieDisplayPerDay.add(MovieTimeOfSeanceHelper.createTimeOfSeance());
++//            }
++//            else {
++//                logger.info("Nie ma takiego filmu. Dostępne filmy: ");
++//                printMovies();
++//            }
++//        } catch (NullPointerException e) {
++//            logger.warn("Nie ma takiego filmu");
++//        }
++//    }
++
++    Seance findSeanceByMovieTitle()
++    {
++        logger.info("Podaj tytuł filmu");
++        String title = sc.nextLine();
++        return cinema.seancesRepository.get(title);
++    }
++    Movie findMovieByTitle()
++    {
++        logger.info("Podaj tytuł filmu");
++        String title = sc.nextLine();
++        return cinema.movies.get(title);
+     }
+ 
+     void printMovies() {
+         ConsolePrinter.printMovies(cinema.getMovies());
+     }
+-    Movie findMovieByTitle(String title) {
+-        return cinema.movies.get(title);
++    void printSeances() {
++        ConsolePrinter.printSeances(cinema.getSeances());
+     }
++
+ 
+         void changeMoviePrice() {
+             logger.info("Podaj tytuł filmu");
+             String title = sc.nextLine();
+             try {
+-                Movie movie = findMovieByTitle(title);
+-                if (movie != null) {
++                Seance seance = findSeanceByMovieTitle();
++                if (seance.getMovie() != null) {
+                     logger.info("Podaj nową cenę: ");
+-                    movie.setPrice(sc.nextDouble());
++                    seance.setPrice(sc.nextDouble());
+                     sc.nextLine();
+                 } else {
+                     logger.warn("Nie ma takiego filmu. Dostępne filmy: ");
+@@ -101,18 +121,11 @@
+                 logger.error("Niepoprawne dane!");
+             }
+         }
+-    boolean removeMovie(Movie movie){
+-        if (cinema.movies.containsValue(movie)){
+-            cinema.movies.remove(movie.getTitle());
+-            return true;
+-        }else {
+-            return false;
+-        }
+-    }
++
+         void deleteMovie() {
+             try {
+-                logger.info("Podaj tytuł filmu, który chcesz usunąć: ");
+-                Movie movie = findMovieByTitle(sc.nextLine());
++                Movie movie = findMovieByTitle();
++
+                 if (removeMovie(movie))
+                     logger.info("Usunięto film");
+                 else
+@@ -121,6 +134,81 @@
+                 logger.error("Nie udało się usunąć filmu, niepoprawne dane");
+             }
+         }
++        boolean removeMovie(Movie movie){
++            if (cinema.movies.containsValue(movie))
++            {
++            cinema.movies.remove(movie);
++                return true;
++            }else
++                {
++                return false;
++            }
++    }
++
++
++//        int cinemaHallNumber = sc.nextInt();
++//
++//        logger.info("Podaj cenę ");
++//        double price = sc.nextDouble();
++//        sc.nextLine();
++
++//        return Movie.Builder.newInstance()
++//                .setTitle(movieTitle)
++//                .setLength(movieLength)
++//                .setMovieDisplayPerDay(movieDisplayHoursPerDay)
++//                .setCinemaHallNumber(cinemaHallNumber)
++//                .setPrice(price)
++//                .build();
++//private LocalDateTime dateTimeOfSeance;
++//    private CinemaHall cinemaHall;
++//    private Movie movie;
++//    private double price;
+ 
++    void addSeance() {
++        try {
++            Map<String, Seance> tempMap = addSeanceToCinemaOffer();
++            cinema.seancesRepository.putAll(tempMap);
++        } catch (InputMismatchException e) {
++            System.out.println("Nie udało się utworzyć filmu. Niepoprawne dane!");
++        }
+     }
++
++
++
++    public Map<String, Seance> addSeanceToCinemaOffer() {
++        Map<String, Seance> tempMap = new HashMap<>();
++        try {
++            Movie movie = findMovieByTitle();
++            if (movie != null){
++                logger.info("Podaj miesiąc seansu: ");
++                String inputMonth = sc.nextLine().toUpperCase();
++                logger.info("Podaj dzień seansu: ");
++                String inputDay = sc.nextLine().toUpperCase();
++                logger.info("Podaj nr sali kinowej: ");
++                int inputCinemaHallNumber = sc.nextInt();
++                logger.info("Ile razy w ciagu dnia bedzie wyświetlany film?");
++                List<LocalTime> movieDisplayHoursPerDay = MovieTimeOfSeanceHelper
++                .setHowManyTimesMovieWillBeShownDuringTheDay(sc.nextInt(), movie.getLength());
++                logger.info("Podaj cenę ");
++                double price = sc.nextDouble();
++                sc.nextLine();
++
++                for (LocalTime localTime : movieDisplayHoursPerDay) {
++                    CinemaHall cinemaHall = new CinemaHall.Builder(inputCinemaHallNumber).build();
++                    Seance seance = new Seance.Builder()
++                            .addDayOfSeance((MonthsBuilder.Month.valueOf(inputMonth)), MonthsBuilder.Week.valueOf(inputDay))
++                            .setCinemaHall(cinemaHall)
++                            .setDateTimeOfSeance(localTime)
++                            .setMovie(movie)
++                            .setPrice(price)
++                            .build();
++                    tempMap.put(movie.getTitle(), seance);
++                }
++            }
++        } catch (InputMismatchException e) {
++            e.printStackTrace();
++        }
++        return tempMap;
++    }
++}
+ 
+Index: Cinema/src/logic/BookingController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/logic/BookingController.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/logic/BookingController.java	(date 1587563301847)
+@@ -1,19 +1,11 @@
+ package logic;
+ 
+-import builder.TicketBuilder;
+-import helpers.MovieTimeOfSeanceHelper;
++import builders.TicketBuilder;
+ import io.file.ConsolePrinter;
+-import model.CinemaUser;
+-import model.Movie;
+-import model.Ticket;
+-import model.User;
++import model.*;
+ import org.apache.log4j.Logger;
+ 
+-import java.time.LocalTime;
+-import java.util.ArrayList;
+-import java.util.List;
+-import java.util.Random;
+-import java.util.Scanner;
++import java.util.*;
+ 
+ public class BookingController {
+     private Logger logger = Logger.getLogger(BookingController.class);
+@@ -37,9 +29,9 @@
+             }
+             else if (user != null){
+                 List<Ticket>tickets = new ArrayList<>();
+-                CinemaUser cinemaUser1 = new CinemaUser(user.getFirstName(), user.getLastName(), tickets);
++                CinemaUser newCinemaUser = new CinemaUser(user.getFirstName(), user.getLastName(), tickets);
+                 movieController.cinema.getCinemaUserMap()
+-                        .put(cinemaUser1.getLastName(), createTicket(cinemaUser1));
++                        .put(newCinemaUser.getLastName(), createTicket(newCinemaUser));
+             }else {
+                 logger.info("Użytkownik o podanym nazwisku nie istnieje");
+                 logger.info("Jeśli jesteś nowym użytkownikiem, prosimy o rejestrację");
+@@ -51,19 +43,32 @@
+ 
+     private CinemaUser createTicket(CinemaUser owner) {
+         Movie movie = findMovie();
+-        Movie selectedMovie = Movie.Builder.newInstance()
+-                .setTitle(movie.getTitle())
+-                .setLength(movie.getLength())
+-                .setPlayingHours(movie.getPlayingHours())
+-                .setCinemaHallNumber(movie.getCinemaHallNumber())
+-                .setPrice(movie.getPrice())
++        Seance seance = movieController.cinema.seancesRepository.get(movie.getTitle());
++
++        //choosePlayingHour(selectedMovie);
++
++        System.out.println("poidaj nr rzedu");
++        int rowNumber = sc.nextInt(10);
++
++        System.out.println("podaj nr siedzenia");
++        int seatNumber = sc.nextInt(17);
++        Map<Integer, Integer> choosenSeat = new HashMap<>();
++        choosenSeat.put(rowNumber, seatNumber);
++        CinemaHall cinemaHall = new CinemaHall.Builder(seance.getCinemaHall().getNumber()).audience(choosenSeat).build();
++        Seance seanceOnSelectedMovie = new Seance.Builder()
++                .setMovie(movie)
++                .setDateTimeOfSeance(seance.getTimeOfSeance())
++                .setCinemaHall(cinemaHall)
++                .setPrice(seance.getPrice())
+                 .build();
+-        choosePlayingHour(selectedMovie);
+-            Random random = new Random();
+-            int rowNumber = random.nextInt(10);
+-            int seatNumber = random.nextInt(17);
++
++//        CinemaHall cinemaHall = new CinemaHall();
++//            cinemaHall.setNumber(movie.getCinemaHallNumber());
++//            cinemaHall.setPlayingHour(movie.getMovieDisplayPerDay());
++//            cinemaHall.setAudience(makeAudience(cinemaHall.getAudience(),rowNumber, seatNumber ));
++
+             Ticket ticket = TicketBuilder.newInstance()
+-                    .setMovie(movie)
++                    .setSeance(seanceOnSelectedMovie)
+                     .setRowNumber(rowNumber)
+                     .setSeatNumber(seatNumber)
+                     .build();
+@@ -73,27 +78,39 @@
+         logger.info("Dodano rezerwację: " + ticket.toString() + "\n");
+         return owner;
+     }
+-
+-    private void choosePlayingHour(Movie movie) {
+-        boolean ok = false;
+-        while (!ok) {
+-            try {
+-                logger.info("Dostępne godziny");
+-                logger.info(movie.getPlayingHours().toString());
+-                List<LocalTime> selectedTime = new ArrayList<>();
+-                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
+-                if (movie.getPlayingHours().contains(readPlayingHour)){
+-                    selectedTime.add(readPlayingHour);
+-                    movie = Movie.Builder.newInstance().setPlayingHours(selectedTime).build();
+-                    ok = true;
+-                } else {
+-                    logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
++    public static int[][] makeAudience(int [][]audience, int colNmb, int rowNmb) {
++        for (int i = 0; i < 7; i++) {
++            for (int j = 0; j < 16; ++j) {
++                audience[i][j] = j;
++                if (i == colNmb-1 && j == rowNmb-1){
++                    audience[i][j] = 0;
+                 }
+-            }catch (Exception e){
+-                e.printStackTrace();
+             }
+-        }
++        }return audience;
+     }
++
++//    private void choosePlayingHour(Movie movie) {
++//        boolean ok = false;
++//        while (!ok) {
++//            try {
++//                logger.info("Dostępne godziny");
++//                Seance availableTimes = movieController.cinema.seancesRepository.get(movie.getTitle());
++//                logger.info(availableTimes.getTimeOfSeance().toString());
++////                List<LocalTime> selectedTime = new ArrayList<>();
++////                LocalTime readPlayingHour = MovieTimeOfSeanceHelper.createTimeOfSeance();
++////                if (availableTimes.getTimeOfSeance().equals(readPlayingHour)){
++////                    selectedTime.add(readPlayingHour);
++////                    movie = Movie.Builder.newInstance().setMovieDisplayPerDay(selectedTime).build();
++//
++//                    ok = true;
++//                } else {
++//                    logger.info("Nie wyświetlamy tego filmu o podanej godzinie");
++//                }
++//            }catch (Exception e){
++//                e.printStackTrace();
++//            }
++//        }
++//    }
+ 
+     void printUserTickets() {
+         logger.info("Podaj Nazwisko");
+@@ -106,13 +123,16 @@
+ 
+     private Movie findMovie() {
+         Movie movie = null;
+-        boolean ok = false;
+-        while (!ok) {
++        boolean movieBooked = false;
++        while (!movieBooked) {
+             try {
+                 logger.info("Podaj tytuł filmu, który chcesz zarezerwować");
+-                movie = movieController.findMovieByTitle(sc.nextLine());
++                ConsolePrinter.printMovies(movieController.cinema.getMovies());
++                movie = movieController.findMovieByTitle();
++
+                 if (movie!=null)
+-                    ok = true;
++                    movieBooked = true;
++
+                 else {
+                     logger.info("W naszym repertuarze nie ma filmu o podanym tytule, spróbuj jeszcze raz"
+                             + "\n" + "Dostępne Filmy:" + "\n");
+Index: Cinema/src/model/Movie.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/model/Movie.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/model/Movie.java	(date 1587567237118)
+@@ -1,93 +1,68 @@
+ package model;
+ 
+ import java.io.Serializable;
+-import java.time.LocalTime;
+-import java.util.List;
++import java.time.LocalDateTime;
++import java.util.HashMap;
++import java.util.Map;
+ 
+-public class Movie implements Serializable{
++public class Movie implements Serializable {
+     private String title;
+     private int length;
+-    private List<LocalTime> playingHours;
+-    private int cinemaHallNumber;
+-    private double price;
+-
+-
+-    private Movie(){}
++    private Map<LocalDateTime, Seance> seances;
+ 
+-    public static class Builder{
++    public static class Builder {
+         private String title;
+         private int length;
+-        private List<LocalTime> playingHours;
+-        private int cinemaHallNumber;
+-        private double price;
++        private Map<LocalDateTime, Seance> seances = new HashMap<>();
+ 
+-        public static Builder newInstance(){
+-            return new Builder();
+-        }
+-        private Builder(){}
+-
+-        public Builder setTitle(String title){
++        public Builder(String title, int length) {
+             this.title = title;
+-            return this;
+-        }
+-        public Builder setLength(int length){
+             this.length = length;
+-            return this;
+-        }
+-        public Builder setPlayingHours(List<LocalTime> playingHours){
+-            this.playingHours = playingHours;
+-            return this;
+         }
+-        public Builder setCinemaHallNumber(int cinemaHallNumber){
+-            this.cinemaHallNumber = cinemaHallNumber;
+-            return this;
+-        }
+-        public Builder setPrice(double price){
+-            this.price = price;
++        public Builder addSeance(Map<LocalDateTime, Seance> addedSeance) {
++            seances = addedSeance;
+             return this;
+         }
+-        public Movie build(){
+-            Movie movie = new Movie();
+-            movie.title = this.title;
+-            movie.length = this.length;
+-            movie.playingHours = this.playingHours;
+-            movie.cinemaHallNumber = this.cinemaHallNumber;
+-            movie.price = this.price;
+-
+-            return movie;
++        public Movie build() {
++            return new Movie(this);
+         }
+     }
++    private Movie(Builder builder) {
++        title = builder.title;
++        length = builder.length;
++        seances = builder.seances;
++    }
+ 
+     public String getTitle() {
+         return title;
+     }
+ 
++    public void setTitle(String title) {
++        this.title = title;
++    }
++
+     public int getLength() {
+         return length;
+     }
+ 
+-    public List<LocalTime> getPlayingHours() {
+-        return playingHours;
+-    }
+-
+-    public int getCinemaHallNumber() {
+-        return cinemaHallNumber;
++    public void setLength(int length) {
++        this.length = length;
+     }
+ 
+-    public double getPrice() {
+-        return price;
++    public Map<LocalDateTime, Seance> getSeances() {
++        return seances;
+     }
+ 
+-    public void setPrice(double price) {
+-        this.price = price;
++    public void setSeances(Map<LocalDateTime, Seance> seances) {
++        this.seances = seances;
+     }
+ 
+     @Override
+     public String toString() {
+-        return
+-                this.title + ", Czas trwania " + this.length +
+-                        " minut" + ", Godziny seansów " + this.playingHours.toString() +
+-                        ", Cena " + this.price + " zł";
++        return "Movie{" +
++                "title='" + title + '\'' +
++                ", length=" + length +
++                ", seances=" + seances +
++                '}';
+     }
+-
+-}
++}
+\ No newline at end of file
+Index: Cinema/src/model/Cinema.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/model/Cinema.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/model/Cinema.java	(date 1587563917604)
+@@ -10,6 +10,7 @@
+     public Map<String, Ticket> tickets = new HashMap<>();
+     public Map<String, User> users = new HashMap<>();
+     public Map<String, CinemaUser> cinemaUserMap = new HashMap<>();
++    public Map<String, Seance> seancesRepository = new HashMap<>();
+ 
+ 
+     public Cinema() {
+@@ -18,6 +19,9 @@
+     public Map<String, Movie> getMovies() {
+         return movies;
+     }
++    public Map<String, Seance> getSeances() {
++        return seancesRepository;
++    }
+ 
+ 
+     public Map<String, Ticket> getTickets() {
+Index: Cinema/src/model/Ticket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/model/Ticket.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/model/Ticket.java	(date 1587563301825)
+@@ -4,16 +4,17 @@
+ 
+ public class Ticket implements Serializable {
+ 
+-    public Movie movie;
++    public Seance seance;
+     public int rowNumber;
+     public int seatNumber;
+ 
++
+     public Ticket() {
+     }
+ 
+     @Override
+     public String toString() {
+-        return ", Rezerwacja " + movie.toString() +
++        return ", Rezerwacja " + seance.toString() +
+                 ", Nr rzędu " + rowNumber +
+                 ", Nr miejsca " + seatNumber;
+     }
+Index: Cinema/src/builder/TicketBuilder.java
+===================================================================
+--- Cinema/src/builder/TicketBuilder.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/builders/TicketBuilder.java	(date 1587562757382)
+@@ -1,10 +1,10 @@
+-package builder;
++package builders;
+ 
+-import model.Movie;
++import model.Seance;
+ import model.Ticket;
+ 
+ public class TicketBuilder {
+-    private  Movie movie;
++    private Seance seance;
+     private  int rowNumber;
+     private  int seatNumber;
+ 
+@@ -16,10 +16,6 @@
+         private TicketBuilder() {
+         }
+ 
+-        public TicketBuilder setMovie(Movie movie){
+-            this.movie = movie;
+-            return this;
+-        }
+         public TicketBuilder setRowNumber(int rowNumber){
+             this.rowNumber = rowNumber;
+             return this;
+@@ -28,11 +24,17 @@
+             this.seatNumber = seatNumber;
+             return this;
+         }
++
++    public TicketBuilder setSeance(Seance seance){
++        this.seance = seance;
++        return this;
++    }
++
+         public Ticket build(){
+             Ticket ticket = new Ticket();
+-            ticket.movie = this.movie;
+             ticket.rowNumber = this.rowNumber;
+             ticket.seatNumber = this.seatNumber;
++            ticket.seance = this.seance;
+             return ticket;
+         }
+ 
+Index: Cinema/src/helpers/OptionsHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/helpers/OptionsHelper.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/helpers/OptionsHelper.java	(date 1587381228948)
+@@ -1,132 +1,53 @@
+ package helpers;
+ 
+-import exception.NoSuchOptionException;
+ import io.file.ConsolePrinter;
+-import options.AdminOptions;
+-import options.MainOptions;
+-import options.MovieFieldsOptions;
+-import options.UserOptions;
+ import org.apache.log4j.Logger;
+ 
+ import java.util.InputMismatchException;
++import java.util.Map;
+ import java.util.Scanner;
++import java.util.Set;
+ 
+ public class OptionsHelper {
+     private static Logger logger = Logger.getLogger(ConsolePrinter.class);
+     private static Scanner sc = new Scanner(System.in);
+ 
+-    public static MainOptions getMainOptions() {
+-        boolean optionOk = false;
+-        MainOptions option = null;
+-        while (!optionOk) {
+-            try {
+-                int userInput = sc.nextInt();
+-                option = createMainOptionsFromInt(userInput);
+-                optionOk = true;
+-            } catch (NoSuchOptionException e) {
+-                logger.warn(e.getMessage() + "Podaj ponownie: ");
+-            } catch (InputMismatchException i) {
+-                sc.nextLine();
+-                logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");}
+-        }return option;
+-    }
+-    public static MainOptions createMainOptionsFromInt(int option) throws NoSuchOptionException {
+-        try {
+-            return MainOptions.values()[option];
+-        } catch (ArrayIndexOutOfBoundsException e) {
+-            throw new NoSuchOptionException("Brak opcji o id: " + option);
+-        }
+-    }
+-    public static void printMainOptions() {
+-        for (MainOptions option : MainOptions.values())
+-            logger.info(option.toString());
+-    }
+ 
+-    public static AdminOptions getAdminOptions() {
+-        boolean optionValueExist = false;
+-        AdminOptions option = null;
+-        while (!optionValueExist) {
+-            try {
+-                option = createAdminOptionsFromInt(sc.nextInt());
+-                optionValueExist = true;
+-            } //catch (InputMismatchException e) {
+-                //logger.info("Wprowadzono wartość, która nie jest liczbą. Wprowadź ponownie: ");
+-             catch (InputMismatchException | NoSuchOptionException e) {
+-                 sc.nextLine();
+-                logger.warn("Nie ma takiej opcji. Podaj ponownie: ");
+-            }
+-        }
+-            return option;
+-    }
+-    public static AdminOptions createAdminOptionsFromInt(int option) throws NoSuchOptionException {
+-        try {
+-            return AdminOptions.values()[option-1];
+-        } catch (ArrayIndexOutOfBoundsException e) {
+-            throw new NoSuchOptionException("Brak opcji o id: " + option);
+-        }
+-    }
+-    public static void printAdminOptions() {
+-        logger.info("Wybierz opcję: ");
+-        for (AdminOptions option : AdminOptions.values())
+-            logger.info(option.toString());
+-    }
+-
+-    public static UserOptions getUserOptions() {
+-        boolean optionOk = false;
+-        UserOptions option = null;
+-        while (!optionOk) {
+-            try {
+-                option = createUserOptionsFromInt(sc.nextInt());
+-                optionOk = true;
+-            } catch (NoSuchOptionException e) {
+-                sc.nextLine();
+-                logger.warn(e.getMessage() + "Podaj ponownie: ");
+-            } catch (InputMismatchException ignored) {
+-                sc.nextLine();
+-                logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");
+-            }
+-        }return option;
+-    }
+-    public static void printUserOptions() {
+-        logger.info("Wybierz opcję: ");
+-        for (UserOptions option : UserOptions.values())
+-            logger.info(option.toString());
+-    }
+-    public static UserOptions createUserOptionsFromInt(int option) throws NoSuchOptionException {
+-        try {
+-            return UserOptions.values()[option-1];
+-        } catch (ArrayIndexOutOfBoundsException e) {
+-            throw new NoSuchOptionException("Brak opcji o id: " + option);
+-        }
+-    }
+-    public static MovieFieldsOptions getMovieFieldsOption() {
+-        boolean optionOk = false;
+-        MovieFieldsOptions movieFieldsOptions = null;
+-        while (!optionOk) {
++    public static Integer getOptions(Map<Integer, String> options) {
++        boolean optionSelected = false;
++        Integer returningOption = null;
++        while (!optionSelected) {
+             try {
+-                movieFieldsOptions = createMovieFieldsOptionsFromInt(sc.nextInt());
+-                optionOk = true;
+-            } catch (NoSuchOptionException e) {
++                int userSelectedOption = sc.nextInt();
+                 sc.nextLine();
++
++                if (userSelectedOption <= options.size() + 1) {
++                    optionSelected = true;
++                    returningOption = userSelectedOption;
++                }
++            } catch (IndexOutOfBoundsException e) {
+                 logger.warn(e.getMessage() + "Podaj ponownie: ");
+-            } catch (InputMismatchException ignored) {
++            } catch (InputMismatchException i) {
+                 sc.nextLine();
+                 logger.warn("Wprowadzono  która nie jest liczbą. Wprowadź ponownie: ");
+             }
+-        }return movieFieldsOptions;
+-    }
+-    public static MovieFieldsOptions createMovieFieldsOptionsFromInt(int option) throws NoSuchOptionException {
+-        try {
+-            return MovieFieldsOptions.values()[option-1];
+-        } catch (ArrayIndexOutOfBoundsException e) {
+-            throw new NoSuchOptionException("Brak opcji o id: " + option);
+         }
++        return returningOption;
++
+     }
+-    public static void printMovieFieldsOptions() {
+-        logger.info("Wybierz opcję: ");
+-        for (MovieFieldsOptions option : MovieFieldsOptions.values())
++
++
++    public static void printOptions(Map<Integer, String> options) {
++        Set<Map.Entry<Integer, String>> entries = options.entrySet();
++        for (Map.Entry<Integer, String> option : entries)
+             logger.info(option.toString());
+     }
++}
+ 
+ 
+-}
++
++
++
++
++
++
+Index: Cinema/src/helpers/MovieTimeOfSeanceHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/src/helpers/MovieTimeOfSeanceHelper.java	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/src/helpers/MovieTimeOfSeanceHelper.java	(date 1587132329470)
+@@ -13,22 +13,22 @@
+     private static Logger logger = Logger.getLogger(MovieTimeOfSeanceHelper.class);
+     private static Scanner sc = new Scanner(System.in);
+ 
+-    public static List<LocalTime> setNumbersOfViewsPerDay (int numbersOfViewsPerDay, int length){
+-        List<LocalTime> localTimes = new ArrayList<>();
+-        LocalTime localTime1 = null;
+-        for (int i = 0; i < numbersOfViewsPerDay; i++){
++    public static List<LocalTime> setHowManyTimesMovieWillBeShownDuringTheDay (int howManyTimesMovieWillBeShownDuringTheDay, int movieLength){
++        List<LocalTime> movieDisplayHoursPerDay = new ArrayList<>();
++        LocalTime checkMovieTimeOverlapToNextMovie = null;
++        for (int i = 0; i < howManyTimesMovieWillBeShownDuringTheDay; i++){
+             logger.info("Seans nr " + (i + 1));
+-            LocalTime localTime = createTimeOfSeance();
++            LocalTime movieDisplayHour = createTimeOfSeance();
+ 
+-            if (localTime1 != null && localTime1.isAfter(localTime)){
++            if (checkMovieTimeOverlapToNextMovie != null && checkMovieTimeOverlapToNextMovie.isAfter(movieDisplayHour)){
+                 System.out.println("Nie możesz ustawić tej godziny. Długość filmu na to nie pozwala");
+                 i--;
+             }else {
+-                localTimes.add(localTime);
++                movieDisplayHoursPerDay.add(movieDisplayHour);
+             }
+-            localTime1 = localTime.plusMinutes(length);
++            checkMovieTimeOverlapToNextMovie = movieDisplayHour.plusMinutes(movieLength);
+         }
+-        return localTimes;
++        return movieDisplayHoursPerDay;
+     }
+ 
+     public static LocalTime createTimeOfSeance() throws DateTimeException {
+Index: Cinema/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/.idea/workspace.xml	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/.idea/workspace.xml	(date 1587567222858)
+@@ -3,9 +3,42 @@
+   <component name="ChangeListManager">
+     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/builder/TicketBuilder.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay$1.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/ApplicationDisplay.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie$Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie$Builder.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/AdminOptions.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MainOptions.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/MovieFieldsOptions.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Cinema/options/UserOptions.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/CinemaApp.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/builder/TicketBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/TicketBuilder.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/io/file/ImportExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/ImportExport.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/logic/ApplicationDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/ViewController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/BookingController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/MovieController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Ticket.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/options/AdminOptions.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/options/MainOptions.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/options/MovieFieldsOptions.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/options/UserOptions.java" beforeDir="false" />
+     </list>
+-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -17,8 +50,8 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
+-        <option value="Interface" />
+         <option value="Enum" />
++        <option value="Interface" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -35,12 +68,24 @@
+       </list>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
++    <option name="UPDATE_TYPE" value="MERGE" />
+   </component>
+   <component name="ProjectId" id="1Q15NsE779Q9MY4S9ItbUom3ahZ" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="1" id="Add" />
+   </component>
++  <component name="ProjectViewState">
++    <option name="compactDirectories" value="true" />
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showExcludedFiles" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
+   <component name="PropertiesComponent">
++    <property name="Downloaded.Files.Path.Enabled" value="false" />
++    <property name="Repository.Attach.Annotations" value="false" />
++    <property name="Repository.Attach.JavaDocs" value="false" />
++    <property name="Repository.Attach.Sources" value="false" />
++    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566826406299" />
+     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/.." />
+     <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+@@ -48,19 +93,7 @@
+     <property name="project.structure.proportion" value="0.15" />
+     <property name="project.structure.side.proportion" value="0.2" />
+     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+-  </component>
+-  <component name="RunDashboard">
+-    <option name="ruleStates">
+-      <list>
+-        <RuleState>
+-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+-        </RuleState>
+-        <RuleState>
+-          <option name="name" value="StatusDashboardGroupingRule" />
+-        </RuleState>
+-      </list>
+-    </option>
++    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+   </component>
+   <component name="RunManager" selected="Application.CinemaApp">
+     <configuration name="CinemaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+@@ -68,7 +101,7 @@
+       <module name="Cinema" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="io.file.*" />
++          <option name="PATTERN" value="helpers.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+@@ -276,7 +309,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1572435892083</updated>
+     </task>
+-    <option name="localTasksCounter" value="25" />
++    <task id="LOCAL-00025" summary="Update">
++      <created>1572460882732</created>
++      <option name="number" value="00025" />
++      <option name="presentableId" value="LOCAL-00025" />
++      <option name="project" value="LOCAL" />
++      <updated>1572460882732</updated>
++    </task>
++    <option name="localTasksCounter" value="26" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.History.Properties">
+@@ -326,12 +366,86 @@
+     <MESSAGE value="Update" />
+     <option name="LAST_COMMIT_MESSAGE" value="Update" />
+   </component>
++  <component name="WindowStateProjectService">
++    <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser" timestamp="1587563207558">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1587563207558" />
++    <state x="449" y="168" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587129603944">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="449" y="168" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.864@0.0.1536.864" timestamp="1587129603944" />
++    <state x="473" y="116" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1587376670823">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="473" y="116" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1536.864@0.0.1536.864" timestamp="1587376670823" />
++    <state x="238" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586772551656">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="238" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1586772551656" />
++    <state width="1493" height="413" key="GridCell.Tab.0.bottom" timestamp="1587564043674">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="413" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
++    <state width="1493" height="413" key="GridCell.Tab.0.center" timestamp="1587564043674">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="413" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
++    <state width="1493" height="413" key="GridCell.Tab.0.left" timestamp="1587564043674">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="413" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
++    <state width="1493" height="413" key="GridCell.Tab.0.right" timestamp="1587564043674">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="413" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1587564043674" />
++    <state width="1493" height="296" key="GridCell.Tab.1.bottom" timestamp="1587564043659">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="296" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
++    <state width="1493" height="296" key="GridCell.Tab.1.center" timestamp="1587564043659">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="296" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
++    <state width="1493" height="296" key="GridCell.Tab.1.left" timestamp="1587564043659">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="296" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
++    <state width="1493" height="296" key="GridCell.Tab.1.right" timestamp="1587564043659">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state width="1493" height="296" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1587564043659" />
++    <state x="277" y="75" key="SettingsEditor" timestamp="1583907744818">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="277" y="75" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1583907744818" />
++    <state x="460" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1587384769756">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="460" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1587384769756" />
++    <state x="490" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1587551836408">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="490" y="326" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.864@0.0.1536.864" timestamp="1587551836408" />
++    <state x="404" y="47" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586781970958">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="404" y="47" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864@0.0.1536.864" timestamp="1586781970958" />
++    <state x="573" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587567222438">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="573" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1587567222438" />
++    <state x="182" y="53" key="new project wizard" timestamp="1587444826316">
++      <screen x="0" y="0" width="1536" height="864" />
++    </state>
++    <state x="182" y="53" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1587444826316" />
++  </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+       <breakpoints>
+         <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java</url>
+-          <line>16</line>
++          <url>file://$PROJECT_DIR$/src/logic/UserController.java</url>
++          <line>20</line>
+           <option name="timeStamp" value="1" />
+         </line-breakpoint>
+       </breakpoints>
+Index: Cinema/Cinema.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cinema/Cinema.iml	(revision 1b0047df3a40865eabf658b18589a4fb438d062c)
++++ Cinema/Cinema.iml	(date 1587552258145)
+@@ -9,5 +9,14 @@
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="library" name="apache-log4j-2.12.1-bin.tar" level="project" />
+     <orderEntry type="library" name="log4j-1.2.15" level="project" />
++    <orderEntry type="module-library">
++      <library>
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/18.0.0/annotations-18.0.0.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+diff --git Cinema/out/production/Cinema/builder/TicketBuilder.class Cinema/out/production/Cinema/builder/TicketBuilder.class
+deleted file mode 100644
+index c2312fb16c7853622b5aa538820ec14de28c384a..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/logic/ApplicationDisplay$1.class Cinema/out/production/Cinema/logic/ApplicationDisplay$1.class
+deleted file mode 100644
+index 8bf870ce79a462b2195802379d3310ed006f7155..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/logic/ApplicationDisplay.class Cinema/out/production/Cinema/logic/ApplicationDisplay.class
+deleted file mode 100644
+index b06a8d706cf69bcd5ff88423a1780c94703794bd..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/options/AdminOptions.class Cinema/out/production/Cinema/options/AdminOptions.class
+deleted file mode 100644
+index a65e2765c7fcc8738334507c839c1b3d33ae9e4d..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/options/MainOptions.class Cinema/out/production/Cinema/options/MainOptions.class
+deleted file mode 100644
+index 6c06d67b66485b66153444031aafa6b28a68dd0e..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/options/MovieFieldsOptions.class Cinema/out/production/Cinema/options/MovieFieldsOptions.class
+deleted file mode 100644
+index 6756236b08bfe6ef57290ca231e4d62c29b2a0a7..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/options/UserOptions.class Cinema/out/production/Cinema/options/UserOptions.class
+deleted file mode 100644
+index 3aa5b434e0f136fd5941fda25a4795fe22b72e31..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git Cinema/out/production/Cinema/io/file/ConsolePrinter.class Cinema/out/production/Cinema/io/file/ConsolePrinter.class
+index 232adb38bb67062ae0189e8f11f41cde391b1fb1..1f9d78fe9dc1a1f921d1edfc4ce8ebe9274b103e
+GIT binary patch
+literal 4112
+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
+XOi^bHCdNy%$<i!`<Ft4{jSv10ZiN-p
+
+diff --git Cinema/out/production/Cinema/app/CinemaApp.class Cinema/out/production/Cinema/app/CinemaApp.class
+index 9c7a54e80b0c40271ae719482aebed627dceead4..0cf61795b5d542d675304b36c3060357a4d91b1a
+GIT binary patch
+literal 1342
+zc${@qTTc^F5dIFmY`ZK43I&U(;I-7kqH?n!T1pY5MG};x@qujXrX1W`wp)~+r4KZ*
+zi9f)1|Bi7^+W<A&KFrC?_syL7=1lkZ-=Dt#tYS|_9GM8_qga3{V-e3JJeLtdM#2jj
+z5|)Hnmarm2#*&0p84A`Uyp$0`R+x1O8xmeIgg3awy-kKdYVMdJn72Rc48uik=?4w7
+zqPrioib0Wh(XML7vF38&cY{Iil-C7Ya~w5KDW;ZloOJ?Bjav*8sZYf-?Oan0&8n$K
+zp3AM;dixs9tx@8b56lqB9Uh(><Vpo`s}DYG+UH!)+m`3rhM~I*lSRX>@v2(t1&FI~
+z)3IHz@J(21sCcRyj_%ggy&G}j#Ts?py;*XiTk>O1oS35(+x|k0+$1Nv<gNc9;>T$=
+z2Cr%!x2<hncMR>~y81EKzxJ@@BfH^N^&Kw88@n3mf*6B>F^n@r_qk=yoG&jdO4wBJ
+z8gC@z6l@{Skno)Y!?>SpQEyv8K@=VLQ%i&Gqf4ajTxIpD5ZGG<yQ1t+&tfo)TtDag
+z%9&pEdO}ARbx${G73~HAiO$<|TRo(Q_vra`&7={H`GgrHM|cJ;T_WYbb5p54TOvTY
+zvnSh{r!g${WBTue$UjN-U4eeJd^fTG4H5B|D(O}OvlyihfcOo7iJc&uAWx-}(HTlN
+z!M?ZQ39{jKFp5dCN{4`3NVa2BxZO?uLp+Jj{rEuf2LkbdO9Wd8m755cT9C?_CL#y(
+zmx#6?3uiD(uu{$>gG~%&LoLM0$xvoqxWn0SGJJ`V>lV`V83G0opauppL_NnajS<X{
+zk~C>qAq@p;;~lX@o4cJ>h;xU|0Qq-uudQ{Ba%QROG^xFh2ZW``e~3p2Qk4WA;|a+t
+PkeC$a+S1eQE}s4a+8a}5
+
+diff --git Cinema/out/production/Cinema/logic/MovieController.class Cinema/out/production/Cinema/logic/MovieController.class
+index ad8701dbef43b00103e66d95b319763d4111ce72..f0714b3f3d1edd239326b3f22b6fa04ec6ae6c23
+GIT binary patch
+literal 6616
+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
+INP6=A3-v#JUjP6A
+
+diff --git Cinema/out/production/Cinema/logic/BookingController.class Cinema/out/production/Cinema/logic/BookingController.class
+index 704be70a0f20e993856e6dff1adefd666948f0e7..772a421b4d1aec2705fcd29bc2d60de336d78220
+GIT binary patch
+literal 7551
+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
+Z#($9VKk;AqZ*TS^yn}buOhhU~{tw_=84Lgb
+
+diff --git Cinema/out/production/Cinema/model/Movie$Builder.class Cinema/out/production/Cinema/model/Movie$Builder.class
+index aa6da44efbcf004ca2639db1c732af1868f20891..8d4b0de5b0e7e18da7f5b9c288552d16d10f1669
+GIT binary patch
+literal 1063
+zc$}S5-A)rh6#k}v%Py<M0;LElDAw(wRO5vvC0vLxG${~M(uB)tJ86e(w`6xp;#=WG
+zLn4U};6oYD%+_KRZoE0?%$ak(pWXTK^V@d-@9@TfgR+Ge4pJ!Fu;J-Y(ZRQ{?ZCoI
+z3$HBfFl3cffnX>!&iDnd20ZLln<|oFuf~uIMA%b(23BXVV!^|Xh#B(9>`2L=ddSad
+z&~D0J$kiw!r1!J8yU9_>fv7fy9Ugq-N}SNC)))-CBB(YEY;8~T?aEN9J%*z9ubg_N
+z#gN&j9j!oy;%GEzi|B;66a5;y#UrWDlV(QsCF!+3jAYOi5rbO~LlNx<JdU-I<%xvD
+z;e`}ilPPV7ce{x!hO+mU+sYkF^Ry(UYsFbTU(SDPI`;ne``ksGZR?UgiZ?SsH%@an
+ziaO$x)WnYI?r1iKxg!y)gJG;(ETYQr;6~E{kNc#{MIH+-=Ha@yhx_F34{W{lnql!4
+zK@1BwzwWqwCOV2C?dhLa@@{odX<?I|rbCZ6O)r)hsY+>5lSu|hps5QqL9|$+xJ;cs
+zozs*b`d487HBzTnNRN^6x5vo(>tp1;n!O^$BC-?<$PixMU@T#kP*$kBk)WW2HNaF_
+z1v8b_k)nDXk0@)_&y-V?Elrd0FO6_b;h6Rc5tR&VF&Ue}T6k>CJfS*)*PX)D-Ud~h
+wcseon)|dtCYgngbaPD&IC1)<y3`qiHPe{^uW~R3A++>R!XkqlIsa}Qs3;0po=>Px#
+
+diff --git Cinema/out/production/Cinema/model/Cinema.class Cinema/out/production/Cinema/model/Cinema.class
+index e1dd5cffc55ece8fe2357a11337b0e9aab255133..263e793296de293e4d9d59e7a3fb6940aae96c47
+GIT binary patch
+literal 2304
+zc$}40ZBrXn6n++xYzT|IluA)VRIm_h1FaP`NVQR<HMF*&bsWEV33uQ&n_Xu21_x*K
+zcla}OM(tP~zxky<%JI3oOLvooPCA*KoOAAZp7VBh^W?wB{{UD=ql7W6*|<`|5Y|TE
+z;HnYt8F9^s_l;N|#RvG%gnl$d*rtu^Ha@ZOsf9w@KUOldFkXKsjzy)Tm0Q^nM^y_W
+z4RzoN-3g?H)$Y@c*mQ+=P-*Buc?Z>c+uxTwG<4NX!fmaZEvZSpHYj*ELPY3%CzJuP
+zl|ixh86P3Xn#z-HVQc~{TpN_3_7oTKOomc;O&Q*kM}DZZADp~ECyfXj@f0?cr}U<U
+z;pLSF7IHNPm~k`P?M{172D@U<rDv+{H--B^1j^WnGp7#~r|?o&iDowkQtu?2n_OOb
+zW_MS5eS>VQMAEo$vR)mWA=9j(*gf6*3s7V>KS7FG_X^hsC+b;Zk!1Jdo3u7KNeb6~
+zd}3kx6rPP|!wtU^H072u+Zv6tUp8?LUd0@jlcwAj;UUvH7{`Qzb4HvuV#bJBOxU>L
+zpoY&Jyo<}6!wuipp$^2+j?{<#emGvh=S6He_yXG&oNT|0PHVff_fR%9D~?>s=YDvn
+zT=heIrN+93!25YD+>Y7!g{}eBeAgw7^1W&aH*w3ttaWLj^Y7m$y5)cGsTQq0cCAmW
+zA1%zZMN8IvuPOA`N*_`SweZX(xV7A8%maA(OxwnnrujP-7Sl839s4brgv1qWiKcm6
+zZQNydb>DAw*rs#S^JGwSMHrf9f6kVbaKv-o7T&%q!^If*{93z!yC+AoPx!a>-qm#V
+zmQd7$>o$~@Z1SFkrGaX*F#r5Gyup|M82J7`o|5;Da+3c5Lztp=E@MwqJD;&%rZ$tY
+zFHoD!*ss8*&MQv&8a+Q@m>RHAegv!h7lyuhgyG+jOVxa;7E;wt)#9%a^E~A|*}-f%
+zjIinwvyEbjy{xjEDl2%Mr%s#?3+xiq-^5!)n_4Qg%vrwt8*;xqB`rkG=?plZfa8`H
+z>09bcQtTy}Ig{jV`Y!e*$@h}Xok_Ax-%4K+yO(6)Op-Ev@AM@p^pY%|NpgukzKxP4
+zf0rz|YzF%$MlAe+lBp`A=TG&=+!@kLQ(Pw4)dUNhV__@&q*=>J)?pTE5UaS&-xAO2
+R_zF9`dR5v*+8g|S{6E=J9c2Ij
+
+diff --git Cinema/out/production/Cinema/model/Movie.class Cinema/out/production/Cinema/model/Movie.class
+index ec2762daeef8dd926a2fff622053fa0731cdb973..26cb0502c7402b350d67440b42bfc8f4007d4ab6
+GIT binary patch
+literal 2026
+zc$}S8T~i}P6g{1UOcI9$vV18nf(sG?Y(#|x0_;jw7Iu@>s!;ggQxm#EFT)Hq)1hj$
+z{2%@ZAG8X}Djxg+{wQm2_Y7f3f~7uWru+8kb5Eapd-B)c*M9<didqgie3^xfud>MM
+zhm93ITG69bJzC8Za>GK|!ls2S3)>9VPD?t+!e_AeU03)OhX;WO82Xe{j$p`F-|`Dy
+za=6<p)s-*ZW|<-F2)C(D7}!2h1cJK_y=NfAwv=>AHGWROY+W{8u3A1Zt=(PS45vz-
+ziBi>TaOVYA;(%u5>X~;eoKoG;mbZ1jP3cNSa>onNV$HjdVkQz_o<C$rRcJwLkgj;s
+zIy(~n0Y3^)pxF<(FZDbMrqqcf#r<(QN@N|~*fG*G5ksaa)In&?aACfeIhml17%6lE
+zwAL(<R3i(Mg?TbD8{9@xg?$am5vYD+?a)oGn7JFBvHxOeE{L(`3mxP-|L9%c-kslg
+zS1$bDw3;@fywC~KQ1@DXL+nb;nlny6(Nqi{yb*z_30=j&#u%R27{H*7A>?g5#4y9)
+zj_0XB`TV>l)QNW-45aZqgRgDuph5((>Jj+13f~^R6%9qjGa>1bI69yse+<v|ut(KR
+zjSh2ofo~XQ&C*Zic5KbDxy7mQE^M*IspukXv7Z^n&iJXQcy5EM@1;7SQJ}c1$n4b~
+zO|jqUe>cR!u09*}%FOMWbT7P95kbOiyS$-1|DA=`bZ@GjciK8<_$8h*+7$Y>$K7K`
+z1T!JB+@1Hnjk+Ovz<;QAdVS|G5k-YNPF*TNr>c^t|4JLf<UivuO&_@&sQ5@Cp&N$2
+zcM07y=1pxwYa?bniVQu+Fiw#VDZ*)%p!cKVA7I6WOC+w4)bG?4`t&<}1?zXS^&@(Y
+zqK}@FNZ}LuxK0uAG(N_sm@sRGh~|#~Gnyn6eJTkz9i=OoIf(ia$=}+vX%n0^G<FDx
+zXc&<{jy7*cTGPb^5_u~sXQK18rx+8GZVO2pM|9#D%F!*P@7E3?OFe~rhPf^w6Xa5-
+zkY(EQ#XUlFNp#`@$xU<#u{s@D=^-SnW07JDSd2)%i#ub=m5d2mr@b5Z2nu^+shvef
+zM%&%;ghr)y@ivK7WAeIq+BYrvni>k7y0>Gx^HH`GJ~yakGDpwoj~5TjdV)q-^waMp
+RUSW@NJ*9Yt5Nq^Xe-EGjvB3ZU
+
+diff --git Cinema/out/production/Cinema/model/Ticket.class Cinema/out/production/Cinema/model/Ticket.class
+index 497fdfed70c376f05ace5de3983bcb48a393c663..2561104b9a36b88ea2773041919d12c143a55e01
+GIT binary patch
+literal 1024
+zc$|$>TW=CU6#k}AmTtGuR<K?xRjPnky!(LBM3SZ?SQ8=j!KY!Fl!0Z3><(?pFVTOY
+ziP5AFKKbO2GM?Q<AySPGJLfXr`Oam}eE)I!6~GfbHj%`oB^bDD;tH+?+GcQETc`UQ
+z2J!~B4cuf%_=3B(U`RCvsw13AGqkG=OP)I39}U{VV_<a#laTtCBk@$aQa@ve6^aK8
+z@fyW4q#M!|5v0Z24tdra%I3}i_hevCoN?Wi{xoAt+I^uZV^XW8_N05rkSP=!J$}S1
+z4tEbLk(Ur=Q;j@Z?8<;<ISSkfa2C>7wP0e|z%2{sv0=f&iiH$b7*<~>rG4%3;Y*>r
+zs^g~<C?rv|P{M5nYqkzTPZPgt_k>NZOz4t|rbC@LavU{c&5q1O8Fv_p<=ksA7Tz(p
+zdpyU=xqUC^jlaF`j3&lFik@%N6~o4W_eD*)HrH>Y?vmzf?rNG%p)lWmy?(|_4D1A5
+z+-Jy7@1%RA`eFi!_;<Ojm3Ly`A^p6DQvK18>aV-5@M;eCeL+dz%_g02L<8I7ZpRUR
+zJ_@YPm+`m2*2z$u0e{>0bH>%;JVlK=PE%?@O+I4S{;%2?Hvf&o7CnO`XulDolQxE4
+z1PhiWl&MfIkVXqd=NefLNHUU(r7vI~!|UJ~nIu7haSAyXY9R<2WJ4-i!U@6iFcpw3
+yeZs<L#7M;HTRcSq`0$%B5rWoc$g&f%7%qgUi?|miW~fkAcgfC?9dxrr-}RqV4ETfq
+
+diff --git Cinema/out/production/Cinema/helpers/OptionsHelper.class Cinema/out/production/Cinema/helpers/OptionsHelper.class
+index 66aa7706f02916bf486c5c1999fd9a8e5f298739..17f349b96029ae0d8a2652f5d6cfa9da96fc555b
+GIT binary patch
+literal 3082
+zc$}qHYjYD-7=E@*yJ@<#G^OQ^DHKdE5Jf<swP<S#m87i=wgO(*Ca3AP>2BQJ^ydA7
+z_xlz7>Ic3GjOF5t<BU4v_!s=>zi<ZeIh&*;G$@0U$(}vuyzhIS_jxa8fB*a1j{qLT
+zxd1lfcnvlo8o+wQ<YTB7!x#zRARbpSD)-_6s5lX%#*+b@#3>c0{dh`>Jza}_JX4DS
+zJS!h(ROr&;gcM7tNXk*Dn5;nxQ_{GhVp_$Fg6g!DN(o!R#;9edB6>zoOo<2=_f1El
+z-d2}_3MZkUF*>c!>5;5!q$BZ!Zkpa!b+=&}ZjXY>aNC#yU!Ro}3hJYVDTcDM6T&{B
+zPo%jLj9LjjJ*L}+oaYyP?v&vuSRb7d>5Q<Q$Z*CrEYmsWO=&%l5^jD?L2I}OK}^qd
+zwdLk%-AqLWO;_Z=2D6T^<035*u1MyT6)1!J^TeGcDoL?0oOOpMd#$XQbov((!V{+v
+z#Za)l=(s^MlXYW;GpoCasbWFZD!{A11)YMr++G0-t)8NoE!?ba8fL11t+A{d&837b
+zW(uSoC_SgUjCRpd+_iaBR}U?&iMx7YhAN&R6=?-EaU*5w#6!Es!*^%6d=#_{w{ONS
+zxGHu`mTD`{Kvlo#+KW^glv&l6)*VMssi{<_)svE(3%(fQ7S7|s<z9C=ojd0!R%-Bn
+zS?lRiF{^_99lBd;Ns_-ik<OP`AZ}&tgcvZqf-0$%JyKgk2rU}6;T{bZG8&$Pt-{gZ
+z%1IV;3U=H<`fJ#Nts3URuCTV(vRuct^-N5-Q&!Tcuf~EOiyD^jyowhzyoi?+g#N2i
+z6dWGU*w(zBT(V3n6q<2=zGUkm(-5I);kco+kyx7e<?NnNUh3Ctp$rA*DR4NX;bpv{
+z;Z?k*;dQ*B;Vj-{*^~*5hPPmAcw1s>Hmt}bsfzTGB`YmPWI_t=zJqraG^}c7D&EuZ
+zK0c5ve#qo2+mp!1O$LW2rdikpTgB02v6bWz!&Sr(QRuEkA=MNME>*nl$qwb0bJ;o-
+ztP8iT&WIATbebL1F_tK;&gto_7@nlp;lc6+DO+hwIF6nY0epmy30oPllKONJ(QL)D
+z`ivl93Edqx+$l+&tD7!MZC7|Tp0W_v-{u}6*m>P%CNvdW%5j*>bXnGm9$O6s?~5wi
+zZ>;dvT(Vu@Q+9?a-5DZ>9-(ZuKGU0&l9@k}7F{ccnu3NoX|W%YqypN`Vwhe}qQAGl
+zBa8APzUa7Ome;0Xt~4<wqgNR`Q0TLi-w-al(Ke>y6IorK^TNAn(lF<&8IdPB7oPz=
+zL8lj0e92B4wXB&e^Wj`E=)6*{a*yd|GA*3eoMf4Hb2~+O^^_4mT_%XDP4wyMbew@>
+zEBuPL?;T-Nu<hUF(87<Q&HN0iKtT2?z6E60<LHATn;@UtIg4;qI99b^hH}AE*uiJD
+zw^)l-KDC?xc48OD8r+L8rKqfQppxc*6P4XcZ1XpWT|~t)Dto-aH@>y~Dyo<`XTC+i
+z*S+-$s$=JG{4sP9{@u%{xkf}-M(z0<zYXOTxD#CCEq&kl9nbKi4W0a;lj9NM@Ojt<
+z(7<N{_k&z%<Zct{(ahflqS{Ezn<(Ex%`MnX*Sq<Cgw8)q_m9%`Va`WsN&419PwPGT
+zcKWiL?;X^uq-;HBd-z80NYZ^CGo!d4d&!0mBX|J&xUzqRA1QUf`%(olRb7WqQE{-f
+zSA{yNLJQ)MXW}pk>>?zOKwRP|35<}bIt9^=tElG<+j$jh6?~0Nd}&bd6M}it8ke!|
+z{Ea^^cwv-W1U>aOa@0<*I*7Q_^D9K;EhP9MdQ$0yIp>4Q*gb+?BHmvj)wd#bU`6Ut
+zN=a|(P;nh~D*9Cn{6!9PjvOWL$5zs4ucr?*2b->-`4ap;VExI9*l-ye>7&G}cz6TU
+ol#KbYh8lyOrN<Z@>4}WzFnX$M@F~8)XN=?%T=!FRjQ{a}0DXTcEC2ui
+
+diff --git Cinema/out/production/Cinema/META-INF/Cinema.kotlin_module Cinema/out/production/Cinema/META-INF/Cinema.kotlin_module
+index 2983af70661ad375cc499ebc4da5a68ca46c532e..a49347afef10a9b5f95305e1058ba36adec7d6dd
+GIT binary patch
+literal 16
+Rc${NkU|?ooU|@t|0RRA102TlM
+

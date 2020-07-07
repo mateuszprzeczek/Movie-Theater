@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class OptionsHelper {
-    private static Logger logger = Logger.getLogger(ConsolePrinter.class);
-    private static Scanner sc = new Scanner(System.in);
+    private static final Logger logger = Logger.getLogger(ConsolePrinter.class);
+    private static final Scanner sc = new Scanner(System.in);
 
 
     public static Integer getOptions(Map<Integer, String> options) {

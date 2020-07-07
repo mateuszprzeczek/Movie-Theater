@@ -3,7 +3,7 @@ package controller;
 import builders.MonthsBuilder;
 import data.ImportData;
 import helpers.MovieTimeOfSeanceHelper;
-import io.file.ConsolePrinter;
+import helpers.ConsolePrinter;
 import model.Cinema;
 import model.CinemaHall;
 import model.Movie;

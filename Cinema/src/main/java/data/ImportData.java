@@ -3,7 +3,6 @@ package data;
 import controller.MovieController;
 import exception.DataImportException;
 import exception.InvalidDataException;
-import io.file.SerializableFileManager;
 import model.Cinema;
 
 import java.util.Scanner;

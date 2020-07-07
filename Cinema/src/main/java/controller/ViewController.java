@@ -1,5 +1,5 @@
 package controller;
-import io.file.ConsolePrinter;
+import helpers.ConsolePrinter;
 import data.ImportData;
 import options.*;
 import org.apache.log4j.Logger;

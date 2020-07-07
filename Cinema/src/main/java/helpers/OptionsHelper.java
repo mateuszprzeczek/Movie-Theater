@@ -1,6 +1,5 @@
 package helpers;
 
-import io.file.ConsolePrinter;
 import org.apache.log4j.Logger;
 
 import java.util.InputMismatchException;

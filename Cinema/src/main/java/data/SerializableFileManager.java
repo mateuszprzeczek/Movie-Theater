@@ -1,6 +1,5 @@
-package io.file;
+package data;
 
-import data.FileManager;
 import exception.DataExportException;
 import exception.DataImportException;
 import model.Cinema;

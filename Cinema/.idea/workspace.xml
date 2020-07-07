@@ -2,62 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f6fc97b-1a7c-485d-b5df-167d618a1ab2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_log4j_2_12_1_bin_tar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/apache_log4j_2_12_1_bin_tar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_15.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/META-INF/Cinema.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/apache-log4j-2.12.1-bin.tar.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/app/CinemaApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/DataExportException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/DataImportException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/InvalidDataException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/MovieAlreadyExistsException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/MovieNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/NoSuchOptionException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/NoSuchUserException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/exception/UserAlreadyExistsException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/helpers/OptionsHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/ConsolePrinter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/FileManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/io/file/SerializableFileManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/log4j-1.2.15.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/BookingController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/MovieController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/logic/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Cinema.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie$Builder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Movie.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/Ticket.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Cinema/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apache-log4j-2.12.1-bin.tar.gz" beforeDir="false" afterPath="$PROJECT_DIR$/apache-log4j-2.12.1-bin.tar.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/CinemaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/CinemaApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/TicketBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/builders/TicketBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/DataExportException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/DataExportException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/DataImportException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/DataImportException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/InvalidDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/InvalidDataException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/MovieAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/MovieAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/MovieNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/MovieNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/NoSuchOptionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/NoSuchOptionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/NoSuchUserException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/NoSuchUserException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exception/UserAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exception/UserAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/ImportExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ImportData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/MovieTimeOfSeanceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/MovieTimeOfSeanceHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/OptionsHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/file/ConsolePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/file/SerializableFileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j-1.2.15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/log4j-1.2.15.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImportData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ImportData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helpers/OptionsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/OptionsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/file/ConsolePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helpers/ConsolePrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/file/SerializableFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/SerializableFileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,11 +36,11 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Mateusz Przęczek &lt;53494694+mateuszprzeczek@users.noreply.github.com&gt;" />
         <option value="mateuszprzeczek &lt;mateuszprzeczek@op.pl&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1Q15NsE779Q9MY4S9ItbUom3ahZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -115,6 +67,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mateu\OneDrive\Pulpit\Java\Cinema" />
     </key>
@@ -354,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587567294047</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Update">
+      <created>1594107378453</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1594107378453</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -424,10 +386,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="212" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1594106436983" />
-    <state x="400" y="27" key="CommitChangelistDialog2" timestamp="1587567292677">
+    <state x="339" y="2" key="CommitChangelistDialog2" timestamp="1594107376960">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="400" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1587567292677" />
+    <state x="339" y="2" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1594107376960" />
     <state width="1493" height="413" key="GridCell.Tab.0.bottom" timestamp="1587564043674">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -468,10 +430,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="277" y="14" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1587994262689" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1587567297816">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1594107380900">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1587567297816" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1594107380900" />
     <state x="460" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1587384769756">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

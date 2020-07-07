@@ -1,4 +1,4 @@
-package io.file;
+package helpers;
 
 import model.CinemaUser;
 import model.Movie;
